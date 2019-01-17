@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">RentABike</string>
+    <string name="app_name">City Bikes</string>
+    <string name="text_title">City Bikes</string>
+    <string name="image_landing_image">Landing image</string>
+    <string name="text_title_sub">Welcome to City Bikes please press find bike to find a bike near you</string>
+    <string name="action_find_bike">Find bike</string>
 </resources>

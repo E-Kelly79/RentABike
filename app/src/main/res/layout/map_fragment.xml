@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/ic_bg_gradient">
+    android:background="@color/color_primary">
 
     <android.support.constraint.Guideline
     android:id="@+id/guide_left"
@@ -50,21 +51,47 @@
         app:layout_constraintRight_toRightOf="@id/guide_right"
         app:layout_constraintBottom_toBottomOf="@id/guide_centre_horizontal"
         android:scaleType="fitXY"
+        android:contentDescription="@string/image_landing_image"
         android:src="@drawable/ic_cityscape"/>
 
 
     <TextView
-        android:id="@+id/test"
+        android:id="@+id/text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/color_black"
-        android:text="Hello World"
-        app:layout_constraintBottom_toTopOf="@+id/guide_bottom"
+        android:layout_marginTop="16dp"
+        android:text="@string/text_title"
+        android:textSize="34sp"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
         app:layout_constraintStart_toStartOf="@+id/guide_left"
         app:layout_constraintTop_toTopOf="@+id/guide_centre_horizontal" />
+
+    <TextView
+        android:id="@+id/text_title_sub"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/text_title_sub"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/guide_right"
+        app:layout_constraintStart_toStartOf="@+id/guide_left"
+        app:layout_constraintTop_toBottomOf="@+id/text_title" />
+
+    <Button
+        android:id="@+id/btn_landing"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/action_find_bike"
+        android:background="@color/color_primary_dark"
+        app:layout_constraintBottom_toTopOf="@+id/guide_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guide_right"
+        app:layout_constraintStart_toStartOf="@+id/guide_left" />
 </android.support.constraint.ConstraintLayout>

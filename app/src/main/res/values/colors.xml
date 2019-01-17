@@ -10,9 +10,9 @@
     <color name="color_toolbar">#FFFFFF</color>
     <color name="color_toolbar_focus">#444344</color>
 
-    <color name="color_primary">#0272D9</color>
+    <color name="color_primary">#3C0048</color>
     <!--Focus colours are 20% darker-->
-    <color name="color_primary_focus">#025BAE</color>
+    <color name="color_primary_dark">#23012A</color>
 
     <color name="color_task_orange">#F5A623</color>
     <color name="color_task_green">#84B135</color>

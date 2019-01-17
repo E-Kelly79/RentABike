@@ -19,6 +19,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.ui.maps.MapsFragment
+import com.bike.rent.kelly.ui.menu.MenuFragment
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 
@@ -71,7 +72,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         mDrawerLayout = findViewById(R.id.layout_drawer)
         mNavView = findViewById(R.id.left_drawer)
         mMainContent = findViewById(R.id.layout_main_content)
-        mivToolbarPrimary = findViewById(R.id.home)
+        mivToolbarPrimary = findViewById(R.id.img_home)
         initNavDrawer()
     }
 
@@ -192,15 +193,15 @@ open class BaseActivity : AppCompatActivity(), MvpView {
                 currentFragmentKey = MAPS
                 loadMapsFragment(args, addToBackStack)
             }
-//            SCREEN2 -> {
-//                currentFragmentKey = SCREEN2
-//                loadScreenTwoFragment(args, addToBackStack)
-//            }
+           MENU -> {
+                currentFragmentKey = MENU
+                loadMenuFragment(args, addToBackStack)
+            }
         }
     }
 
     /**
-     * Load Menu Fragment
+     * Load MAps Fragment
      *
      * @param args           Bundle
      * @param addToBackStack Boolean
@@ -210,21 +211,20 @@ open class BaseActivity : AppCompatActivity(), MvpView {
     }
 
     /**
-     * Load Card Fragment
+     * Load Menu Fragment
      *
      * @param args           Bundle
      * @param addToBackStack Boolean
      */
-//    fun loadScreenTwoFragment(args: Bundle, addToBackStack: Boolean) {
-//        getFragment(args, addToBackStack, ScreenTwoFragment(),
-//            SCREEN2
-//        ).commit()
-//    }
+    fun loadMenuFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, MenuFragment(), MENU
+        ).commit()
+    }
 
     /**
      * Definition of fragments supported
      */
-    @StringDef(MAPS, SCREEN2 )
+    @StringDef(MAPS, MENU )
     @Retention(RetentionPolicy.SOURCE)
     annotation class MainFragments
 
@@ -242,7 +242,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
 
     companion object {
         const val MAPS = "MAPS_FRAGMENT"
-        const val SCREEN2 = "SCREEN2"
+        const val MENU = "MENU_FRAGMENT"
 
         const val KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID"
         const val KEY_FRAGMENT_ARGS = "KEY_FRAGMENT_ARGS"

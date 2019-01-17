@@ -37,13 +37,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
+        android:background="@color/color_primary"
         android:divider="@android:color/transparent"
         android:elevation="0dp"
         android:dividerHeight="0dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,9 +51,10 @@
 
                 <ImageView
                     android:id="@+id/nav_logo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/ic_logo"/>
 
                 <TextView
                     android:id="@+id/text_nav_home"
@@ -66,11 +64,6 @@
                     android:textSize="16sp"
                     android:text="Home"/>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp" />
-
                 <TextView
                     android:id="@+id/text_nav_cards"
                     android:layout_width="match_parent"
@@ -78,11 +71,6 @@
                     android:layout_marginTop="16dp"
                     android:textSize="16sp"
                     android:text="Menu"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp" />
 
                 <TextView
                     android:id="@+id/text_nav_decks"
@@ -92,11 +80,6 @@
                     android:textSize="16sp"
                     android:text="Decks"/>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp" />
-
                 <TextView
                     android:id="@+id/text_nav_tools"
                     android:layout_width="match_parent"
@@ -105,11 +88,6 @@
                     android:textSize="16sp"
                     android:text="Tools"/>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp" />
-
                 <TextView
                     android:id="@+id/text_nav_login"
                     android:layout_width="match_parent"
@@ -117,11 +95,6 @@
                     android:layout_marginTop="16dp"
                     android:textSize="16sp"
                     android:text="Login"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp" />
 
                 <TextView
                     android:id="@+id/text_nav_card_search"
@@ -134,12 +107,10 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="8dp" />
+                    android:layout_marginTop="24dp"
+                    android:background="@color/color_white"/>
 
             </LinearLayout>
-
-
-        </RelativeLayout>
 
     </android.support.design.widget.NavigationView>
 
