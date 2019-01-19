@@ -10,15 +10,15 @@
     <color name="color_toolbar">#FFFFFF</color>
     <color name="color_toolbar_focus">#444344</color>
 
-    <color name="color_primary">#3C0048</color>
+    <color name="color_primary">#750af6</color>
     <!--Focus colours are 20% darker-->
-    <color name="color_primary_dark">#23012A</color>
+    <color name="color_primary_dark">#4C00CD</color>
 
     <color name="color_task_orange">#F5A623</color>
     <color name="color_task_green">#84B135</color>
 
-    <color name="color_bg_gradient_start">#035BAC</color>
-    <color name="color_bg_gradient_end">#00376A</color>
+    <color name="color_bg_gradient_start">#360395</color>
+    <color name="color_bg_gradient_end">#2d0260</color>
 
     <color name="color_text_main">#D9FFFFFF</color>
     <color name="color_text_secondary">#D9EEECEC</color>

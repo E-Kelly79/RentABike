@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/color_primary">
+    android:background="@drawable/ic_bg_gradient">
 
     <android.support.constraint.Guideline
     android:id="@+id/guide_left"
@@ -90,7 +90,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/action_find_bike"
-        android:background="@color/color_primary_dark"
+        android:background="@color/color_primary"
         app:layout_constraintBottom_toTopOf="@+id/guide_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
         app:layout_constraintStart_toStartOf="@+id/guide_left" />

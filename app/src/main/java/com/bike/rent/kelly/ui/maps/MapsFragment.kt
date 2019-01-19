@@ -27,7 +27,7 @@ class MapsFragment : BaseFragment() {
         mContinueBtn = mView.findViewById(R.id.btn_landing) as Button
 
         mContinueBtn.setOnClickListener {
-            baseActivity.loadMenuFragment(baseArguments!!, false);
+            baseActivity.loadBikeListFragment(baseArguments!!, false);
         }
 
         return mView

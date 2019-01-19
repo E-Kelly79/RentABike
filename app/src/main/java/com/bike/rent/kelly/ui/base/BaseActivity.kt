@@ -11,19 +11,32 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import com.android.volley.Request.Method
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.bike.rent.kelly.R
+import com.bike.rent.kelly.model.Bike
+import com.bike.rent.kelly.ui.bike.BikeList
 import com.bike.rent.kelly.ui.maps.MapsFragment
 import com.bike.rent.kelly.ui.menu.MenuFragment
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 
 open class BaseActivity : AppCompatActivity(), MvpView {
+
     var mActivityId: Long = 0
     /**
      * Get current fragment key
@@ -73,6 +86,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         mNavView = findViewById(R.id.left_drawer)
         mMainContent = findViewById(R.id.layout_main_content)
         mivToolbarPrimary = findViewById(R.id.img_home)
+
         initNavDrawer()
     }
 
@@ -197,6 +211,10 @@ open class BaseActivity : AppCompatActivity(), MvpView {
                 currentFragmentKey = MENU
                 loadMenuFragment(args, addToBackStack)
             }
+            BIKE_LIST -> {
+                currentFragmentKey = BIKE_LIST
+                loadBikeListFragment(args, addToBackStack)
+            }
         }
     }
 
@@ -209,6 +227,17 @@ open class BaseActivity : AppCompatActivity(), MvpView {
     fun loadMapsFragment(args: Bundle, addToBackStack: Boolean) {
         getFragment(args, addToBackStack, MapsFragment(), MAPS).commit()
     }
+
+    /**
+     * Load BikeList Fragment
+     *
+     * @param args           Bundle
+     * @param addToBackStack Boolean
+     */
+    fun loadBikeListFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, BikeList(), BIKE_LIST).commit()
+    }
+
 
     /**
      * Load Menu Fragment
@@ -224,7 +253,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
     /**
      * Definition of fragments supported
      */
-    @StringDef(MAPS, MENU )
+    @StringDef(MAPS, MENU, BIKE_LIST )
     @Retention(RetentionPolicy.SOURCE)
     annotation class MainFragments
 
@@ -235,6 +264,9 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         }
     }
 
+
+
+
     @RequiresApi(api = VERSION_CODES.LOLLIPOP)
     fun setToolbarButton(drawable: Int) {
         mivToolbarPrimary!!.setImageDrawable(this.resources.getDrawable(drawable, applicationContext.theme))
@@ -243,6 +275,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
     companion object {
         const val MAPS = "MAPS_FRAGMENT"
         const val MENU = "MENU_FRAGMENT"
+        const val BIKE_LIST = "BIKE_LIST"
 
         const val KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID"
         const val KEY_FRAGMENT_ARGS = "KEY_FRAGMENT_ARGS"
