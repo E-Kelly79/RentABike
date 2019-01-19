@@ -57,52 +57,46 @@
                     android:src="@drawable/ic_logo"/>
 
                 <TextView
-                    android:id="@+id/text_nav_home"
+                    android:id="@+id/text_nav_my_wallet"
                     android:layout_width="match_parent"
                     android:layout_height="22dp"
                     android:layout_marginTop="-16dp"
                     android:textSize="16sp"
-                    android:text="Home"/>
+                    android:text="@string/nav_link_my_wallet"/>
 
                 <TextView
-                    android:id="@+id/text_nav_cards"
+                    android:id="@+id/text_nav_buy_tickets"
+                    android:layout_width="match_parent"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="16dp"
+                    android:textSize="16sp"
+                    android:text="@string/nav_link_buy_tickets"/>
+
+                <TextView
+                    android:id="@+id/text_nav_favs"
                     android:layout_width="match_parent"
                     android:layout_height="22dp"
                     android:layout_marginTop="16dp"
                     android:textSize="16sp"
-                    android:text="Menu"/>
+                    android:text="@string/nav_link_favorites"/>
+
+
 
                 <TextView
-                    android:id="@+id/text_nav_decks"
+                    android:id="@+id/text_nav_journey"
                     android:layout_width="match_parent"
                     android:layout_height="23dp"
                     android:layout_marginTop="16dp"
                     android:textSize="16sp"
-                    android:text="Decks"/>
+                    android:text="@string/nav_link_journey"/>
 
                 <TextView
-                    android:id="@+id/text_nav_tools"
+                    android:id="@+id/text_nav_search"
                     android:layout_width="match_parent"
                     android:layout_height="23dp"
                     android:layout_marginTop="16dp"
                     android:textSize="16sp"
-                    android:text="Tools"/>
-
-                <TextView
-                    android:id="@+id/text_nav_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="23dp"
-                    android:layout_marginTop="16dp"
-                    android:textSize="16sp"
-                    android:text="Login"/>
-
-                <TextView
-                    android:id="@+id/text_nav_card_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="23dp"
-                    android:layout_marginTop="16dp"
-                    android:textSize="16sp"
-                    android:text="Card Search"/>
+                    android:text="@string/nav_link_search"/>
 
                 <View
                     android:layout_width="match_parent"

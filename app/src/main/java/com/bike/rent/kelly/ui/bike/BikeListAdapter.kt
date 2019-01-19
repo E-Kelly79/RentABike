@@ -42,12 +42,12 @@ class BikeListAdapter(private val bikeList:ArrayList<Bike>,
         var status = itemView.findViewById<TextView>(R.id.card_list_status)
 
         fun bindView(bike: Bike){
-            streetName.text = bike.name
-            streetAddress.text = bike.address
-            banking.text = bike.banking.toString()
-            bikeAvailable.text = bike.availableBikes.toString()
-            status.text = bike.status
-            Picasso.get().load(R.drawable.ic_bike).into(bikeImage)
+            streetName.text = "Name: ${bike.name}"
+            streetAddress.text = "Address: ${bike.address}"
+            banking.text = "Card Use: ${bike.banking.toString()}"
+            bikeAvailable.text = "Bikes Availabile ${bike.availableBikes.toString()}"
+            status.text = "Status: ${bike.status}"
+            bikeImage.setImageResource(R.drawable.ic_bike)
         }
 
     }

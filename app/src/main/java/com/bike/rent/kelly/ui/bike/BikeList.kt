@@ -40,6 +40,10 @@ class BikeList: BaseFragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.bike_list_fragment, container, false)
         baseActivity.showToolbar()
+        baseActivity.setTitle("Bike List")
+        var test = arguments
+        var myString = test?.getString("contractName")
+        Toast.makeText(context, "Result====> $myString", Toast.LENGTH_LONG).show()
 
         baseActivity.mivToolbarPrimary?.setOnClickListener {
             baseActivity.showNavDrawer() }
@@ -66,7 +70,10 @@ class BikeList: BaseFragment(){
                         bike.bonus = bikeObj.optBoolean("bonus")
                         bike.bikeStands = bikeObj.getInt("bike_stands")
                         bike.lastUpdated = bikeObj.getLong("last_update")
+
+
                         bikeList!!.add(bike)
+
                         bikeAdapter = BikeListAdapter(bikeList!!, context!!)
                         layoutManager = LinearLayoutManager(context)
                         bike_recycler_view.layoutManager = layoutManager

@@ -2,6 +2,27 @@
     <string name="app_name">City Bikes</string>
     <string name="text_title">City Bikes</string>
     <string name="image_landing_image">Landing image</string>
-    <string name="text_title_sub">Welcome to City Bikes please press find bike to find a bike near you</string>
+    <string name="text_title_sub">Welcome to City Bikes please find your city from the list below and press search location to find a bike</string>
     <string name="action_find_bike">Find bike</string>
+    <string name="nav_link_my_wallet">My Wallet</string>
+    <string name="nav_link_favorites">Favorites</string>
+    <string name="nav_link_buy_tickets">Buy Tickets</string>
+    <string name="nav_link_journey">Plan A Journey</string>
+    <string name="nav_link_search">Search Station</string>
+
+
+    <string-array name="city_array">
+        <item>Please Select</item>
+        <item>Dublin</item>
+        <item>Marseille</item>
+        <item>Toulouse</item>
+        <item>Luxembourg</item>
+        <item>Stockholm</item>
+        <item>Santander</item>
+        <item>Bruxelles-Capitale</item>
+        <item>Lyon</item>
+        <item>Brisbane</item>
+    </string-array>
+
+
 </resources>
