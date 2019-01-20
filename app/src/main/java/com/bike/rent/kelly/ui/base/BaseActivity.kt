@@ -29,6 +29,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.model.Bike
+import com.bike.rent.kelly.ui.auth.AuthActivity
 import com.bike.rent.kelly.ui.bike.BikeList
 import com.bike.rent.kelly.ui.login.LoginFragment
 import com.bike.rent.kelly.ui.maps.MapsFragment
@@ -256,7 +257,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
      * @param addToBackStack Boolean
      */
     fun loadLoginFragment(args: Bundle, addToBackStack: Boolean) {
-        getFragment(args, addToBackStack, LoginFragment(), LOGIN_FRAGMENT).commit()
+        getFragment(args, addToBackStack, AuthActivity(), LOGIN_FRAGMENT).commit()
     }
 
 
