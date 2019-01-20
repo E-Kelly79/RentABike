@@ -30,6 +30,7 @@ import com.android.volley.toolbox.Volley
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.model.Bike
 import com.bike.rent.kelly.ui.bike.BikeList
+import com.bike.rent.kelly.ui.login.LoginFragment
 import com.bike.rent.kelly.ui.maps.MapsFragment
 import com.bike.rent.kelly.ui.menu.MenuFragment
 import org.json.JSONArray
@@ -49,7 +50,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
      * Set current fragment
      */
     @get:MainFragments
-    var currentFragmentKey: String? = MAPS
+    var currentFragmentKey: String? = MAPS_FRAGMENT
     /**
      * Get a fragment
      * @return fragment
@@ -209,17 +210,21 @@ open class BaseActivity : AppCompatActivity(), MvpView {
      */
     fun loadFragment(args: Bundle, fragment: String, addToBackStack: Boolean) {
         when (fragment) {
-           MAPS -> {
-                currentFragmentKey = MAPS
+           MAPS_FRAGMENT -> {
+                currentFragmentKey = MAPS_FRAGMENT
                 loadMapsFragment(args, addToBackStack)
             }
-           MENU -> {
-                currentFragmentKey = MENU
+           MENU_FRAGMENT -> {
+                currentFragmentKey = MENU_FRAGMENT
                 loadMenuFragment(args, addToBackStack)
             }
-            BIKE_LIST -> {
-                currentFragmentKey = BIKE_LIST
+            BIKE_LIST_FRAGMENT -> {
+                currentFragmentKey = BIKE_LIST_FRAGMENT
                 loadBikeListFragment(args, addToBackStack)
+            }
+            LOGIN_FRAGMENT -> {
+                currentFragmentKey = LOGIN_FRAGMENT
+                loadLoginFragment(args, addToBackStack)
             }
         }
     }
@@ -231,7 +236,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
      * @param addToBackStack Boolean
      */
     fun loadMapsFragment(args: Bundle, addToBackStack: Boolean) {
-        getFragment(args, addToBackStack, MapsFragment(), MAPS).commit()
+        getFragment(args, addToBackStack, MapsFragment(), MAPS_FRAGMENT).commit()
     }
 
     /**
@@ -241,7 +246,17 @@ open class BaseActivity : AppCompatActivity(), MvpView {
      * @param addToBackStack Boolean
      */
     fun loadBikeListFragment(args: Bundle, addToBackStack: Boolean) {
-        getFragment(args, addToBackStack, BikeList(), BIKE_LIST).commit()
+        getFragment(args, addToBackStack, BikeList(), BIKE_LIST_FRAGMENT).commit()
+    }
+
+    /**
+     * Load Login Fragment
+     *
+     * @param args           Bundle
+     * @param addToBackStack Boolean
+     */
+    fun loadLoginFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, LoginFragment(), LOGIN_FRAGMENT).commit()
     }
 
 
@@ -252,14 +267,14 @@ open class BaseActivity : AppCompatActivity(), MvpView {
      * @param addToBackStack Boolean
      */
     fun loadMenuFragment(args: Bundle, addToBackStack: Boolean) {
-        getFragment(args, addToBackStack, MenuFragment(), MENU
+        getFragment(args, addToBackStack, MenuFragment(), MENU_FRAGMENT
         ).commit()
     }
 
     /**
      * Definition of fragments supported
      */
-    @StringDef(MAPS, MENU, BIKE_LIST )
+    @StringDef(MAPS_FRAGMENT, MENU_FRAGMENT, BIKE_LIST_FRAGMENT, LOGIN_FRAGMENT )
     @Retention(RetentionPolicy.SOURCE)
     annotation class MainFragments
 
@@ -282,9 +297,10 @@ open class BaseActivity : AppCompatActivity(), MvpView {
     }
 
     companion object {
-        const val MAPS = "MAPS_FRAGMENT"
-        const val MENU = "MENU_FRAGMENT"
-        const val BIKE_LIST = "BIKE_LIST"
+        const val MAPS_FRAGMENT = "MAPS_FRAGMENT"
+        const val MENU_FRAGMENT = "MENU_FRAGMENT"
+        const val BIKE_LIST_FRAGMENT = "BIKE_LIST"
+        const val LOGIN_FRAGMENT = "LOGIN"
 
         const val KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID"
         const val KEY_FRAGMENT_ARGS = "KEY_FRAGMENT_ARGS"

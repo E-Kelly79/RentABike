@@ -35,7 +35,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="750af6" />
+                                                <entry key="color" value="727272" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -47,7 +47,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/F:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/maps/ic_directions_bike_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/F:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_lock_open_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -57,8 +57,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="dogEared" value="true" />
-                                      <entry key="outputName" value="ic_bike" />
+                                      <entry key="iconShape" value="NONE" />
+                                      <entry key="outputName" value="ic_lock" />
                                     </map>
                                   </option>
                                 </PersistentState>
