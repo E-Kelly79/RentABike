@@ -3,17 +3,27 @@
     <string name="text_title">City Bikes</string>
     <string name="image_landing_image">Landing image</string>
     <string name="text_title_sub">Welcome to City Bikes please find your city from the list below and press search location to find a bike</string>
-    <string name="action_find_bike">Find bike</string>
+    <string name="password_info">* Password must be 8 - 20 characters with at least1 uppercase and 1 special character (!@#$ etc.).</string>
+    <string name="text_sign_up_btn">Sign Up</string>
+
+    <!-- Nav Links -->
     <string name="nav_link_my_wallet">My Wallet</string>
     <string name="nav_link_favorites">Favorites</string>
     <string name="nav_link_buy_tickets">Buy Tickets</string>
     <string name="nav_link_journey">Plan A Journey</string>
     <string name="nav_link_search">Search Station</string>
+
+    <!-- Hint Strings -->
+    <string name="hint_full_name">Micheal Smith</string>
+    <string name="hint_phone_number">(555) 1234567</string>
     <string name="hint_email_address">Email Address</string>
     <string name="hint_login_password">Password</string>
+
+    <!-- Action Button Strings -->
+    <string name="action_find_bike">Find bike</string>
     <string name="action_login_btn">Login</string>
 
-
+    <!-- City Array -->
     <string-array name="city_array">
         <item>Please Select</item>
         <item>Dublin</item>
