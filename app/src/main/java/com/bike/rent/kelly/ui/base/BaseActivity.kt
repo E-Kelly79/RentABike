@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -19,24 +18,12 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
-import com.android.volley.Request.Method
-import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
 import com.bike.rent.kelly.R
-import com.bike.rent.kelly.model.Bike
 import com.bike.rent.kelly.ui.auth.AuthActivity
 import com.bike.rent.kelly.ui.bike.BikeList
 import com.bike.rent.kelly.ui.login.LoginFragment
 import com.bike.rent.kelly.ui.maps.MapsFragment
 import com.bike.rent.kelly.ui.menu.MenuFragment
-import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 
@@ -92,7 +79,6 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         mMainContent = findViewById(R.id.layout_main_content)
         mivToolbarPrimary = findViewById(R.id.img_home)
         mtvTitle = findViewById(R.id.ToolbarTitle)
-        ButterKnife.bind(this)
 
         initNavDrawer()
     }

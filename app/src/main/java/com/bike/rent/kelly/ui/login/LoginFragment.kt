@@ -14,12 +14,12 @@ class LoginFragment: BaseFragment(){
 
     lateinit var mView: View
     lateinit var contractName: Bundle
-    var mLoginBtn: Button? = null
+    lateinit var mLoginBtn: Button
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.login_fragment, container, false)
-        mLoginBtn = mView.findViewById(R.id.login_button) as Button
-        mLoginBtn!!.setOnClickListener {
+        mLoginBtn = mView.findViewById(R.id.login_button)
+        mLoginBtn.setOnClickListener {
             val fragment = Fragment()
             contractName = Bundle()
             contractName.putString("contractName", "Hello")

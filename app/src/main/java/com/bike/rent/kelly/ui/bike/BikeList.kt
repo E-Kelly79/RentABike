@@ -1,6 +1,8 @@
 package com.bike.rent.kelly.ui.bike
 
+import android.app.Dialog
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -25,42 +27,50 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import com.bike.rent.kelly.ui.main.MainActivity
+import com.bike.rent.kelly.utils.ProgressDialog
 import kotlinx.android.synthetic.main.bike_list_fragment.bike_recycler_view
 
-class BikeList: BaseFragment(){
+class BikeList: BaseFragment() {
 
     var volleyRequest: RequestQueue? = null
+    lateinit var mDialog: Dialog
 
-    var  mView: View? = null
+    var mView: View? = null
     lateinit var bikeList: ArrayList<Bike>
     var bikeAdapter: BikeListAdapter? = null
     var layoutManager: RecyclerView.LayoutManager? = null
     val url = "https://api.jcdecaux.com/vls/v1/stations?&apiKey=567c5a18aec43057727314c80b218d65bced9c61"
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.bike_list_fragment, container, false)
         baseActivity.showToolbar()
         baseActivity.setTitle("Bike List")
+        mDialog= ProgressDialog.progressDialog(baseActivity)
+        mDialog.show()
         var test = arguments
         var myString = test?.getString("contractName")
         Toast.makeText(context, "Result====> $myString", Toast.LENGTH_LONG).show()
 
         baseActivity.mivToolbarPrimary?.setOnClickListener {
-            baseActivity.showNavDrawer() }
+            baseActivity.showNavDrawer()
+        }
         bikeList = ArrayList<Bike>()
         volleyRequest = Volley.newRequestQueue(context)
         getBikes(url)
+        mDialog.dismiss()
         return mView
     }
 
-    fun getBikes(url: String){
+    fun getBikes(url: String) {
         val bikeRequest = JsonArrayRequest(Method.GET, url,
             Response.Listener { response: JSONArray ->
-                try{
-                    for (i in 0 until response.length()){
+                try {
+
+                    for (i in 0 until response.length()) {
                         var bikeObj = response.getJSONObject(i)
                         var bike = Bike()
-                        bike.name= bikeObj.getString("name")
+                        bike.name = bikeObj.getString("name")
                         bike.address = bikeObj.getString("address")
                         bike.banking = bikeObj.getBoolean("banking")
                         bike.availableBikes = bikeObj.getInt("available_bikes")
@@ -70,8 +80,6 @@ class BikeList: BaseFragment(){
                         bike.bonus = bikeObj.optBoolean("bonus")
                         bike.bikeStands = bikeObj.getInt("bike_stands")
                         bike.lastUpdated = bikeObj.getLong("last_update")
-
-
                         bikeList!!.add(bike)
 
                         bikeAdapter = BikeListAdapter(bikeList!!, context!!)
@@ -80,7 +88,8 @@ class BikeList: BaseFragment(){
                         bike_recycler_view.adapter = bikeAdapter
                     }
                     bikeAdapter!!.notifyDataSetChanged()
-                }catch (e: JSONException){
+
+                } catch (e: JSONException) {
                     e.printStackTrace()
                 }
             },
