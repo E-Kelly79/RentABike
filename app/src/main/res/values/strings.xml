@@ -36,6 +36,7 @@
         <item>Lyon</item>
         <item>Brisbane</item>
     </string-array>
+    <string name="title_activity_google_maps_fragment">Map</string>
 
 
 </resources>

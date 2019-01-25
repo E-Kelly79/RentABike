@@ -29,6 +29,10 @@ class MapsFragment : BaseFragment() {
     lateinit var mCitySpinner: Spinner
     lateinit var contractName: Bundle
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.map_fragment, container, false)
@@ -59,7 +63,6 @@ class MapsFragment : BaseFragment() {
                 }else{
                     mContinueBtn.isEnabled = false
                 }
-                Toast.makeText(context, mCitySpinner.selectedItem.toString(), Toast.LENGTH_LONG).show()
             }
         }
         mContinueBtn.setOnClickListener {

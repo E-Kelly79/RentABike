@@ -18,6 +18,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.bike.rent.kelly.GoogleMapsFragment
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.ui.auth.AuthActivity
 import com.bike.rent.kelly.ui.bike.BikeList
@@ -213,6 +214,10 @@ open class BaseActivity : AppCompatActivity(), MvpView {
                 currentFragmentKey = LOGIN_FRAGMENT
                 loadLoginFragment(args, addToBackStack)
             }
+            GOOGLE_MAPS ->{
+                currentFragmentKey = GOOGLE_MAPS
+                loadGoogleMapsFragment(args, addToBackStack)
+            }
         }
     }
 
@@ -246,6 +251,16 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         getFragment(args, addToBackStack, AuthActivity(), LOGIN_FRAGMENT).commit()
     }
 
+    /**
+     * Load Google Maps Fragment
+     *
+     * @param args           Bundle
+     * @param addToBackStack Boolean
+     */
+    fun loadGoogleMapsFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, GoogleMapsFragment(), GOOGLE_MAPS).commit()
+    }
+
 
     /**
      * Load Menu Fragment
@@ -261,7 +276,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
     /**
      * Definition of fragments supported
      */
-    @StringDef(MAPS_FRAGMENT, MENU_FRAGMENT, BIKE_LIST_FRAGMENT, LOGIN_FRAGMENT )
+    @StringDef(MAPS_FRAGMENT, MENU_FRAGMENT, BIKE_LIST_FRAGMENT, LOGIN_FRAGMENT, GOOGLE_MAPS )
     @Retention(RetentionPolicy.SOURCE)
     annotation class MainFragments
 
@@ -288,6 +303,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         const val MENU_FRAGMENT = "MENU_FRAGMENT"
         const val BIKE_LIST_FRAGMENT = "BIKE_LIST"
         const val LOGIN_FRAGMENT = "LOGIN"
+        const val GOOGLE_MAPS = "GOOGLE_MAPS"
 
         const val KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID"
         const val KEY_FRAGMENT_ARGS = "KEY_FRAGMENT_ARGS"
