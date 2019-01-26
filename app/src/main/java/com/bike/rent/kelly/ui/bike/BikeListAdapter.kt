@@ -17,9 +17,17 @@ import com.bike.rent.kelly.model.Bike
 import com.bike.rent.kelly.ui.base.BaseActivity
 import com.squareup.picasso.Picasso
 
+/**
+ * @author Eoin Kelly
+ * Created 21/01/2019
+ *
+ * Class to set up the recycler view for the bike list
+ * @constructor must take a ArrayList of type Bike and a context listener is optional
+ *
+ */
 class BikeListAdapter(private val bikeList:ArrayList<Bike>,
                       private val context: Context, val listener: (Int) -> Unit): RecyclerView.Adapter<BikeListAdapter.ViewHolder>() {
-    val mBaseActivity: BaseActivity = BaseActivity()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {
         val view = LayoutInflater.from(context)
@@ -47,8 +55,9 @@ class BikeListAdapter(private val bikeList:ArrayList<Bike>,
         var lat = itemView.findViewById<TextView>(R.id.text_lat)
         var lng = itemView.findViewById<TextView>(R.id.text_lng)
 
-
-
+        /**
+         *
+         */
         fun bindView(bike: Bike, pos:Int, listener:(Int)-> Unit) = with(itemView){
             streetName.text = "Name: ${bike.name}"
             streetAddress.text = "Address: ${bike.address}"

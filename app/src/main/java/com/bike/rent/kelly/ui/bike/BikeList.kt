@@ -1,6 +1,5 @@
 package com.bike.rent.kelly.ui.bike
 
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -9,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.android.volley.Request.Method
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -17,14 +15,20 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.data.local.PreferencesHelper
-import com.bike.rent.kelly.data.local.PrefsHelper
 import com.bike.rent.kelly.model.Bike
+import com.bike.rent.kelly.ui.base.BaseActivity
 import com.bike.rent.kelly.ui.base.BaseFragment
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import kotlinx.android.synthetic.main.bike_list_fragment.bike_recycler_view
 
+/**
+ * @author Eoin Kelly
+ * created 21/01/19
+ *
+ * Class to add bike objects to the recycler view
+ */
 class BikeList: BaseFragment() {
     var volleyRequest: RequestQueue? = null
     var preferences: PreferencesHelper? = null
@@ -36,15 +40,21 @@ class BikeList: BaseFragment() {
 
     lateinit var url: String
 
-
+    /**
+     * Inflate a layout far the fragment to show
+     * @param inflater inflate the give view to show layout on screen
+     * @param container the view in which the layout will sit in
+     * @param savedInstanceState used to save any data and pass to another activity
+     * @return View
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.bike_list_fragment, container, false)
         baseActivity.showToolbar()
         baseActivity.setTitle("Bike List")
+
         var test = arguments
         var myString = test?.getString("contractName")
         url = "https://api.jcdecaux.com/vls/v1/stations?contract=$myString&apiKey=567c5a18aec43057727314c80b218d65bced9c61"
-
         preferences = PreferencesHelper(context!!)
 
         baseActivity.mivToolbarPrimary?.setOnClickListener {
@@ -56,6 +66,10 @@ class BikeList: BaseFragment() {
         return mView
     }
 
+    /**
+     * Used to make a http request to given url to pull back some json data
+     * @param url a string with a given url
+     */
     fun getBikes(url: String) {
         val bikeRequest = JsonArrayRequest(Method.GET, url,
             Response.Listener { response: JSONArray ->
@@ -77,13 +91,18 @@ class BikeList: BaseFragment() {
                         bike.bonus = bikeObj.optBoolean("bonus")
                         bike.bikeStands = bikeObj.getInt("bike_stands")
                         bike.lastUpdated = bikeObj.getLong("last_update")
-
                         bikeList.add(bike)
 
+                        // Get the Lat Lng form json and used it in the onclick event of recyclerview
+                        // to add that mark on the map
                         bikeAdapter = BikeListAdapter(bikeList, context!!){row ->
                             val latitude = bikeList[row].lat
                             val longitude = bikeList[row].lng
-                            savePrefs(latitude!!.toDouble(), longitude!!.toDouble())
+                            val title = bikeList[row].name
+                            preferences!!.setPrefFloat(BaseActivity.LAT, latitude!!.toFloat())
+                            preferences!!.setPrefFloat(BaseActivity.LNG, longitude!!.toFloat())
+                            preferences!!.setPrefString(BaseActivity.TITLE, title!!)
+
                             baseActivity.loadGoogleMapsFragment(arguments!!, false)
                         }
                         layoutManager = LinearLayoutManager(context)
@@ -102,11 +121,4 @@ class BikeList: BaseFragment() {
         volleyRequest!!.add(bikeRequest)
     }
 
-    fun savePrefs(lat: Double, lng: Double){
-        val prefs =  context!!.getSharedPreferences("LatLng", Context.MODE_PRIVATE)
-        val editor = prefs.edit()
-        editor.putFloat("LAT", lat.toFloat())
-        editor.putFloat("LNG", lng.toFloat())
-        editor.commit()
-    }
 }

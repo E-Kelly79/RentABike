@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bike.rent.kelly.R
-import com.bike.rent.kelly.ui.adapters.AuthPagerAdapter
 import com.bike.rent.kelly.ui.base.BaseFragment
 
 class AuthActivity: BaseFragment() {

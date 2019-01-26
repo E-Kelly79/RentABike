@@ -1,17 +1,14 @@
-package com.bike.rent.kelly
+package com.bike.rent.kelly.ui.maps
 
-import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bike.rent.kelly.R
+import com.bike.rent.kelly.R.layout
 import com.bike.rent.kelly.data.local.PreferencesHelper
-import com.bike.rent.kelly.data.local.PrefsHelper
 import com.bike.rent.kelly.ui.base.BaseActivity
 import com.bike.rent.kelly.ui.base.BaseFragment
-import com.bike.rent.kelly.ui.bike.BikeList
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -25,24 +22,19 @@ class GoogleMapsFragment : BaseFragment(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var mView: View
     var preference: PreferencesHelper? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-//        val mapFragment = supportFragmentManager
-//            .findFragmentById(R.id.map) as SupportMapFragment
-//        mapFragment.getMapAsync(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView = inflater.inflate(R.layout.google_maps_fragment, container, false)
+        mView = inflater.inflate(layout.google_maps_fragment, container, false)
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         preference = PreferencesHelper(context!!)
         return mView
     }
-
-
 
     /**
      * Manipulates the map once available.
@@ -55,16 +47,13 @@ class GoogleMapsFragment : BaseFragment(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        var lat = preference!!.getPrefFloat(BaseActivity.LAT)
+        var lng = preference!!.getPrefFloat(BaseActivity.LNG)
+        val title = preference!!.getPrefString(BaseActivity.TITLE)
+        val sydney = LatLng(lat!!.toDouble(), lng!!.toDouble())
 
-        // Add a marker in Sydney and move the camera
-        val prefs =  context!!.getSharedPreferences("LatLng", Context.MODE_PRIVATE)
-        var lat = prefs.getFloat("LAT", 0.0f)
-        var lng = prefs.getFloat("LNG", 0.0f)
-
-
-        val sydney = LatLng(lat.toDouble(), lng.toDouble())
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        mMap.addMarker(MarkerOptions().position(sydney).title(title))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-        mMap.animateCamera(CameraUpdateFactory.zoomTo( 12.0f ) )
+        mMap.animateCamera(CameraUpdateFactory.zoomTo( 12.0f ))
     }
 }

@@ -1,4 +1,4 @@
-package com.bike.rent.kelly.ui.adapters
+package com.bike.rent.kelly.ui.auth
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

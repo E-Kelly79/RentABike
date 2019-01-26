@@ -11,6 +11,6 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val args = Bundle()
-        baseActivity.loadMapsFragment(args, false)
+        baseActivity.loadCitySelectFragment(args, false)
     }
 }
