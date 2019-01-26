@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1023001151971",
+    "firebase_url": "https://gbs-bikes.firebaseio.com",
+    "project_id": "gbs-bikes",
+    "storage_bucket": "gbs-bikes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023001151971:android:fe3b8e3b9e286d8c",
+        "android_client_info": {
+          "package_name": "com.bike.rent.kelly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023001151971-eo4kok9e5sb37u3jrddqva719ci468l8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVA-wmlCwh-Yx4aFFerg_rrSAAOdUSpOI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
