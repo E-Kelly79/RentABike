@@ -1,33 +1,29 @@
-package com.bike.rent.kelly.ui.maps
+package com.bike.rent.kelly.ui.city_select
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
-import android.widget.SpinnerAdapter
 import android.widget.TextView
-import android.widget.Toast
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.map_fragment.spinner_city
-import java.text.FieldPosition
 
-class MapsFragment : BaseFragment() {
-
-
+class CitySelectFragment : BaseFragment() {
     lateinit var mView: View
     lateinit var mTitle: TextView
     lateinit var mSubTitle: TextView
     lateinit var mContinueBtn: Button
     lateinit var mCitySpinner: Spinner
     lateinit var contractName: Bundle
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,14 +34,16 @@ class MapsFragment : BaseFragment() {
         mContinueBtn = mView.findViewById(R.id.btn_landing) as Button
         mCitySpinner = mView.findViewById(R.id.spinner_city) as Spinner
 
+        //setup spinner
         var mSpinnerAdapter = ArrayAdapter.createFromResource(context, R.array.city_array,
             android.R.layout.simple_spinner_item)
         mSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         mCitySpinner.adapter = mSpinnerAdapter
 
+        //Listener for spinner to get selected item from spinner and send to bike list fragment
         mCitySpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                //All ways an option to select so method is redundant
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -55,11 +53,9 @@ class MapsFragment : BaseFragment() {
                     contractName = Bundle()
                     contractName.putString("contractName", mCitySpinner.selectedItem.toString())
                     fragment.arguments = contractName
-
                 }else{
                     mContinueBtn.isEnabled = false
                 }
-                Toast.makeText(context, mCitySpinner.selectedItem.toString(), Toast.LENGTH_LONG).show()
             }
         }
         mContinueBtn.setOnClickListener {
@@ -67,10 +63,4 @@ class MapsFragment : BaseFragment() {
         }
         return mView
     }
-
-
-
-
 }
-
-

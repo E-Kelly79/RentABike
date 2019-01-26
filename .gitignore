@@ -9,3 +9,6 @@
 /build
 /captures
 .externalNativeBuild
+.idea/*
+/app/src/debug
+/app/src/release

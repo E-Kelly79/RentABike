@@ -25,7 +25,7 @@ class LoginFragment: BaseFragment(){
             contractName.putString("contractName", "Hello")
             fragment.arguments = contractName
             Toast.makeText(context, "hello", Toast.LENGTH_LONG).show()
-           baseActivity.loadMapsFragment(contractName, false)
+           baseActivity.loadCitySelectFragment(contractName, false)
         }
         return mView
     }

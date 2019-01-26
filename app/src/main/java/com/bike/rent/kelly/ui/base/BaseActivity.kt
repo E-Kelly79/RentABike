@@ -18,39 +18,34 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.bike.rent.kelly.ui.maps.GoogleMapsFragment
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.ui.auth.AuthActivity
 import com.bike.rent.kelly.ui.bike.BikeList
-import com.bike.rent.kelly.ui.login.LoginFragment
-import com.bike.rent.kelly.ui.maps.MapsFragment
+import com.bike.rent.kelly.ui.city_select.CitySelectFragment
 import com.bike.rent.kelly.ui.menu.MenuFragment
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 
 open class BaseActivity : AppCompatActivity(), MvpView {
     var mActivityId: Long = 0
-    /**
-     * Get current fragment key
-     *
-     * @return String Current Fragment
-     */
+
     /**
      * Set current fragment
      */
     @get:MainFragments
-    var currentFragmentKey: String? = MAPS_FRAGMENT
+    var currentFragmentKey: String? = CITY_SELECT_FRAGMENT
+
     /**
      * Get a fragment
      * @return fragment
      */
     var fragment: BaseFragment? = null
         private set
-    /**
-     * Track Bundle on BackPressed
-     *
-     * @return Bundle
-     */
+
+
     var bundle: Bundle? = null
+
 
     var mFragmentContainer: FrameLayout? = null
     var mDrawerLayout: DrawerLayout? = null
@@ -98,11 +93,6 @@ open class BaseActivity : AppCompatActivity(), MvpView {
 
     @RequiresApi(VERSION_CODES.LOLLIPOP)
     private fun initNavDrawer() {
-        //TODO This needs to be done dynamically
-        //        setPairedDeviceLabel("Tablet 1234");
-        //        setPairedDeviceStatus(getString(R.string.label_status_connected));
-        //        setLastSyncTimeLabel("2 Mins");
-
         mDrawerLayout?.setScrimColor(Color.TRANSPARENT)
         mNavView?.outlineProvider = null
         mDrawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
@@ -169,12 +159,11 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         mToolbar!!.visibility = View.VISIBLE
     }
 
-
-    fun getFragment(
-        args: Bundle, addToBackStack: Boolean, fragment: BaseFragment, fragmentKey: String): FragmentTransaction {
-        return getFragmentAnim(
-            args, addToBackStack, fragment, fragmentKey, android.R.anim.fade_in,
-            android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out
+    fun getFragment(args: Bundle, addToBackStack: Boolean, fragment: BaseFragment,
+            fragmentKey: String): FragmentTransaction {
+        return getFragmentAnim(args, addToBackStack, fragment,
+                fragmentKey, android.R.anim.fade_in, android.R.anim.fade_out,
+                android.R.anim.fade_in, android.R.anim.fade_out
         )
     }
 
@@ -197,9 +186,9 @@ open class BaseActivity : AppCompatActivity(), MvpView {
      */
     fun loadFragment(args: Bundle, fragment: String, addToBackStack: Boolean) {
         when (fragment) {
-           MAPS_FRAGMENT -> {
-                currentFragmentKey = MAPS_FRAGMENT
-                loadMapsFragment(args, addToBackStack)
+           CITY_SELECT_FRAGMENT -> {
+                currentFragmentKey = CITY_SELECT_FRAGMENT
+                loadCitySelectFragment(args, addToBackStack)
             }
            MENU_FRAGMENT -> {
                 currentFragmentKey = MENU_FRAGMENT
@@ -213,17 +202,21 @@ open class BaseActivity : AppCompatActivity(), MvpView {
                 currentFragmentKey = LOGIN_FRAGMENT
                 loadLoginFragment(args, addToBackStack)
             }
+            GOOGLE_MAPS ->{
+                currentFragmentKey = GOOGLE_MAPS
+                loadGoogleMapsFragment(args, addToBackStack)
+            }
         }
     }
 
     /**
-     * Load MAps Fragment
+     * Load City Select Fragment
      *
      * @param args           Bundle
      * @param addToBackStack Boolean
      */
-    fun loadMapsFragment(args: Bundle, addToBackStack: Boolean) {
-        getFragment(args, addToBackStack, MapsFragment(), MAPS_FRAGMENT).commit()
+    fun loadCitySelectFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, CitySelectFragment(), CITY_SELECT_FRAGMENT).commit()
     }
 
     /**
@@ -246,6 +239,15 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         getFragment(args, addToBackStack, AuthActivity(), LOGIN_FRAGMENT).commit()
     }
 
+    /**
+     * Load Google Maps Fragment
+     *
+     * @param args           Bundle
+     * @param addToBackStack Boolean
+     */
+    fun loadGoogleMapsFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, GoogleMapsFragment(), GOOGLE_MAPS).commit()
+    }
 
     /**
      * Load Menu Fragment
@@ -261,7 +263,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
     /**
      * Definition of fragments supported
      */
-    @StringDef(MAPS_FRAGMENT, MENU_FRAGMENT, BIKE_LIST_FRAGMENT, LOGIN_FRAGMENT )
+    @StringDef(CITY_SELECT_FRAGMENT, MENU_FRAGMENT, BIKE_LIST_FRAGMENT, LOGIN_FRAGMENT, GOOGLE_MAPS )
     @Retention(RetentionPolicy.SOURCE)
     annotation class MainFragments
 
@@ -284,14 +286,18 @@ open class BaseActivity : AppCompatActivity(), MvpView {
     }
 
     companion object {
-        const val MAPS_FRAGMENT = "MAPS_FRAGMENT"
+        const val CITY_SELECT_FRAGMENT = "MAPS_FRAGMENT"
         const val MENU_FRAGMENT = "MENU_FRAGMENT"
         const val BIKE_LIST_FRAGMENT = "BIKE_LIST"
         const val LOGIN_FRAGMENT = "LOGIN"
+        const val GOOGLE_MAPS = "GOOGLE_MAPS"
 
         const val KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID"
         const val KEY_FRAGMENT_ARGS = "KEY_FRAGMENT_ARGS"
         const val ADD_FRAGMENT_TO_BACKSTACK = true
         const val NOT_ADD_TO_BACKSTACK = false
+        const val LAT = "LAT"
+        const val LNG = "LNG"
+        const val TITLE ="TITLE"
     }
 }

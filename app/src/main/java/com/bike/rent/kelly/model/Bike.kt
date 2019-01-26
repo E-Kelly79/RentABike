@@ -1,7 +1,5 @@
 package com.bike.rent.kelly.model
 
-import java.util.Date
-
 class Bike(){
     var number: Int? = null
     var contractName: String? = null
@@ -13,10 +11,12 @@ class Bike(){
     var availableBikes: Int? = null
     var status: String? = null
     var lastUpdated: Long? = null
+    var lat: Double? = null
+    var lng: Double? = null
 
     constructor(number: Int, contractName: String, name: String, address: String,
                 banking: Boolean, bonus: Boolean, bikeStands: Int, availableBikes: Int,
-                status: String, lastUpdated: Long): this(){
+                status: String, lastUpdated: Long, lat: Double, lng: Double): this(){
         this.number = number
         this.contractName = contractName
         this.name = name
@@ -27,6 +27,8 @@ class Bike(){
         this.availableBikes = availableBikes
         this.status = status
         this.lastUpdated = lastUpdated
+        this.lat = lat
+        this.lng = lng
     }
 
 
