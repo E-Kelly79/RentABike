@@ -28,6 +28,8 @@ dependencies {
     final PICASSO_VERSION = '2.71828'
     final VOLLEY_VERSION = '2.0.1'
     final BUTTER_KNIFE = '9.0.0'
+    final MAPBOX = '7.0.1'
+    final MAPBOX_LOCATION = '0.11.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //noinspection GradleCompatible
@@ -42,6 +44,8 @@ dependencies {
     implementation 'com.jakewharton:kotterknife:0.1.0-SNAPSHOT'
     implementation "com.squareup.picasso:picasso:$PICASSO_VERSION"
     implementation "com.dubsmash.volley:library:$VOLLEY_VERSION"
+    implementation "com.mapbox.mapboxsdk:mapbox-android-sdk:$MAPBOX"
+    implementation "com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:$MAPBOX_LOCATION"
 }
 
 repositories {
