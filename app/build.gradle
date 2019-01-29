@@ -22,14 +22,17 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     final CONSTRAINT_LAYOUT = '1.1.2'
     final SUPPORT_LIBRARY_VERSION = '28.0.0'
     final PICASSO_VERSION = '2.71828'
     final VOLLEY_VERSION = '2.0.1'
     final BUTTER_KNIFE = '9.0.0'
-    final MAPBOX = '7.0.1'
-    final MAPBOX_LOCATION = '0.11.0'
+    final MAPBOX = '7.0.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //noinspection GradleCompatible
@@ -45,9 +48,6 @@ dependencies {
     implementation "com.squareup.picasso:picasso:$PICASSO_VERSION"
     implementation "com.dubsmash.volley:library:$VOLLEY_VERSION"
     implementation "com.mapbox.mapboxsdk:mapbox-android-sdk:$MAPBOX"
-    implementation "com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:$MAPBOX_LOCATION"
 }
 
-repositories {
-    mavenCentral()
-}
+

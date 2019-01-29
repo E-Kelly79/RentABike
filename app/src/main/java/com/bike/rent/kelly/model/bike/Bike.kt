@@ -1,4 +1,4 @@
-package com.bike.rent.kelly.model
+package com.bike.rent.kelly.model.bike
 
 class Bike(){
     var number: Int? = null

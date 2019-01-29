@@ -1,6 +1,6 @@
 package com.bike.rent.kelly.ui.bike
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -14,8 +14,9 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.bike.rent.kelly.R
+import com.bike.rent.kelly.SupportMapFragment
 import com.bike.rent.kelly.data.local.PreferencesHelper
-import com.bike.rent.kelly.model.Bike
+import com.bike.rent.kelly.model.bike.Bike
 import com.bike.rent.kelly.ui.base.BaseActivity
 import com.bike.rent.kelly.ui.base.BaseFragment
 import org.json.JSONArray
@@ -102,8 +103,12 @@ class BikeList: BaseFragment() {
                             preferences!!.setPrefFloat(BaseActivity.LAT, latitude!!.toFloat())
                             preferences!!.setPrefFloat(BaseActivity.LNG, longitude!!.toFloat())
                             preferences!!.setPrefString(BaseActivity.TITLE, title!!)
+                            var intent = Intent(baseActivity, SupportMapFragment::class.java)
+                            intent.putExtra(BaseActivity.LAT, latitude!!.toFloat())
+                            intent.putExtra(BaseActivity.LNG, longitude!!.toFloat())
+                            startActivity(intent)
 
-                            baseActivity.loadGoogleMapsFragment(arguments!!, false)
+                            //baseActivity.loadGoogleMapsFragment(arguments!!, false)
                         }
                         layoutManager = LinearLayoutManager(context)
                         bike_recycler_view.layoutManager = layoutManager
@@ -120,5 +125,7 @@ class BikeList: BaseFragment() {
             })
         volleyRequest!!.add(bikeRequest)
     }
+
+
 
 }
