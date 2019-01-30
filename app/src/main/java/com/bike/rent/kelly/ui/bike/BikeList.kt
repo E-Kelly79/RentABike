@@ -36,7 +36,7 @@ class BikeList: BaseFragment() {
 
     var mView: View? = null
     lateinit var bikeList: ArrayList<Bike>
-    var bikeAdapter: BikeListAdapter? = null
+    var mBikeRecyclerViewAdapter: BikeListRecyclerViewAdapter? = null
     var layoutManager: RecyclerView.LayoutManager? = null
 
     lateinit var url: String
@@ -96,25 +96,25 @@ class BikeList: BaseFragment() {
 
                         // Get the Lat Lng form json and used it in the onclick event of recyclerview
                         // to add that mark on the map
-                        bikeAdapter = BikeListAdapter(bikeList, context!!){row ->
+                        mBikeRecyclerViewAdapter = BikeListRecyclerViewAdapter(bikeList, context!!){row ->
                             val latitude = bikeList[row].lat
                             val longitude = bikeList[row].lng
                             val title = bikeList[row].name
                             preferences!!.setPrefFloat(BaseActivity.LAT, latitude!!.toFloat())
                             preferences!!.setPrefFloat(BaseActivity.LNG, longitude!!.toFloat())
                             preferences!!.setPrefString(BaseActivity.TITLE, title!!)
-                            var intent = Intent(baseActivity, SupportMapFragment::class.java)
-                            intent.putExtra(BaseActivity.LAT, latitude!!.toFloat())
-                            intent.putExtra(BaseActivity.LNG, longitude!!.toFloat())
-                            startActivity(intent)
+//                            var intent = Intent(baseActivity, SupportMapFragment::class.java)
+//                            intent.putExtra(BaseActivity.LAT, latitude!!.toFloat())
+//                            intent.putExtra(BaseActivity.LNG, longitude!!.toFloat())
+//                            startActivity(intent)
 
-                            //baseActivity.loadGoogleMapsFragment(arguments!!, false)
+                            baseActivity.loadGoogleMapsFragment(arguments!!, false)
                         }
                         layoutManager = LinearLayoutManager(context)
                         bike_recycler_view.layoutManager = layoutManager
-                        bike_recycler_view.adapter = bikeAdapter
+                        bike_recycler_view.adapter = mBikeRecyclerViewAdapter
                     }
-                    bikeAdapter!!.notifyDataSetChanged()
+                    mBikeRecyclerViewAdapter!!.notifyDataSetChanged()
 
                 } catch (e: JSONException) {
                     e.printStackTrace()

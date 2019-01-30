@@ -20,9 +20,11 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bike.rent.kelly.ui.maps.GoogleMapsFragment
 import com.bike.rent.kelly.R
+import com.bike.rent.kelly.SupportMapFragment
 import com.bike.rent.kelly.ui.auth.AuthActivity
 import com.bike.rent.kelly.ui.bike.BikeList
 import com.bike.rent.kelly.ui.city_select.CitySelectFragment
+import com.bike.rent.kelly.ui.favorites.FavouritesFragment
 import com.bike.rent.kelly.ui.menu.MenuFragment
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
@@ -44,7 +46,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         private set
 
 
-    var bundle: Bundle? = null
+    lateinit var bundle: Bundle
 
 
     var mFragmentContainer: FrameLayout? = null
@@ -206,6 +208,10 @@ open class BaseActivity : AppCompatActivity(), MvpView {
                 currentFragmentKey = GOOGLE_MAPS
                 loadGoogleMapsFragment(args, addToBackStack)
             }
+            FAVOURITES_FRAGMENT -> {
+                currentFragmentKey = FAVOURITES_FRAGMENT
+                loadFavouriteFragment(args, addToBackStack)
+            }
         }
     }
 
@@ -246,7 +252,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
      * @param addToBackStack Boolean
      */
     fun loadGoogleMapsFragment(args: Bundle, addToBackStack: Boolean) {
-        getFragment(args, addToBackStack, GoogleMapsFragment(), GOOGLE_MAPS).commit()
+        getFragment(args, addToBackStack, SupportMapFragment(), GOOGLE_MAPS).commit()
     }
 
     /**
@@ -261,9 +267,20 @@ open class BaseActivity : AppCompatActivity(), MvpView {
     }
 
     /**
+     * Load Favourite Fragment
+     *
+     * @param args           Bundle
+     * @param addToBackStack Boolean
+     */
+    fun loadFavouriteFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, FavouritesFragment(), FAVOURITES_FRAGMENT
+        ).commit()
+    }
+
+    /**
      * Definition of fragments supported
      */
-    @StringDef(CITY_SELECT_FRAGMENT, MENU_FRAGMENT, BIKE_LIST_FRAGMENT, LOGIN_FRAGMENT, GOOGLE_MAPS )
+    @StringDef(CITY_SELECT_FRAGMENT, MENU_FRAGMENT, BIKE_LIST_FRAGMENT, LOGIN_FRAGMENT, GOOGLE_MAPS, FAVOURITES_FRAGMENT)
     @Retention(RetentionPolicy.SOURCE)
     annotation class MainFragments
 
@@ -285,12 +302,15 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         mtvTitle?.setTextColor(resources.getColor(R.color.color_black))
     }
 
+
+
     companion object {
         const val CITY_SELECT_FRAGMENT = "MAPS_FRAGMENT"
         const val MENU_FRAGMENT = "MENU_FRAGMENT"
         const val BIKE_LIST_FRAGMENT = "BIKE_LIST"
         const val LOGIN_FRAGMENT = "LOGIN"
         const val GOOGLE_MAPS = "GOOGLE_MAPS"
+        const val FAVOURITES_FRAGMENT = "FAVOURITES_FRAGMENT"
 
         const val KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID"
         const val KEY_FRAGMENT_ARGS = "KEY_FRAGMENT_ARGS"

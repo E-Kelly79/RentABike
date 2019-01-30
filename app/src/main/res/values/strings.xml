@@ -37,6 +37,7 @@
         <item>Brisbane</item>
     </string-array>
     <string name="title_activity_google_maps_fragment">Map</string>
+    <string name="title_activity_main2">Main2Activity</string>
 
 
 </resources>

@@ -1,13 +1,15 @@
 package com.bike.rent.kelly;
 
-import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import com.bike.rent.kelly.ui.base.BaseActivity;
-import com.bike.rent.kelly.ui.main.MainActivity;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import com.bike.rent.kelly.ui.base.BaseFragment;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -21,40 +23,51 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import timber.log.Timber;
+public class SupportMapFragment extends BaseFragment {
 
-public class SupportMapFragment extends BaseActivity {
-
+    private View mView;
     private MapboxMap mMapboxMap;
     private MapView mapView;
     private float lat;
     private float lng;
+    private FloatingActionButton fab;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@org.jetbrains.annotations.Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Mapbox.getInstance(this, "pk.eyJ1IjoiYW5kcm9pZGtlbGx5IiwiYSI6ImNqcmZmN29udjIydDQ0M24wZHR3eTg3MDAifQ.L-taXW6VInPZrFwuIhYnOQ");
-        setContentView(R.layout.google_maps_fragment);
-        Intent intent = getIntent();
-        lat = intent.getFloatExtra("LAT", 0.0f);
-        lng = intent.getFloatExtra("LNG", 0.0f);
-        mapView = findViewById(R.id.mapView);
+        Mapbox.getInstance(getBaseActivity(),
+                "pk.eyJ1IjoiYW5kcm9pZGtlbGx5IiwiYSI6ImNqcmZmN29udjIydDQ0M24wZHR3eTg3MDAifQ.L-taXW6VInPZrFwuIhYnOQ");
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container,
+            @Nullable final Bundle savedInstanceState) {
+        mView = inflater.inflate(R.layout.google_maps_fragment, container, false);
+        fab = mView.findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("City", "Dublin");
+                getBaseActivity().loadFavouriteFragment(bundle, false);
+            }
+        });
+        mapView = mView.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-
-
                 mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
-// Add the marker image to map
+                        // Add the marker image to map
                         style.addImage("marker-icon-id",
                                 BitmapFactory.decodeResource(
                                         getResources(), R.drawable.mapbox_marker_icon_default));
 
                         GeoJsonSource geoJsonSource = new GeoJsonSource("source-id", Feature.fromGeometry(
-                                Point.fromLngLat(lng, lat)));
+                                Point.fromLngLat(7.1101, 52.2593)));
                         style.addSource(geoJsonSource);
 
                         SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
@@ -66,7 +79,7 @@ public class SupportMapFragment extends BaseActivity {
                     }
                 });
                 CameraPosition position = new CameraPosition.Builder()
-                        .target(new LatLng(lat, lng))
+                        .target(new LatLng(52.2593, 7.1101))
                         .zoom(11)
                         .tilt(20)
                         .build();
@@ -75,23 +88,13 @@ public class SupportMapFragment extends BaseActivity {
                 mapboxMap.setStyle(Style.TRAFFIC_DAY, new Style.OnStyleLoaded() {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
-
                         // Custom map style has been loaded and map is now ready
-
 
                     }
                 });
             }
         });
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        Timber.i("onBracked Pressed");
-        Bundle bundle = new Bundle();
-        bundle.putString("City", "Dublin");
-        getBaseActivity().loadCitySelectFragment(bundle, false);
+        return mView;
     }
 
     // Add the mapView's own lifecycle methods to the activity's lifecycle methods
@@ -125,14 +128,15 @@ public class SupportMapFragment extends BaseActivity {
         mapView.onLowMemory();
     }
 
+
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }

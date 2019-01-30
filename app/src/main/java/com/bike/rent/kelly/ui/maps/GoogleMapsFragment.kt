@@ -8,11 +8,6 @@ import android.view.ViewGroup
 import com.bike.rent.kelly.ui.base.BaseFragment
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.maps.MapView
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
-import kotlinx.android.synthetic.main.google_maps_fragment.mapView
-import com.mapbox.mapboxsdk.maps.MapboxMap
-
-import com.mapbox.mapboxsdk.maps.Style
 
 class GoogleMapsFragment : BaseFragment() {
     var mView: View? = null

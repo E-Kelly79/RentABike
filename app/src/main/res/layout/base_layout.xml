@@ -62,6 +62,7 @@
                     android:layout_height="22dp"
                     android:layout_marginTop="-16dp"
                     android:textSize="16sp"
+                    android:onClick="walletClicked"
                     android:text="@string/nav_link_my_wallet"/>
 
                 <TextView
@@ -70,6 +71,7 @@
                     android:layout_height="23dp"
                     android:layout_marginTop="16dp"
                     android:textSize="16sp"
+                    android:onClick="buyTicketsClicked"
                     android:text="@string/nav_link_buy_tickets"/>
 
                 <TextView
@@ -78,6 +80,7 @@
                     android:layout_height="22dp"
                     android:layout_marginTop="16dp"
                     android:textSize="16sp"
+                    android:onClick="favouritesClicked"
                     android:text="@string/nav_link_favorites"/>
 
 
@@ -88,6 +91,7 @@
                     android:layout_height="23dp"
                     android:layout_marginTop="16dp"
                     android:textSize="16sp"
+                    android:onClick="planJourneyClicked"
                     android:text="@string/nav_link_journey"/>
 
                 <TextView
@@ -96,6 +100,7 @@
                     android:layout_height="23dp"
                     android:layout_marginTop="16dp"
                     android:textSize="16sp"
+                    android:onClick="searchClicked"
                     android:text="@string/nav_link_search"/>
 
                 <View

@@ -19,8 +19,8 @@ import com.bike.rent.kelly.model.bike.Bike
  * @constructor must take a ArrayList of type Bike and a context listener is optional
  *
  */
-class BikeListAdapter(private val bikeList:ArrayList<Bike>,
-                      private val context: Context, val listener: (Int) -> Unit): RecyclerView.Adapter<BikeListAdapter.ViewHolder>() {
+class BikeListRecyclerViewAdapter(private val bikeList:ArrayList<Bike>, private val context: Context, val listener: (Int) -> Unit):
+        RecyclerView.Adapter<BikeListRecyclerViewAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {
