@@ -26,10 +26,13 @@ import com.bike.rent.kelly.ui.bike.BikeList
 import com.bike.rent.kelly.ui.city_select.CitySelectFragment
 import com.bike.rent.kelly.ui.favorites.FavouritesFragment
 import com.bike.rent.kelly.ui.menu.MenuFragment
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 
 open class BaseActivity : AppCompatActivity(), MvpView {
+
     var mActivityId: Long = 0
 
     /**
@@ -305,12 +308,16 @@ open class BaseActivity : AppCompatActivity(), MvpView {
 
 
     companion object {
+        val DATABASE:FirebaseDatabase = FirebaseDatabase.getInstance()
+        val DB_FAVOURITES:DatabaseReference = DATABASE.getReference("message")
         const val CITY_SELECT_FRAGMENT = "MAPS_FRAGMENT"
         const val MENU_FRAGMENT = "MENU_FRAGMENT"
         const val BIKE_LIST_FRAGMENT = "BIKE_LIST"
         const val LOGIN_FRAGMENT = "LOGIN"
         const val GOOGLE_MAPS = "GOOGLE_MAPS"
         const val FAVOURITES_FRAGMENT = "FAVOURITES_FRAGMENT"
+
+
 
         const val KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID"
         const val KEY_FRAGMENT_ARGS = "KEY_FRAGMENT_ARGS"

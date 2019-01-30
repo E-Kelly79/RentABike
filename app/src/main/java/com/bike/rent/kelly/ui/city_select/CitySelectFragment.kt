@@ -11,7 +11,13 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import com.bike.rent.kelly.R
+import com.bike.rent.kelly.ui.base.BaseActivity
 import com.bike.rent.kelly.ui.base.BaseFragment
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+
+
+
 
 class CitySelectFragment : BaseFragment() {
     lateinit var mView: View
@@ -33,6 +39,8 @@ class CitySelectFragment : BaseFragment() {
         mSubTitle = mView.findViewById(R.id.text_title_sub) as TextView
         mContinueBtn = mView.findViewById(R.id.btn_landing) as Button
         mCitySpinner = mView.findViewById(R.id.spinner_city) as Spinner
+        BaseActivity.DB_FAVOURITES.setValue("HEllo Eoin")
+
 
         //setup spinner
         var mSpinnerAdapter = ArrayAdapter.createFromResource(context, R.array.city_array,

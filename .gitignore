@@ -12,3 +12,7 @@
 .idea/*
 /app/src/debug
 /app/src/release
+/app/src/main/res/values/google_ads_key.xml
+/app/google-json.json
+
+
