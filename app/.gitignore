@@ -1,3 +1,4 @@
 /build
 .idea/*
 .gradle/*
+app/src/main/res/values/consts.xml

@@ -9,7 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Toast;
+import com.bike.rent.kelly.data.local.PreferencesHelper;
+import com.bike.rent.kelly.model.favs.Favourites;
+import com.bike.rent.kelly.ui.base.BaseActivity;
 import com.bike.rent.kelly.ui.base.BaseFragment;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -28,15 +37,25 @@ public class SupportMapFragment extends BaseFragment {
     private View mView;
     private MapboxMap mMapboxMap;
     private MapView mapView;
+    private PreferencesHelper mPreferencesHelper;
     private float lat;
     private float lng;
+    private String name;
+    private String city;
+    private String address;
     private FloatingActionButton fab;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mFavRef;
+    private Favourites mFavourites;
 
     @Override
     public void onCreate(@org.jetbrains.annotations.Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(getBaseActivity(),
-                "pk.eyJ1IjoiYW5kcm9pZGtlbGx5IiwiYSI6ImNqcmZmN29udjIydDQ0M24wZHR3eTg3MDAifQ.L-taXW6VInPZrFwuIhYnOQ");
+                getString(R.string.map_box_key));
+        mDatabase = FirebaseDatabase.getInstance();
+        mPreferencesHelper = new PreferencesHelper(getContext());
+        getPreferenceData();
     }
 
     @Nullable
@@ -48,11 +67,12 @@ public class SupportMapFragment extends BaseFragment {
         fab.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("City", "Dublin");
-                getBaseActivity().loadFavouriteFragment(bundle, false);
+                saveFavouritesToDatabase();
+                fab.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_on));
+                //getBaseActivity().loadFavouriteFragment(getBaseArguments(), false);
             }
         });
+
         mapView = mView.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
@@ -67,7 +87,7 @@ public class SupportMapFragment extends BaseFragment {
                                         getResources(), R.drawable.mapbox_marker_icon_default));
 
                         GeoJsonSource geoJsonSource = new GeoJsonSource("source-id", Feature.fromGeometry(
-                                Point.fromLngLat(7.1101, 52.2593)));
+                                Point.fromLngLat(lng, lat)));
                         style.addSource(geoJsonSource);
 
                         SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
@@ -79,7 +99,7 @@ public class SupportMapFragment extends BaseFragment {
                     }
                 });
                 CameraPosition position = new CameraPosition.Builder()
-                        .target(new LatLng(52.2593, 7.1101))
+                        .target(new LatLng(lat, lng))
                         .zoom(11)
                         .tilt(20)
                         .build();
@@ -95,6 +115,37 @@ public class SupportMapFragment extends BaseFragment {
             }
         });
         return mView;
+    }
+
+    public void saveFavouritesToDatabase(){
+        //Push object to new node in firebase database with a unique ID
+        mFavRef = mDatabase.getReference("Favourites").push();
+        mFavourites = new Favourites(name, city, address, lng, lat);
+        mFavRef.setValue(mFavourites);
+    }
+
+
+
+    public void readFavouritesFromDatabase(){
+        mFavRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+                Favourites myFavs = dataSnapshot.getValue(Favourites.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull final DatabaseError databaseError) {
+                Toast.makeText(getContext(),databaseError.getMessage().toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void getPreferenceData(){
+        lat = mPreferencesHelper.getPrefFloat(BaseActivity.LAT);
+        lng = mPreferencesHelper.getPrefFloat(BaseActivity.LNG);
+        name = mPreferencesHelper.getPrefString(BaseActivity.TITLE);
+        city = mPreferencesHelper.getPrefString(BaseActivity.CITY);
+        address = mPreferencesHelper.getPrefString(BaseActivity.ADDRESS);
     }
 
     // Add the mapView's own lifecycle methods to the activity's lifecycle methods

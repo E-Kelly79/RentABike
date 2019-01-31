@@ -100,14 +100,17 @@ class BikeList: BaseFragment() {
                             val latitude = bikeList[row].lat
                             val longitude = bikeList[row].lng
                             val title = bikeList[row].name
+                            val city = bikeList[row].contractName
+                            val address = bikeList[row].address
                             preferences!!.setPrefFloat(BaseActivity.LAT, latitude!!.toFloat())
                             preferences!!.setPrefFloat(BaseActivity.LNG, longitude!!.toFloat())
                             preferences!!.setPrefString(BaseActivity.TITLE, title!!)
+                            preferences!!.setPrefString(BaseActivity.CITY, city!!)
+                            preferences!!.setPrefString(BaseActivity.ADDRESS, address!!)
 //                            var intent = Intent(baseActivity, SupportMapFragment::class.java)
 //                            intent.putExtra(BaseActivity.LAT, latitude!!.toFloat())
 //                            intent.putExtra(BaseActivity.LNG, longitude!!.toFloat())
 //                            startActivity(intent)
-
                             baseActivity.loadGoogleMapsFragment(arguments!!, false)
                         }
                         layoutManager = LinearLayoutManager(context)
@@ -121,7 +124,7 @@ class BikeList: BaseFragment() {
                 }
             },
             Response.ErrorListener {
-                Log.d("ERROR====>", "sometimes is wrong")
+                Log.d("ERROR====>", "somethis went wrong")
             })
         volleyRequest!!.add(bikeRequest)
     }

@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import com.bike.rent.kelly.R
+import com.bike.rent.kelly.data.local.DatabaseHelper
 import com.bike.rent.kelly.ui.base.BaseActivity
 import com.bike.rent.kelly.ui.base.BaseFragment
 import com.google.firebase.database.DatabaseReference
@@ -29,6 +30,7 @@ class CitySelectFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -39,7 +41,6 @@ class CitySelectFragment : BaseFragment() {
         mSubTitle = mView.findViewById(R.id.text_title_sub) as TextView
         mContinueBtn = mView.findViewById(R.id.btn_landing) as Button
         mCitySpinner = mView.findViewById(R.id.spinner_city) as Spinner
-        BaseActivity.DB_FAVOURITES.setValue("HEllo Eoin")
 
 
         //setup spinner

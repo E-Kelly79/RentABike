@@ -301,15 +301,13 @@ open class BaseActivity : AppCompatActivity(), MvpView {
     }
 
     fun setTitle(title: String) {
-        mtvTitle?.setText(title)
+        mtvTitle?.text = title
         mtvTitle?.setTextColor(resources.getColor(R.color.color_black))
     }
 
 
 
     companion object {
-        val DATABASE:FirebaseDatabase = FirebaseDatabase.getInstance()
-        val DB_FAVOURITES:DatabaseReference = DATABASE.getReference("message")
         const val CITY_SELECT_FRAGMENT = "MAPS_FRAGMENT"
         const val MENU_FRAGMENT = "MENU_FRAGMENT"
         const val BIKE_LIST_FRAGMENT = "BIKE_LIST"
@@ -326,5 +324,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         const val LAT = "LAT"
         const val LNG = "LNG"
         const val TITLE ="TITLE"
+        const val CITY ="CITY"
+        const val ADDRESS ="ADDRESS"
     }
 }
