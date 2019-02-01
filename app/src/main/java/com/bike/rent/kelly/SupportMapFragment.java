@@ -9,16 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
 import com.bike.rent.kelly.data.local.PreferencesHelper;
 import com.bike.rent.kelly.model.favs.Favourites;
 import com.bike.rent.kelly.ui.base.BaseActivity;
 import com.bike.rent.kelly.ui.base.BaseFragment;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -55,6 +57,7 @@ public class SupportMapFragment extends BaseFragment {
                 getString(R.string.map_box_key));
         mDatabase = FirebaseDatabase.getInstance();
         mPreferencesHelper = new PreferencesHelper(getContext());
+        mFavRef = mDatabase.getReference("Favourites");
         getPreferenceData();
     }
 
@@ -64,15 +67,15 @@ public class SupportMapFragment extends BaseFragment {
             @Nullable final Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.google_maps_fragment, container, false);
         fab = mView.findViewById(R.id.floatingActionButton);
+        checkDatabaseForMatch();
         fab.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View view) {
                 saveFavouritesToDatabase();
                 fab.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_on));
-                //getBaseActivity().loadFavouriteFragment(getBaseArguments(), false);
+                getBaseActivity().loadFavouriteFragment(getBaseArguments(), false);
             }
         });
-
         mapView = mView.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
@@ -124,21 +127,27 @@ public class SupportMapFragment extends BaseFragment {
         mFavRef.setValue(mFavourites);
     }
 
-
-
-    public void readFavouritesFromDatabase(){
-        mFavRef.addValueEventListener(new ValueEventListener() {
+    public void checkDatabaseForMatch() {
+        mDatabase.getReference().child("Favourites").orderByChild("stationName").equalTo(name).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-                Favourites myFavs = dataSnapshot.getValue(Favourites.class);
+                if (dataSnapshot.exists()){
+                    fab.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_on));
+                    fab.setClickable(false);
+                }else{
+                    fab.setImageDrawable(getResources().getDrawable(android.R.drawable.btn_star_big_off));
+                    fab.setClickable(true);
+                }
             }
-
             @Override
             public void onCancelled(@NonNull final DatabaseError databaseError) {
-                Toast.makeText(getContext(),databaseError.getMessage().toString(), Toast.LENGTH_LONG).show();
+
             }
         });
+
     }
+
+
 
     public void getPreferenceData(){
         lat = mPreferencesHelper.getPrefFloat(BaseActivity.LAT);

@@ -5,26 +5,25 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.RecyclerView.LayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
+
 import com.bike.rent.kelly.R
-import com.bike.rent.kelly.data.local.DatabaseHelper
-
 import com.bike.rent.kelly.model.favs.Favourites
-import com.bike.rent.kelly.ui.base.BaseActivity
-
 import com.bike.rent.kelly.ui.base.BaseFragment
 import com.google.firebase.database.ChildEventListener
+
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.favourites_fragment.fav_recycler_view
+
+
 
 class FavouritesFragment: BaseFragment() {
     lateinit var mView: View
@@ -39,7 +38,6 @@ class FavouritesFragment: BaseFragment() {
         super.onCreate(savedInstanceState)
         database = FirebaseDatabase.getInstance()
         favRef = database.getReference("Favourites")
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,35 +45,30 @@ class FavouritesFragment: BaseFragment() {
         baseActivity.showToolbar()
         baseActivity.setTitle("Favourites List")
         favRecycler = mView.findViewById(R.id.fav_recycler_view)
-
-
         favList = ArrayList<Favourites>()
-        for(i in 0..11){
-            favRef = favRef.child("favLists").push()
-            favList.add(Favourites(favRef.key!!, "gfdgdsfg","Hello",  0.0f, 0.0f))
-        }
-        favRef.setValue(favList)
-
-
-        favRef.addValueEventListener(object: ValueEventListener{
-            override fun onCancelled(erroe: DatabaseError) {
-
-            }
-
-            override fun onDataChange(data: DataSnapshot) {
-                var value = data.value
-                Log.d("Log", value.toString())
-            }
-        })
-
-        mFavRecyclerViewAdapter = FavouritesRecyclerViewAdapter(favList, context!!){}
-
-        layoutManager = GridLayoutManager(context, 3)
-        favRecycler!!.layoutManager = layoutManager
-        favRecycler!!.adapter = mFavRecyclerViewAdapter
-
+        getFavouritesFromDatabase()
         return mView
     }
 
-
+    fun getFavouritesFromDatabase(){
+        favRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    favList.clear()
+                    for (fav in dataSnapshot.children) {
+                        var myFavs = fav.getValue(Favourites::class.java)!!
+                        favList.add(myFavs)
+                        mFavRecyclerViewAdapter = FavouritesRecyclerViewAdapter(favList, context!!){}
+                        layoutManager = LinearLayoutManager(context)
+                        favRecycler!!.layoutManager = layoutManager
+                        favRecycler!!.adapter = mFavRecyclerViewAdapter
+                    }
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.e("TAG", "postMessages:onCancelled", databaseError!!.toException())
+                Toast.makeText(context, "Failed to load Message.", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 }
