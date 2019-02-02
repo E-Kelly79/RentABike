@@ -3,12 +3,10 @@ package com.bike.rent.kelly.ui.base
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import butterknife.Unbinder
 import com.bike.rent.kelly.ui.base.BaseActivity
 
 open class BaseFragment : Fragment() {
     private var mActivity: BaseActivity? = null
-    private var mUnBinder: Unbinder? = null
 
     val baseArguments: Bundle?
         get() = arguments
@@ -50,17 +48,6 @@ open class BaseFragment : Fragment() {
 
     fun tag(): String {
         return ""
-    }
-
-    fun setUnBinder(unBinder: Unbinder) {
-        mUnBinder = unBinder
-    }
-
-    override fun onDestroy() {
-        if (mUnBinder != null) {
-            mUnBinder!!.unbind()
-        }
-        super.onDestroy()
     }
 
     interface Callback {

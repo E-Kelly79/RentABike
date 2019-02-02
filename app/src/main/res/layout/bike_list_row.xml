@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:outlineAmbientShadowColor="@color/color_black">
-
 
     <android.support.v7.widget.CardView
         android:layout_width="0dp"
@@ -33,6 +33,7 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="4dp"
                 android:src="@drawable/ic_bike"
+                android:backgroundTint="@color/color_primary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -104,6 +105,27 @@
                 app:layout_constraintStart_toStartOf="@+id/card_list_bikes_available"
                 app:layout_constraintTop_toBottomOf="@+id/card_list_bikes_available"
                 tools:text="Status" />
+
+            <TextView
+                android:id="@+id/text_lat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_lng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>

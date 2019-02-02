@@ -5,22 +5,21 @@
     <color name="color_grey">#727272</color>
     <color name="color_white">#FFFFFF</color>
     <color name="color_white_accent">#E1E1E1</color>
-    <color name="color_btn_border">#D8D8D8</color>
+    <color name="color_btn_border">#868BCC</color>
 
-    <color name="color_toolbar">#FFFFFF</color>
+    <color name="color_toolbar">@color/color_white</color>
     <color name="color_toolbar_focus">#444344</color>
+    <color name="color_btn_primary">#868BCC</color>
+    <color name="color_btn_secondary">#7E83BF</color>
 
-    <color name="color_primary">#750af6</color>
+    <color name="color_primary">#34364f</color>
     <!--Focus colours are 20% darker-->
-    <color name="color_primary_dark">#4C00CD</color>
-
-    <color name="color_task_orange">#F5A623</color>
-    <color name="color_task_green">#84B135</color>
-
-    <color name="color_bg_gradient_start">#360395</color>
-    <color name="color_bg_gradient_end">#2d0260</color>
+    <color name="color_primary_dark">#2A2B3F</color>
+    <color name="color_accent">#9FA5F2</color>
+    <color name="color_bg_gradient_start">@color/color_primary</color>
+    <color name="color_bg_gradient_end">@color/color_primary_dark</color>
 
     <color name="color_text_main">#D9FFFFFF</color>
     <color name="color_text_secondary">#D9EEECEC</color>
-    <color name="color_text_green">#008000</color>
+    <color name="color_text_dark">@color/color_primary_dark</color>
 </resources>

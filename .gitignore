@@ -9,3 +9,10 @@
 /build
 /captures
 .externalNativeBuild
+.idea/*
+/app/src/debug
+/app/src/release
+/app/src/main/res/values/google_ads_key.xml
+/app/google-json.json
+/app/src/main/res/values/consts.xml
+
