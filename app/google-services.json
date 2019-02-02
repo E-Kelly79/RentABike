@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1008646000926",
+    "firebase_url": "https://gbs-bikes-c40c8.firebaseio.com",
+    "project_id": "gbs-bikes-c40c8",
+    "storage_bucket": "gbs-bikes-c40c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1008646000926:android:fe3b8e3b9e286d8c",
+        "android_client_info": {
+          "package_name": "com.bike.rent.kelly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1008646000926-slnt8068v9shblbafgko3qm2nfkv06n3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bike.rent.kelly",
+            "certificate_hash": "57f9f3d1a79fc9f46abafbbd5ec3412cf939e4f6"
+          }
+        },
+        {
+          "client_id": "1008646000926-2rhcrlub6fnq94i8mcbl6d7cqeloul6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk8MzRD5zNo8YSP_VwFOnXlEuUtvwVTQg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1008646000926-2rhcrlub6fnq94i8mcbl6d7cqeloul6s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

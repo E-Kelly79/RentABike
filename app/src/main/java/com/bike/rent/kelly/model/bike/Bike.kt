@@ -1,4 +1,4 @@
-package com.bike.rent.kelly.model
+package com.bike.rent.kelly.model.bike
 
 class Bike(){
     var number: Int? = null
@@ -30,6 +30,5 @@ class Bike(){
         this.lat = lat
         this.lng = lng
     }
-
 
 }

@@ -33,6 +33,7 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="4dp"
                 android:src="@drawable/ic_bike"
+                android:backgroundTint="@color/color_primary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

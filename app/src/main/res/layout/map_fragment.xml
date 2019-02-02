@@ -104,7 +104,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/action_find_bike"
-        android:background="@color/color_primary"
+        android:textColor="@color/color_text_dark"
+        android:background="@color/color_btn_primary"
+        android:drawableRight="@drawable/ic_search"
+        android:drawableTint="@color/color_text_dark"
+        android:paddingRight="16dp"
         app:layout_constraintBottom_toTopOf="@+id/guide_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
         app:layout_constraintStart_toStartOf="@+id/guide_left" />

@@ -1,21 +1,15 @@
 package com.bike.rent.kelly.ui.bike
 
 import android.content.Context
-import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ListView
 import android.widget.TextView
-import android.widget.Toast
 import com.bike.rent.kelly.R
-import com.bike.rent.kelly.model.Bike
-import com.bike.rent.kelly.ui.base.BaseActivity
-import com.squareup.picasso.Picasso
+import com.bike.rent.kelly.model.bike.Bike
 
 /**
  * @author Eoin Kelly
@@ -25,8 +19,8 @@ import com.squareup.picasso.Picasso
  * @constructor must take a ArrayList of type Bike and a context listener is optional
  *
  */
-class BikeListAdapter(private val bikeList:ArrayList<Bike>,
-                      private val context: Context, val listener: (Int) -> Unit): RecyclerView.Adapter<BikeListAdapter.ViewHolder>() {
+class BikeListRecyclerViewAdapter(private val bikeList:ArrayList<Bike>, private val context: Context, val listener: (Int) -> Unit):
+        RecyclerView.Adapter<BikeListRecyclerViewAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {

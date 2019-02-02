@@ -26,9 +26,6 @@
             android:layout_below="@+id/Toolbar"
             android:elevation="60dp"/>
 
-
-
-
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView
@@ -37,10 +34,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:background="#7C5869"
-        android:divider="@android:color/transparent"
-        android:elevation="0dp"
-        android:dividerHeight="0dp">
+        android:background="@drawable/pexels_photo2"
+        android:backgroundTintMode="multiply"
+        android:backgroundTint="#DD34364f">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,20 +44,38 @@
                 android:orientation="vertical"
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="26dp">
+                    <!-- TODO.... Change Image when google sign in is implemented and remove text view -->
+                <!--<ImageView-->
+                    <!--android:id="@+id/nav_logo"-->
+                    <!--android:layout_width="150dp"-->
+                    <!--android:layout_height="150dp"-->
+                    <!--android:layout_marginBottom="16dp"-->
+                    <!--android:src="@drawable/ic_logo"/>-->
 
-                <ImageView
-                    android:id="@+id/nav_logo"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginBottom="16dp"
-                    android:src="@drawable/ic_logo"/>
+                <TextView
+                    android:id="@+id/text_nav_my_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/carter_one"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="GBS\n \tBikes"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@color/color_white"/>
+
 
                 <TextView
                     android:id="@+id/text_nav_my_wallet"
                     android:layout_width="match_parent"
                     android:layout_height="22dp"
-                    android:layout_marginTop="-16dp"
                     android:textSize="16sp"
+                    android:onClick="walletClicked"
                     android:text="@string/nav_link_my_wallet"/>
 
                 <TextView
@@ -70,6 +84,7 @@
                     android:layout_height="23dp"
                     android:layout_marginTop="16dp"
                     android:textSize="16sp"
+                    android:onClick="buyTicketsClicked"
                     android:text="@string/nav_link_buy_tickets"/>
 
                 <TextView
@@ -88,6 +103,7 @@
                     android:layout_height="23dp"
                     android:layout_marginTop="16dp"
                     android:textSize="16sp"
+                    android:onClick="planJourneyClicked"
                     android:text="@string/nav_link_journey"/>
 
                 <TextView
@@ -96,6 +112,7 @@
                     android:layout_height="23dp"
                     android:layout_marginTop="16dp"
                     android:textSize="16sp"
+                    android:onClick="searchClicked"
                     android:text="@string/nav_link_search"/>
 
                 <View

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="stations">https://api.jcdecaux.com/vls/v1/stations?contract=%s&amp;apiKey=567c5a18aec43057727314c80b218d65bced9c61</string>
+</resources>
