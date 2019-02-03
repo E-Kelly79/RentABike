@@ -127,9 +127,9 @@ public class SupportMapFragment extends BaseFragment {
 
     public void saveFavouritesToDatabase(){
         //Push object to new node in firebase database with a unique ID
-        mFavRef = mDatabase.getReference("Favourites").push();
-        mFavourites = new Favourites(name, city, address, lng, lat);
-        mFavRef.setValue(mFavourites);
+        String mFavId = mDatabase.getReference("Favourites").push().getKey();
+        mFavourites = new Favourites(mFavId, name, city, address, lng, lat);
+        mFavRef.child(mFavId).setValue(mFavourites);
     }
 
     public void checkDatabaseForMatch() {
@@ -150,6 +150,11 @@ public class SupportMapFragment extends BaseFragment {
             }
         });
 
+    }
+
+    public void deleteFavourite(String favId){
+        DatabaseReference drFavourite = FirebaseDatabase.getInstance().getReference("Favourites").child(mFavourites.getFavId());
+        drFavourite.removeValue();
     }
 
     public void getPreferenceData(){

@@ -62,7 +62,10 @@ class FavouritesFragment: BaseFragment() {
                     for (fav in dataSnapshot.children) {
                         var myFavs = fav.getValue(Favourites::class.java)!!
                         favList.add(myFavs)
-                        mFavRecyclerViewAdapter = FavouritesRecyclerViewAdapter(favList, context!!){}
+                        mFavRecyclerViewAdapter = FavouritesRecyclerViewAdapter(favList, context!!){
+                            Toast.makeText(context, favList[it].stationName, Toast.LENGTH_LONG).show()
+                            deleteFavourite(favList[it].favId!!)
+                        }
                         layoutManager = LinearLayoutManager(context)
                         favRecycler!!.layoutManager = layoutManager
                         favRecycler!!.adapter = mFavRecyclerViewAdapter
@@ -74,5 +77,10 @@ class FavouritesFragment: BaseFragment() {
                 Toast.makeText(context, "Failed to load Message.", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    fun deleteFavourite(favId: String) {
+        val drFavourite = FirebaseDatabase.getInstance().getReference("Favourites").child(favId)
+        drFavourite.removeValue()
     }
 }
