@@ -34,16 +34,36 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:background="@drawable/pexels_photo2"
-        android:backgroundTintMode="multiply"
-        android:backgroundTint="#DD34364f">
+        android:background="@color/color_white_accent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="26dp">
+                android:orientation="vertical">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@color/color_primary_dark">
+
+                    <TextView
+                        android:id="@+id/text_nav_my_logo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/carter_one"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="GBS\n \tBikes"
+                        android:textSize="32sp"
+                        android:textColor="@color/color_white_accent"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                </android.support.constraint.ConstraintLayout>
                     <!-- TODO.... Change Image when google sign in is implemented and remove text view -->
                 <!--<ImageView-->
                     <!--android:id="@+id/nav_logo"-->
@@ -52,74 +72,82 @@
                     <!--android:layout_marginBottom="16dp"-->
                     <!--android:src="@drawable/ic_logo"/>-->
 
-                <TextView
-                    android:id="@+id/text_nav_my_logo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/carter_one"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="GBS\n \tBikes"
-                    android:textSize="32sp"
-                    android:textStyle="bold" />
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="24dp"
-                    android:background="@color/color_white"/>
+                    android:background="@color/color_primary_dark"/>
 
 
                 <TextView
                     android:id="@+id/text_nav_my_wallet"
                     android:layout_width="match_parent"
-                    android:layout_height="22dp"
+                    android:layout_height="23dp"
                     android:textSize="16sp"
-                    android:onClick="walletClicked"
+                    android:textColor="@color/color_primary"
+                    android:drawableLeft="@android:drawable/ic_input_add"
+                    android:drawableTint="@color/color_primary"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="16dp"
                     android:text="@string/nav_link_my_wallet"/>
 
                 <TextView
                     android:id="@+id/text_nav_buy_tickets"
                     android:layout_width="match_parent"
                     android:layout_height="23dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:textSize="16sp"
-                    android:onClick="buyTicketsClicked"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/color_primary"
+                    android:drawableLeft="@android:drawable/ic_input_add"
+                    android:drawableTint="@color/color_primary"
+                    android:paddingLeft="16dp"
                     android:text="@string/nav_link_buy_tickets"/>
 
                 <TextView
                     android:id="@+id/text_nav_favs"
                     android:layout_width="match_parent"
                     android:layout_height="22dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:textSize="16sp"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/color_primary"
+                    android:drawableLeft="@android:drawable/star_off"
+                    android:drawableTint="@color/color_primary"
+                    android:paddingLeft="16dp"
                     android:text="@string/nav_link_favorites"/>
-
-
 
                 <TextView
                     android:id="@+id/text_nav_journey"
                     android:layout_width="match_parent"
                     android:layout_height="23dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:textSize="16sp"
-                    android:onClick="planJourneyClicked"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/color_primary"
+                    android:drawableLeft="@android:drawable/ic_dialog_map"
+                    android:drawableTint="@color/color_primary"
+                    android:paddingLeft="16dp"
                     android:text="@string/nav_link_journey"/>
 
                 <TextView
                     android:id="@+id/text_nav_search"
                     android:layout_width="match_parent"
                     android:layout_height="23dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:textSize="16sp"
-                    android:onClick="searchClicked"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/color_primary"
+                    android:drawableLeft="@android:drawable/ic_menu_search"
+                    android:drawableTint="@color/color_primary"
+                    android:paddingLeft="16dp"
                     android:text="@string/nav_link_search"/>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="24dp"
-                    android:background="@color/color_white"/>
+                    android:background="@color/color_primary_dark"/>
 
             </LinearLayout>
 

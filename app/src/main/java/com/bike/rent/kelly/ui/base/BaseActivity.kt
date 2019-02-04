@@ -76,15 +76,6 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         setContentView(R.layout.base_layout)
         bundle = Bundle()
         ButterKnife.bind(this)
-
-//        mToolbar = findViewById(R.id.Toolbar)
-//        mFragmentContainer = findViewById(R.id.fragment_container)
-//        mDrawerLayout = findViewById(R.id.layout_drawer)
-//        mNavView = findViewById(R.id.left_drawer)
-//        mMainContent = findViewById(R.id.layout_main_content)
-//        mivToolbarPrimary = findViewById(R.id.img_home)
-//        mtvTitle = findViewById(R.id.ToolbarTitle)
-
         initNavDrawer()
     }
 
@@ -310,7 +301,6 @@ open class BaseActivity : AppCompatActivity(), MvpView {
 
     fun setTitle(title: String) {
         mtvTitle?.text = title
-        mtvTitle?.setTextColor(resources.getColor(R.color.color_black))
     }
     @OnClick(R.id.text_nav_my_wallet)
     fun loadWallet(){

@@ -16,7 +16,7 @@ class Bike(){
 
     constructor(number: Int, contractName: String, name: String, address: String,
                 banking: Boolean, bonus: Boolean, bikeStands: Int, availableBikes: Int,
-                status: String, lastUpdated: Long, lat: Double, lng: Double): this(){
+                status: String, lastUpdated: Long, lat: Double, lng: Double):this(){
         this.number = number
         this.contractName = contractName
         this.name = name

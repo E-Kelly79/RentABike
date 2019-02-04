@@ -1,6 +1,5 @@
 package com.bike.rent.kelly.ui.bike
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -16,7 +15,6 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.bike.rent.kelly.R
-import com.bike.rent.kelly.SupportMapFragment
 import com.bike.rent.kelly.data.local.PreferencesHelper
 import com.bike.rent.kelly.model.bike.Bike
 import com.bike.rent.kelly.ui.base.BaseActivity
@@ -24,7 +22,6 @@ import com.bike.rent.kelly.ui.base.BaseFragment
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import kotlinx.android.synthetic.main.bike_list_fragment.bike_recycler_view
 
 /**
  * @author Eoin Kelly
@@ -96,7 +93,7 @@ class BikeList: BaseFragment() {
                         bike.lastUpdated = bikeObj.getLong("last_update")
                         bikeList.add(bike)
 
-                        // Get the Lat Lng form json and used it in the onclick event of recyclerview
+                        // Get the Lat Lng form json and use it in the onclick event of recyclerview
                         // to add that mark on the map
                         mBikeRecyclerViewAdapter = BikeListRecyclerViewAdapter(bikeList, context!!){row ->
                             val latitude = bikeList[row].lat
@@ -123,6 +120,9 @@ class BikeList: BaseFragment() {
         volleyRequest!!.add(bikeRequest)
     }
 
+    /**
+     * Set preferences for favourites
+     */
     fun setPreferences(lat: Double, long: Double, title: String, city: String, address:String) {
         preferences!!.setPrefFloat(BaseActivity.LAT, lat.toFloat())
         preferences!!.setPrefFloat(BaseActivity.LNG, long.toFloat())
