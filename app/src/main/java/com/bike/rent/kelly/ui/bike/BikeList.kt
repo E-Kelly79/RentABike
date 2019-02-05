@@ -3,10 +3,13 @@ package com.bike.rent.kelly.ui.bike
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.android.volley.Request.Method
@@ -31,6 +34,7 @@ import org.json.JSONObject
  */
 class BikeList: BaseFragment() {
     @BindView(R.id.bike_recycler_view) @JvmField var bikeRecyclerView: RecyclerView? = null
+    @BindView(R.id.et_search) @JvmField var mSearchText: EditText? = null
     var volleyRequest: RequestQueue? = null
     var preferences: PreferencesHelper? = null
     var mView: View? = null
@@ -56,13 +60,25 @@ class BikeList: BaseFragment() {
         var myString = test?.getString("contractName")
         url = "https://api.jcdecaux.com/vls/v1/stations?contract=$myString&apiKey=567c5a18aec43057727314c80b218d65bced9c61"
         preferences = PreferencesHelper(context!!)
-
         baseActivity.mivToolbarPrimary?.setOnClickListener {
             baseActivity.showNavDrawer()
         }
         bikeList = ArrayList<Bike>()
         volleyRequest = Volley.newRequestQueue(context)
         getBikes(url)
+        mSearchText!!.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(search: Editable?) {
+                filterList(search.toString())
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                null
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                null
+            }
+        })
         return mView
     }
 
@@ -129,6 +145,16 @@ class BikeList: BaseFragment() {
         preferences!!.setPrefString(BaseActivity.TITLE, title)
         preferences!!.setPrefString(BaseActivity.CITY, city)
         preferences!!.setPrefString(BaseActivity.ADDRESS, address)
+    }
+
+    fun filterList(text: String){
+        var fliterBikeArray: ArrayList<Bike> = ArrayList()
+        for (bike in bikeList){
+            if (bike.address!!.toLowerCase().contains(text.toLowerCase())){
+                fliterBikeArray.add(bike)
+                mBikeRecyclerViewAdapter!!.filterList(fliterBikeArray)
+            }
+        }
     }
 
 

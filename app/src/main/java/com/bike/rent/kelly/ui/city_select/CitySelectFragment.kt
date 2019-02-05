@@ -43,6 +43,7 @@ class CitySelectFragment : BaseFragment() {
         baseActivity.lockNavDrawer()
         ButterKnife.bind(this, mView)
         //setup spinner
+        mCitySpinner = mView.findViewById(R.id.spinner_city)
         var mSpinnerAdapter = ArrayAdapter.createFromResource(context, R.array.city_array,
             android.R.layout.simple_spinner_item)
         mSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

@@ -16,12 +16,10 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
-import com.bike.rent.kelly.ui.maps.GoogleMapsFragment
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.SupportMapFragment
 import com.bike.rent.kelly.ui.auth.AuthActivity
@@ -29,19 +27,15 @@ import com.bike.rent.kelly.ui.bike.BikeList
 import com.bike.rent.kelly.ui.city_select.CitySelectFragment
 import com.bike.rent.kelly.ui.favorites.FavouritesFragment
 import com.bike.rent.kelly.ui.menu.MenuFragment
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
+import kotlinx.android.synthetic.main.base_layout.*
 
 open class BaseActivity : AppCompatActivity(), MvpView {
-
-
     lateinit var bundle: Bundle
     @BindView(R.id.fragment_container) @JvmField var mFragmentContainer: FrameLayout? = null
     @BindView(R.id.layout_drawer) @JvmField var mDrawerLayout: DrawerLayout? = null
     @BindView(R.id.left_drawer)  @JvmField var mNavView: NavigationView? = null
-    @BindView(R.id.layout_main_content)  @JvmField var mMainContent: RelativeLayout? = null
     @BindView(R.id.Toolbar)  @JvmField var mToolbar: Toolbar? = null
     @BindView(R.id.img_home)  @JvmField var mivToolbarPrimary: ImageView? = null
     @BindView(R.id.ToolbarTitle)  @JvmField var mtvTitle: TextView? = null
@@ -75,6 +69,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.base_layout)
         bundle = Bundle()
+
         ButterKnife.bind(this)
         initNavDrawer()
     }
@@ -99,8 +94,8 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         mDrawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                 val moveFactor = mNavView!!.width * slideOffset
-                mMainContent!!.translationX = moveFactor
-                mMainContent!!.translationY = 80f * slideOffset
+                layout_main_content.translationX = moveFactor
+                layout_main_content.translationY = 80f * slideOffset
             }
 
             override fun onDrawerOpened(drawerView: View) {
@@ -159,6 +154,8 @@ open class BaseActivity : AppCompatActivity(), MvpView {
     fun showToolbar() {
         mToolbar!!.visibility = View.VISIBLE
     }
+
+
 
     fun getFragment(args: Bundle, addToBackStack: Boolean, fragment: BaseFragment,
             fragmentKey: String): FragmentTransaction {
