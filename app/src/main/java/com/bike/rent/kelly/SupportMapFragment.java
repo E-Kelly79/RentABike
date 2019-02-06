@@ -5,14 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.bike.rent.kelly.data.local.PreferencesHelper;
 import com.bike.rent.kelly.model.favs.Favourites;
 import com.bike.rent.kelly.ui.base.BaseActivity;
@@ -40,8 +36,8 @@ import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 public class SupportMapFragment extends BaseFragment {
 
-    @BindView(R.id.mapView)  MapView mapView;
-    @BindView(R.id.floatingActionButton)  FloatingActionButton fab;
+    private MapView mapView;
+    private FloatingActionButton fab;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mFavRef;
     private Favourites mFavourites;
@@ -70,8 +66,8 @@ public class SupportMapFragment extends BaseFragment {
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container,
             @Nullable final Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.google_maps_fragment, container, false);
-        ButterKnife.bind(this, mView);
-
+        mapView = mView.findViewById(R.id.mMapView);
+        fab = mView.findViewById(R.id.mFloatingActionButton);
         checkDatabaseForMatch();
         fab.setOnClickListener(new OnClickListener() {
             @Override
@@ -81,7 +77,6 @@ public class SupportMapFragment extends BaseFragment {
                 SnackBars.Companion.centerSnackbar(mView, name + " was added to favourites");
             }
         });
-        mapView = mView.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override

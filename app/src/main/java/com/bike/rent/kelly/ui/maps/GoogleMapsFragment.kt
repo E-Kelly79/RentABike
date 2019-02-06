@@ -21,16 +21,10 @@ class GoogleMapsFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(com.bike.rent.kelly.R.layout.google_maps_fragment, container, false)
-        mapView = mView!!.findViewById(com.bike.rent.kelly.R.id.mapView) as MapView
+        mapView = mView!!.findViewById(com.bike.rent.kelly.R.id.mMapView) as MapView
         //mapView!!.getMapAsync { }
         mapView!!.onCreate(savedInstanceState)
         return mView
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-
-
     }
 
     // Add the mapView lifecycle to the activity's lifecycle methods

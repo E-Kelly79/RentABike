@@ -9,9 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.android.volley.Request.Method
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -22,9 +19,13 @@ import com.bike.rent.kelly.data.local.PreferencesHelper
 import com.bike.rent.kelly.model.bike.Bike
 import com.bike.rent.kelly.ui.base.BaseActivity
 import com.bike.rent.kelly.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.bike_list_fragment.mBikeRecyclerView
+import kotlinx.android.synthetic.main.bike_list_fragment.mSearch
+import kotlinx.android.synthetic.main.toolbar.mToolbarHome
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import timber.log.Timber
 
 /**
  * @author Eoin Kelly
@@ -33,8 +34,6 @@ import org.json.JSONObject
  * Class to add bike objects to the recycler view
  */
 class BikeList: BaseFragment() {
-    @BindView(R.id.bike_recycler_view) @JvmField var bikeRecyclerView: RecyclerView? = null
-    @BindView(R.id.et_search) @JvmField var mSearchText: EditText? = null
     var volleyRequest: RequestQueue? = null
     var preferences: PreferencesHelper? = null
     var mView: View? = null
@@ -54,19 +53,22 @@ class BikeList: BaseFragment() {
         mView = inflater.inflate(R.layout.bike_list_fragment, container, false)
         baseActivity.showToolbar()
         baseActivity.setTitle("Bike List")
-        ButterKnife.bind(this, mView!!)
+        return mView
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var test = arguments
         var myString = test?.getString("contractName")
+        Timber.i(myString, String)
         url = "https://api.jcdecaux.com/vls/v1/stations?contract=$myString&apiKey=567c5a18aec43057727314c80b218d65bced9c61"
         preferences = PreferencesHelper(context!!)
-        baseActivity.mivToolbarPrimary?.setOnClickListener {
+        baseActivity.mToolbarHome.setOnClickListener {
             baseActivity.showNavDrawer()
         }
         bikeList = ArrayList<Bike>()
         volleyRequest = Volley.newRequestQueue(context)
         getBikes(url)
-        mSearchText!!.addTextChangedListener(object: TextWatcher{
+        mSearch.addTextChangedListener(object: TextWatcher{
             override fun afterTextChanged(search: Editable?) {
                 filterList(search.toString())
             }
@@ -79,7 +81,7 @@ class BikeList: BaseFragment() {
                 null
             }
         })
-        return mView
+
     }
 
     /**
@@ -121,8 +123,8 @@ class BikeList: BaseFragment() {
                             baseActivity.loadGoogleMapsFragment(arguments!!, false)
                         }
                         layoutManager = LinearLayoutManager(context)
-                        bikeRecyclerView!!.layoutManager = layoutManager
-                        bikeRecyclerView!!.adapter = mBikeRecyclerViewAdapter
+                        mBikeRecyclerView.layoutManager = layoutManager
+                        mBikeRecyclerView.adapter = mBikeRecyclerViewAdapter
                     }
                     mBikeRecyclerViewAdapter!!.notifyDataSetChanged()
 
