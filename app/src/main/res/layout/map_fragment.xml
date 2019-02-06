@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/ic_bg_gradient">
+    android:background="@color/color_accent">
 
     <android.support.constraint.Guideline
         android:id="@+id/guide_left"
@@ -43,7 +42,7 @@
         app:layout_constraintGuide_percent="0.96"/>
 
     <ImageView
-        android:id="@+id/image_landing_icon"
+        android:id="@+id/mLandingImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintLeft_toLeftOf="@id/guide_left"
@@ -55,7 +54,7 @@
         android:src="@drawable/ic_cityscape"/>
 
     <TextView
-        android:id="@+id/text_title"
+        android:id="@+id/mLandingTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -69,7 +68,7 @@
 
 
     <TextView
-        android:id="@+id/text_title_sub"
+        android:id="@+id/mLandingSub"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -80,34 +79,34 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
         app:layout_constraintStart_toStartOf="@+id/guide_left"
-        app:layout_constraintTop_toBottomOf="@+id/text_title" />
+        app:layout_constraintTop_toBottomOf="@+id/mLandingTitle" />
 
     <Spinner
-        android:id="@+id/spinner_city"
+        android:id="@+id/mCitySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_landing"
+        app:layout_constraintBottom_toTopOf="@+id/mLandingBtn"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="@+id/guide_left"
-        app:layout_constraintTop_toBottomOf="@+id/text_title_sub" />
+        app:layout_constraintTop_toBottomOf="@+id/mLandingSub" />
 
     <Button
-        android:id="@+id/btn_landing"
+        android:id="@+id/mLandingBtn"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/action_find_bike"
-        android:textColor="@color/color_text_dark"
+        android:textColor="@color/color_white_accent"
         android:background="@color/color_btn_primary"
         android:drawableRight="@drawable/ic_search"
-        android:drawableTint="@color/color_text_dark"
+        android:drawableTint="@color/color_white_accent"
         android:paddingRight="16dp"
         app:layout_constraintBottom_toTopOf="@+id/guide_bottom"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"

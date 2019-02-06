@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import com.bike.rent.kelly.R
@@ -19,8 +21,8 @@ import com.bike.rent.kelly.model.bike.Bike
  * @constructor must take a ArrayList of type Bike and a context listener is optional
  *
  */
-class BikeListRecyclerViewAdapter(private val bikeList:ArrayList<Bike>, private val context: Context, val listener: (Int) -> Unit):
-        RecyclerView.Adapter<BikeListRecyclerViewAdapter.ViewHolder>() {
+class BikeListRecyclerViewAdapter(private var bikeList:ArrayList<Bike>, private val context: Context,
+        val listener: (Int) -> Unit): RecyclerView.Adapter<BikeListRecyclerViewAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {
@@ -36,6 +38,13 @@ class BikeListRecyclerViewAdapter(private val bikeList:ArrayList<Bike>, private 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.bindView(bikeList[position], position, listener)
     }
+
+    fun filterList(filteredBikeList: ArrayList<Bike>){
+        this.bikeList = filteredBikeList
+        notifyDataSetChanged()
+    }
+
+
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 

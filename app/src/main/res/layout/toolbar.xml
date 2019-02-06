@@ -1,7 +1,6 @@
 <android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     style="@style/ToolBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -12,15 +11,15 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/img_home"
+            android:id="@+id/mToolbarHome"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_marginLeft="8dp"
             android:focusable="true"
             android:padding="15dp"
             android:scaleType="center"
-            android:src="@drawable/ic_menu"
-            android:backgroundTint="@color/color_text_dark"
+            android:background="@drawable/ic_menu"
+            android:backgroundTint="@color/color_white_accent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,10 +32,10 @@
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:textAlignment="center"
+            android:textColor="@color/color_white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img_home"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="hello" />
+            app:layout_constraintStart_toEndOf="@+id/mToolbarHome"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <ImageView

@@ -16,9 +16,10 @@
     <style name="ToolBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:background">@color/color_accent</item>
+        <item name="android:background">@color/color_primary</item>
         <item name="contentInsetLeft">0dp</item>
         <item name="contentInsetStart">0dp</item>
+        <item name="android:textColor">@color/color_white</item>
     </style>
 
     <style name="ToolBarTitle" parent="MatchParentWrapContent">

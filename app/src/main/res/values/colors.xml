@@ -9,13 +9,13 @@
 
     <color name="color_toolbar">@color/color_white</color>
     <color name="color_toolbar_focus">#444344</color>
-    <color name="color_btn_primary">#868BCC</color>
-    <color name="color_btn_secondary">#7E83BF</color>
+    <color name="color_btn_primary">#ff5722</color>
+    <color name="color_btn_secondary">#512da8</color>
+    <color name="color_primary">#7340d1</color>
 
-    <color name="color_primary">#34364f</color>
     <!--Focus colours are 20% darker-->
-    <color name="color_primary_dark">#2A2B3F</color>
-    <color name="color_accent">#9FA5F2</color>
+    <color name="color_primary_dark">#512da8</color>
+    <color name="color_accent">#2C0971</color>
     <color name="color_bg_gradient_start">@color/color_primary</color>
     <color name="color_bg_gradient_end">@color/color_primary_dark</color>
 

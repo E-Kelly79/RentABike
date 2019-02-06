@@ -35,7 +35,6 @@ dependencies {
     final SUPPORT_LIBRARY_VERSION = '28.0.0'
     final PICASSO_VERSION = '2.71828'
     final VOLLEY_VERSION = '2.0.1'
-    final BUTTER_KNIFE = '9.0.0'
     final MAPBOX = '7.0.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -51,8 +50,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation "com.jakewharton:butterknife:$BUTTER_KNIFE"
-    kapt "com.jakewharton:butterknife-compiler:$BUTTER_KNIFE"
     implementation "com.squareup.picasso:picasso:$PICASSO_VERSION"
     implementation "com.dubsmash.volley:library:$VOLLEY_VERSION"
     implementation "com.mapbox.mapboxsdk:mapbox-android-sdk:$MAPBOX"

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout_drawer"
+    android:id="@+id/mLayoutDrawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:elevation="0dp">
 
     <RelativeLayout
-        android:id="@+id/layout_main_content"
+        android:id="@+id/mMainContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white">
@@ -20,7 +20,7 @@
 
         <!-- Main content goes here -->
         <FrameLayout
-            android:id="@+id/fragment_container"
+            android:id="@+id/mFragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/Toolbar"
@@ -29,21 +29,41 @@
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView
-        android:id="@+id/left_drawer"
+        android:id="@+id/mDrawer"
         android:layout_width="255dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:background="@drawable/pexels_photo2"
-        android:backgroundTintMode="multiply"
-        android:backgroundTint="#DD34364f">
+        android:background="@color/color_white_accent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="26dp">
+                android:orientation="vertical">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@color/color_primary_dark">
+
+                    <TextView
+                        android:id="@+id/mivToolbarPrimary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/carter_one"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="GBS\n \tBikes"
+                        android:textSize="32sp"
+                        android:textColor="@color/color_white_accent"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                </android.support.constraint.ConstraintLayout>
                     <!-- TODO.... Change Image when google sign in is implemented and remove text view -->
                 <!--<ImageView-->
                     <!--android:id="@+id/nav_logo"-->
@@ -52,74 +72,83 @@
                     <!--android:layout_marginBottom="16dp"-->
                     <!--android:src="@drawable/ic_logo"/>-->
 
-                <TextView
-                    android:id="@+id/text_nav_my_logo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/carter_one"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="GBS\n \tBikes"
-                    android:textSize="32sp"
-                    android:textStyle="bold" />
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="24dp"
-                    android:background="@color/color_white"/>
+                    android:background="@color/color_primary_dark"/>
 
 
                 <TextView
-                    android:id="@+id/text_nav_my_wallet"
+                    android:id="@+id/mNavWallet"
                     android:layout_width="match_parent"
-                    android:layout_height="22dp"
+                    android:layout_height="23dp"
                     android:textSize="16sp"
-                    android:onClick="walletClicked"
+                    android:textColor="@color/color_primary"
+                    android:drawableLeft="@android:drawable/ic_input_add"
+                    android:drawableTint="@color/color_primary"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="16dp"
                     android:text="@string/nav_link_my_wallet"/>
 
                 <TextView
-                    android:id="@+id/text_nav_buy_tickets"
+                    android:id="@+id/mNavTickets"
                     android:layout_width="match_parent"
                     android:layout_height="23dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:textSize="16sp"
-                    android:onClick="buyTicketsClicked"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/color_primary"
+                    android:drawableLeft="@android:drawable/ic_input_add"
+                    android:drawableTint="@color/color_primary"
+                    android:paddingLeft="16dp"
                     android:text="@string/nav_link_buy_tickets"/>
 
                 <TextView
-                    android:id="@+id/text_nav_favs"
+                    android:id="@+id/mNavFavs"
                     android:layout_width="match_parent"
                     android:layout_height="22dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:textSize="16sp"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/color_primary"
+                    android:onClick="loadFavourites"
+                    android:drawableLeft="@android:drawable/star_off"
+                    android:drawableTint="@color/color_primary"
+                    android:paddingLeft="16dp"
                     android:text="@string/nav_link_favorites"/>
 
-
-
                 <TextView
-                    android:id="@+id/text_nav_journey"
+                    android:id="@+id/mNavJourney"
                     android:layout_width="match_parent"
                     android:layout_height="23dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:textSize="16sp"
-                    android:onClick="planJourneyClicked"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/color_primary"
+                    android:drawableLeft="@android:drawable/ic_dialog_map"
+                    android:drawableTint="@color/color_primary"
+                    android:paddingLeft="16dp"
                     android:text="@string/nav_link_journey"/>
 
                 <TextView
-                    android:id="@+id/text_nav_search"
+                    android:id="@+id/mNavSearch"
                     android:layout_width="match_parent"
                     android:layout_height="23dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:textSize="16sp"
-                    android:onClick="searchClicked"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/color_primary"
+                    android:drawableLeft="@android:drawable/ic_menu_search"
+                    android:drawableTint="@color/color_primary"
+                    android:paddingLeft="16dp"
                     android:text="@string/nav_link_search"/>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="24dp"
-                    android:background="@color/color_white"/>
+                    android:background="@color/color_primary_dark"/>
 
             </LinearLayout>
 

@@ -6,22 +6,13 @@ import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.annotation.StringDef
-import android.support.design.widget.NavigationView
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnClick
-import com.bike.rent.kelly.ui.maps.GoogleMapsFragment
+
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.SupportMapFragment
 import com.bike.rent.kelly.ui.auth.AuthActivity
@@ -29,23 +20,14 @@ import com.bike.rent.kelly.ui.bike.BikeList
 import com.bike.rent.kelly.ui.city_select.CitySelectFragment
 import com.bike.rent.kelly.ui.favorites.FavouritesFragment
 import com.bike.rent.kelly.ui.menu.MenuFragment
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
+import kotlinx.android.synthetic.main.base_layout.*
+import kotlinx.android.synthetic.main.toolbar.ToolbarTitle
+import kotlinx.android.synthetic.main.toolbar.mToolbarHome
 
 open class BaseActivity : AppCompatActivity(), MvpView {
-
-
     lateinit var bundle: Bundle
-    @BindView(R.id.fragment_container) @JvmField var mFragmentContainer: FrameLayout? = null
-    @BindView(R.id.layout_drawer) @JvmField var mDrawerLayout: DrawerLayout? = null
-    @BindView(R.id.left_drawer)  @JvmField var mNavView: NavigationView? = null
-    @BindView(R.id.layout_main_content)  @JvmField var mMainContent: RelativeLayout? = null
-    @BindView(R.id.Toolbar)  @JvmField var mToolbar: Toolbar? = null
-    @BindView(R.id.img_home)  @JvmField var mivToolbarPrimary: ImageView? = null
-    @BindView(R.id.ToolbarTitle)  @JvmField var mtvTitle: TextView? = null
-    @BindView(R.id.text_nav_favs)  @JvmField var favourites: TextView? = null
 
     var mActivityId: Long = 0
 
@@ -75,16 +57,6 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.base_layout)
         bundle = Bundle()
-        ButterKnife.bind(this)
-
-//        mToolbar = findViewById(R.id.Toolbar)
-//        mFragmentContainer = findViewById(R.id.fragment_container)
-//        mDrawerLayout = findViewById(R.id.layout_drawer)
-//        mNavView = findViewById(R.id.left_drawer)
-//        mMainContent = findViewById(R.id.layout_main_content)
-//        mivToolbarPrimary = findViewById(R.id.img_home)
-//        mtvTitle = findViewById(R.id.ToolbarTitle)
-
         initNavDrawer()
     }
 
@@ -103,13 +75,13 @@ open class BaseActivity : AppCompatActivity(), MvpView {
 
     @RequiresApi(VERSION_CODES.LOLLIPOP)
     private fun initNavDrawer() {
-        mDrawerLayout?.setScrimColor(Color.TRANSPARENT)
-        mNavView?.outlineProvider = null
-        mDrawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
+        mLayoutDrawer.setScrimColor(Color.TRANSPARENT)
+        mDrawer.outlineProvider = null
+        mLayoutDrawer.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-                val moveFactor = mNavView!!.width * slideOffset
-                mMainContent!!.translationX = moveFactor
-                mMainContent!!.translationY = 80f * slideOffset
+                val moveFactor = mDrawer.width * slideOffset
+                mMainContent.translationX = moveFactor
+                mMainContent.translationY = 80f * slideOffset
             }
 
             override fun onDrawerOpened(drawerView: View) {
@@ -125,11 +97,11 @@ open class BaseActivity : AppCompatActivity(), MvpView {
 
     fun showNavDrawer() {
         closeSoftKeyboard()
-        mDrawerLayout!!.openDrawer(Gravity.LEFT)
+        mLayoutDrawer.openDrawer(Gravity.LEFT)
     }
 
     protected fun closeNavDrawer() {
-        mDrawerLayout!!.closeDrawer(Gravity.LEFT)
+        mLayoutDrawer.closeDrawer(Gravity.LEFT)
     }
 
     fun closeSoftKeyboard() {
@@ -145,29 +117,31 @@ open class BaseActivity : AppCompatActivity(), MvpView {
      * Lock Nav Drawer for Fragments that do not allow Nav Drawer access.
      */
     fun lockNavDrawer() {
-        mDrawerLayout!!.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        mLayoutDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 
     /**
      * Unlock Nav Drawer for Fragments that allow Nav Drawer access.
      */
     fun unlockNavDrawer() {
-        mDrawerLayout!!.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        mLayoutDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
     /**
      * Hide Toolbar for Fragments that do not require it.
      */
     fun hideToolbar() {
-        mToolbar!!.visibility = View.GONE
+        Toolbar.visibility = View.GONE
     }
 
     /**
      * Show Toolbar when required.
      */
     fun showToolbar() {
-        mToolbar!!.visibility = View.VISIBLE
+        Toolbar.visibility = View.VISIBLE
     }
+
+
 
     fun getFragment(args: Bundle, addToBackStack: Boolean, fragment: BaseFragment,
             fragmentKey: String): FragmentTransaction {
@@ -185,7 +159,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         ft.addToBackStack(null)
         ft.setCustomAnimations(animEnter, animExit, animBackEnter, animBackExit)
         if (args != null) fragment.arguments = args
-        ft.replace(R.id.fragment_container, fragment, fragmentKey)
+        ft.replace(R.id.mFragmentContainer, fragment, fragmentKey)
         if (addToBackStack && currentFragmentKey != fragmentKey) ft.addToBackStack(fragment.tag())
         currentFragmentKey = fragmentKey
         return ft
@@ -305,38 +279,37 @@ open class BaseActivity : AppCompatActivity(), MvpView {
 
     @RequiresApi(api = VERSION_CODES.LOLLIPOP)
     fun setToolbarButton(drawable: Int) {
-        mivToolbarPrimary!!.setImageDrawable(this.resources.getDrawable(drawable, applicationContext.theme))
+        mToolbarHome.setImageDrawable(this.resources.getDrawable(drawable, applicationContext.theme))
     }
 
     fun setTitle(title: String) {
-        mtvTitle?.text = title
-        mtvTitle?.setTextColor(resources.getColor(R.color.color_black))
+        ToolbarTitle.text = title
     }
-    @OnClick(R.id.text_nav_my_wallet)
+
     fun loadWallet(){
         //loadWalletFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
         closeNavDrawer()
     }
-    @OnClick(R.id.text_nav_buy_tickets)
+
     fun loadTickets(){
         //loadTicketFragment( getArguments(), NOT_ADD_TO_BACKSTACK)
         closeNavDrawer()
     }
 
-    @OnClick(R.id.text_nav_journey)
+
     fun loadJourney(){
         //loadJourneyFragment( getArguments(), NOT_ADD_TO_BACKSTACK)
         closeNavDrawer()
     }
 
-    @OnClick(R.id.text_nav_search)
+
     fun loadSearchStation(){
        //loadSearchStationsFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
         closeNavDrawer()
     }
 
-    @OnClick(R.id.text_nav_favs)
-    fun loadFavourites(){
+
+    fun loadFavourites(view: View){
         loadFavouriteFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
         closeNavDrawer()
     }

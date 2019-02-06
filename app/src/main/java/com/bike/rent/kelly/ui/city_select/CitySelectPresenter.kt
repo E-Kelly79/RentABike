@@ -3,7 +3,7 @@ package com.bike.rent.kelly.ui.city_select
 import com.bike.rent.kelly.data.DataManager
 import com.bike.rent.kelly.ui.base.BasePresenter
 
-class CitySelectPresenter (private val mDataManager: DataManager) : BasePresenter<CitySelectView>() {
+class CitySelectPresenter () : BasePresenter<CitySelectView>() {
 
     private var mCitySelectView: CitySelectView? = null
 

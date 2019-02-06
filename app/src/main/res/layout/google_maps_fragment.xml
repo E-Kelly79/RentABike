@@ -6,19 +6,19 @@
     android:layout_height="match_parent">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/mFloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:layout_marginEnd="32dp"
         android:clickable="true"
-        android:backgroundTint="@color/color_accent"
+        android:backgroundTint="@color/color_btn_primary"
         mapbox:layout_constraintBottom_toBottomOf="parent"
         mapbox:layout_constraintEnd_toEndOf="parent"
         mapbox:srcCompat="@android:drawable/btn_star_big_off" />
 
     <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/mapView"
+        android:id="@+id/mMapView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         mapbox:layout_constraintBottom_toBottomOf="parent"

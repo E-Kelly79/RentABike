@@ -1,30 +1,31 @@
 package com.bike.rent.kelly.ui.bike
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.android.volley.Request.Method
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.bike.rent.kelly.R
-import com.bike.rent.kelly.SupportMapFragment
 import com.bike.rent.kelly.data.local.PreferencesHelper
 import com.bike.rent.kelly.model.bike.Bike
 import com.bike.rent.kelly.ui.base.BaseActivity
 import com.bike.rent.kelly.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.bike_list_fragment.mBikeRecyclerView
+import kotlinx.android.synthetic.main.bike_list_fragment.mSearch
+import kotlinx.android.synthetic.main.toolbar.mToolbarHome
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import kotlinx.android.synthetic.main.bike_list_fragment.bike_recycler_view
+import timber.log.Timber
 
 /**
  * @author Eoin Kelly
@@ -33,7 +34,6 @@ import kotlinx.android.synthetic.main.bike_list_fragment.bike_recycler_view
  * Class to add bike objects to the recycler view
  */
 class BikeList: BaseFragment() {
-    @BindView(R.id.bike_recycler_view) @JvmField var bikeRecyclerView: RecyclerView? = null
     var volleyRequest: RequestQueue? = null
     var preferences: PreferencesHelper? = null
     var mView: View? = null
@@ -53,20 +53,35 @@ class BikeList: BaseFragment() {
         mView = inflater.inflate(R.layout.bike_list_fragment, container, false)
         baseActivity.showToolbar()
         baseActivity.setTitle("Bike List")
-        ButterKnife.bind(this, mView!!)
+        return mView
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var test = arguments
         var myString = test?.getString("contractName")
+        Timber.i(myString, String)
         url = "https://api.jcdecaux.com/vls/v1/stations?contract=$myString&apiKey=567c5a18aec43057727314c80b218d65bced9c61"
         preferences = PreferencesHelper(context!!)
-
-        baseActivity.mivToolbarPrimary?.setOnClickListener {
+        baseActivity.mToolbarHome.setOnClickListener {
             baseActivity.showNavDrawer()
         }
         bikeList = ArrayList<Bike>()
         volleyRequest = Volley.newRequestQueue(context)
         getBikes(url)
-        return mView
+        mSearch.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(search: Editable?) {
+                filterList(search.toString())
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                null
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                null
+            }
+        })
+
     }
 
     /**
@@ -96,7 +111,7 @@ class BikeList: BaseFragment() {
                         bike.lastUpdated = bikeObj.getLong("last_update")
                         bikeList.add(bike)
 
-                        // Get the Lat Lng form json and used it in the onclick event of recyclerview
+                        // Get the Lat Lng form json and use it in the onclick event of recyclerview
                         // to add that mark on the map
                         mBikeRecyclerViewAdapter = BikeListRecyclerViewAdapter(bikeList, context!!){row ->
                             val latitude = bikeList[row].lat
@@ -108,8 +123,8 @@ class BikeList: BaseFragment() {
                             baseActivity.loadGoogleMapsFragment(arguments!!, false)
                         }
                         layoutManager = LinearLayoutManager(context)
-                        bikeRecyclerView!!.layoutManager = layoutManager
-                        bikeRecyclerView!!.adapter = mBikeRecyclerViewAdapter
+                        mBikeRecyclerView.layoutManager = layoutManager
+                        mBikeRecyclerView.adapter = mBikeRecyclerViewAdapter
                     }
                     mBikeRecyclerViewAdapter!!.notifyDataSetChanged()
 
@@ -123,12 +138,25 @@ class BikeList: BaseFragment() {
         volleyRequest!!.add(bikeRequest)
     }
 
+    /**
+     * Set preferences for favourites
+     */
     fun setPreferences(lat: Double, long: Double, title: String, city: String, address:String) {
         preferences!!.setPrefFloat(BaseActivity.LAT, lat.toFloat())
         preferences!!.setPrefFloat(BaseActivity.LNG, long.toFloat())
         preferences!!.setPrefString(BaseActivity.TITLE, title)
         preferences!!.setPrefString(BaseActivity.CITY, city)
         preferences!!.setPrefString(BaseActivity.ADDRESS, address)
+    }
+
+    fun filterList(text: String){
+        var fliterBikeArray: ArrayList<Bike> = ArrayList()
+        for (bike in bikeList){
+            if (bike.address!!.toLowerCase().contains(text.toLowerCase())){
+                fliterBikeArray.add(bike)
+                mBikeRecyclerViewAdapter!!.filterList(fliterBikeArray)
+            }
+        }
     }
 
 
