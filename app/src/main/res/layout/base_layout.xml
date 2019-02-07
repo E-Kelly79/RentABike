@@ -34,7 +34,11 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:background="@color/color_white_accent">
+        android:background="@color/color_primary_dark">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,8 +47,7 @@
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:background="@color/color_primary_dark">
+                    android:layout_height="150dp">
 
                     <TextView
                         android:id="@+id/mivToolbarPrimary"
@@ -52,7 +55,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/carter_one"
                         android:layout_marginTop="20dp"
-                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginBottom="8dp"
                         android:text="GBS\n \tBikes"
                         android:textSize="32sp"
@@ -76,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginBottom="24dp"
-                    android:background="@color/color_primary_dark"/>
+                    android:background="@color/color_white"/>
 
 
                 <TextView
@@ -84,11 +87,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="23dp"
                     android:textSize="16sp"
-                    android:textColor="@color/color_primary"
-                    android:drawableLeft="@android:drawable/ic_input_add"
-                    android:drawableTint="@color/color_primary"
+                    android:textColor="@color/color_white"
+                    android:drawableStart="@android:drawable/ic_input_add"
+                    android:drawableTint="@color/color_white"
                     android:drawablePadding="10dp"
-                    android:paddingLeft="16dp"
+                    android:paddingStart="16dp"
                     android:text="@string/nav_link_my_wallet"/>
 
                 <TextView
@@ -98,9 +101,9 @@
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
                     android:drawablePadding="10dp"
-                    android:textColor="@color/color_primary"
+                    android:textColor="@color/color_white"
                     android:drawableLeft="@android:drawable/ic_input_add"
-                    android:drawableTint="@color/color_primary"
+                    android:drawableTint="@color/color_white"
                     android:paddingLeft="16dp"
                     android:text="@string/nav_link_buy_tickets"/>
 
@@ -111,10 +114,10 @@
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
                     android:drawablePadding="10dp"
-                    android:textColor="@color/color_primary"
+                    android:textColor="@color/color_white"
                     android:onClick="loadFavourites"
                     android:drawableLeft="@android:drawable/star_off"
-                    android:drawableTint="@color/color_primary"
+                    android:drawableTint="@color/color_white"
                     android:paddingLeft="16dp"
                     android:text="@string/nav_link_favorites"/>
 
@@ -125,9 +128,9 @@
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
                     android:drawablePadding="10dp"
-                    android:textColor="@color/color_primary"
+                    android:textColor="@color/color_white"
                     android:drawableLeft="@android:drawable/ic_dialog_map"
-                    android:drawableTint="@color/color_primary"
+                    android:drawableTint="@color/color_white"
                     android:paddingLeft="16dp"
                     android:text="@string/nav_link_journey"/>
 
@@ -138,9 +141,9 @@
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
                     android:drawablePadding="10dp"
-                    android:textColor="@color/color_primary"
+                    android:textColor="@color/color_white"
                     android:drawableLeft="@android:drawable/ic_menu_search"
-                    android:drawableTint="@color/color_primary"
+                    android:drawableTint="@color/color_white"
                     android:paddingLeft="16dp"
                     android:text="@string/nav_link_search"/>
 
@@ -151,6 +154,17 @@
                     android:background="@color/color_primary_dark"/>
 
             </LinearLayout>
+
+            <ImageView
+                android:layout_width="235dp"
+                android:layout_height="225dp"
+                android:layout_alignParentBottom="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_cityscape"
+                android:layout_marginBottom="-10dp"/>
+        </RelativeLayout>
+
+
 
     </android.support.design.widget.NavigationView>
 

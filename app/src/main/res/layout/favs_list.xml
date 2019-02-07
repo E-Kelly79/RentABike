@@ -17,21 +17,11 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color_primary">
+            android:background="@drawable/pexels_photo2"
+            android:backgroundTint="@color/color_black_accent"
+            android:backgroundTintMode="multiply">
 
-            <ImageView
-                android:id="@+id/img_fav"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="top"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/ic_fav_bike"
-                android:backgroundTint="@color/color_accent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
                 android:id="@+id/text_station_name"
@@ -42,7 +32,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_fav"
+                app:layout_constraintTop_toTopOf="parent"
                 tool:text="Station Name" />
 
             <TextView
