@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_black">#141414</color>
-    <color name="color_black_accent">#373737</color>
+    <color name="color_black_accent">#333333</color>
     <color name="color_grey">#727272</color>
     <color name="color_white">#FFFFFF</color>
     <color name="color_white_accent">#E1E1E1</color>
@@ -9,17 +9,17 @@
 
     <color name="color_toolbar">@color/color_white</color>
     <color name="color_toolbar_focus">#444344</color>
-    <color name="color_btn_primary">#ff5722</color>
+    <color name="color_btn_primary">#0272D9</color>
     <color name="color_btn_secondary">#512da8</color>
-    <color name="color_primary">#7340d1</color>
+    <color name="color_primary">#035BAC</color>
 
     <!--Focus colours are 20% darker-->
-    <color name="color_primary_dark">#512da8</color>
+    <color name="color_primary_dark">#00376A</color>
     <color name="color_accent">#2C0971</color>
     <color name="color_bg_gradient_start">@color/color_primary</color>
     <color name="color_bg_gradient_end">@color/color_primary_dark</color>
 
     <color name="color_text_main">#D9FFFFFF</color>
     <color name="color_text_secondary">#D9EEECEC</color>
-    <color name="color_text_dark">@color/color_primary_dark</color>
+    <color name="color_text_dark">@color/color_black</color>
 </resources>

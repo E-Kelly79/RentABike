@@ -26,6 +26,9 @@ class CitySelectFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        baseActivity.setStatusBarColor(R.color.color_bg_gradient_end, R.color.color_bg_gradient_end,
+            View.SYSTEM_UI_LAYOUT_FLAGS
+        )
         //setup spinner
         var mSpinnerAdapter = ArrayAdapter.createFromResource(context, R.array.city_array,
             android.R.layout.simple_spinner_item)

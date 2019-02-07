@@ -6,9 +6,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import android.widget.ImageView
 import android.widget.TextView
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.model.bike.Bike
@@ -48,7 +45,6 @@ class BikeListRecyclerViewAdapter(private var bikeList:ArrayList<Bike>, private 
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
-        var bikeImage = itemView.findViewById<ImageView>(R.id.card_list_bike_image)
         var streetName = itemView.findViewById<TextView>(R.id.card_list_name)
         var streetAddress = itemView.findViewById<TextView>(R.id.card_list_address)
         var banking = itemView.findViewById<TextView>(R.id.card_list_banking)
@@ -67,7 +63,6 @@ class BikeListRecyclerViewAdapter(private var bikeList:ArrayList<Bike>, private 
             banking.text = "Card Use: ${bike.banking.toString()}"
             bikeAvailable.text = "Bikes Availabile ${bike.availableBikes.toString()}"
             status.text = "Status: ${bike.status}"
-            bikeImage.setImageResource(R.drawable.ic_bike)
             lat.text = bike.lat.toString()
             lng.text = bike.lng.toString()
             parentLayout.setOnClickListener { listener(pos) }
