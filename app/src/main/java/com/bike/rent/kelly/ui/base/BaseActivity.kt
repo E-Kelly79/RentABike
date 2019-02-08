@@ -183,9 +183,9 @@ open class BaseActivity : AppCompatActivity(), MvpView {
                 currentFragmentKey = BIKE_LIST_FRAGMENT
                 loadBikeListFragment(args, addToBackStack)
             }
-            LOGIN_FRAGMENT -> {
-                currentFragmentKey = LOGIN_FRAGMENT
-                loadLoginFragment(args, addToBackStack)
+            AUTH_FRAGMENT -> {
+                currentFragmentKey = AUTH_FRAGMENT
+                loadAuthFragment(args, addToBackStack)
             }
             GOOGLE_MAPS ->{
                 currentFragmentKey = GOOGLE_MAPS
@@ -196,6 +196,16 @@ open class BaseActivity : AppCompatActivity(), MvpView {
                 loadFavouriteFragment(args, addToBackStack)
             }
         }
+    }
+
+    /**
+     * Load Auth Fragment
+     *
+     * @param args           Bundle
+     * @param addToBackStack Boolean
+     */
+    fun loadAuthFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, AuthActivity(), AUTH_FRAGMENT).commit()
     }
 
     /**
@@ -214,8 +224,8 @@ open class BaseActivity : AppCompatActivity(), MvpView {
      * @param args           Bundle
      * @param addToBackStack Boolean
      */
-    fun loadBikeListFragment(args: Bundle?, addToBackStack: Boolean) {
-        getFragment(args!!, addToBackStack, BikeList(), BIKE_LIST_FRAGMENT).commit()
+    fun loadBikeListFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, BikeList(), BIKE_LIST_FRAGMENT).commit()
     }
 
     /**
@@ -224,8 +234,8 @@ open class BaseActivity : AppCompatActivity(), MvpView {
      * @param args           Bundle
      * @param addToBackStack Boolean
      */
-    fun loadLoginFragment(args: Bundle?, addToBackStack: Boolean) {
-        getFragment(args!!, addToBackStack, AuthActivity(), LOGIN_FRAGMENT).commit()
+    fun loadLoginFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, AuthActivity(), LOGIN_FRAGMENT).commit()
     }
 
     /**
@@ -234,8 +244,8 @@ open class BaseActivity : AppCompatActivity(), MvpView {
      * @param args           Bundle
      * @param addToBackStack Boolean
      */
-    fun loadGoogleMapsFragment(args: Bundle?, addToBackStack: Boolean) {
-        getFragment(args!!, addToBackStack, SupportMapFragment(), GOOGLE_MAPS).commit()
+    fun loadGoogleMapsFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, SupportMapFragment(), GOOGLE_MAPS).commit()
     }
 
     /**
@@ -244,8 +254,8 @@ open class BaseActivity : AppCompatActivity(), MvpView {
      * @param args           Bundle
      * @param addToBackStack Boolean
      */
-    fun loadMenuFragment(args: Bundle?, addToBackStack: Boolean) {
-        getFragment(args!!, addToBackStack, MenuFragment(), MENU_FRAGMENT
+    fun loadMenuFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, MenuFragment(), MENU_FRAGMENT
         ).commit()
     }
 
@@ -263,7 +273,8 @@ open class BaseActivity : AppCompatActivity(), MvpView {
     /**
      * Definition of fragments supported
      */
-    @StringDef(CITY_SELECT_FRAGMENT, MENU_FRAGMENT, BIKE_LIST_FRAGMENT, LOGIN_FRAGMENT, GOOGLE_MAPS, FAVOURITES_FRAGMENT)
+    @StringDef(CITY_SELECT_FRAGMENT, MENU_FRAGMENT, BIKE_LIST_FRAGMENT, LOGIN_FRAGMENT, GOOGLE_MAPS,
+        FAVOURITES_FRAGMENT, AUTH_FRAGMENT)
     @Retention(RetentionPolicy.SOURCE)
     annotation class MainFragments
 
@@ -334,6 +345,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
         const val LOGIN_FRAGMENT = "LOGIN"
         const val GOOGLE_MAPS = "GOOGLE_MAPS"
         const val FAVOURITES_FRAGMENT = "FAVOURITES_FRAGMENT"
+        const val AUTH_FRAGMENT = "AUTH_FRAGMENT"
 
         const val KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID"
         const val KEY_FRAGMENT_ARGS = "KEY_FRAGMENT_ARGS"

@@ -11,46 +11,52 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/signup_full_name"
+            android:id="@+id/mFullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
+            android:textColor="@color/color_black"
             android:drawableLeft="@drawable/ic_profile_tertiary"
             android:drawablePadding="5dp"
             android:hint="@string/hint_full_name"
             android:inputType="text"
+            android:imeOptions="actionNext"
             android:textColorHint="@color/color_grey" />
 
         <EditText
-            android:id="@+id/signup_email"
+            android:id="@+id/mEmailSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
+            android:textColor="@color/color_black"
             android:drawableLeft="@drawable/ic_email_tertiary"
             android:drawablePadding="5dp"
             android:hint="@string/hint_email_address"
+            android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
             android:textColorHint="@color/color_grey" />
 
         <EditText
-            android:id="@+id/signup_pass"
+            android:id="@+id/mPasswordSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
+            android:textColor="@color/color_black"
             android:drawableLeft="@drawable/ic_lock_tertiary"
             android:drawablePadding="5dp"
             android:hint="@string/hint_login_password"
+            android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:textColorHint="@color/color_grey" />
 
         <TextView
-            android:id="@+id/pasword_info"
+            android:id="@+id/mPaswordInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -59,6 +65,7 @@
             android:textColor="@color/color_grey" />
 
         <Button
+            android:id="@+id/mSignupBtn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginEnd="16dp"

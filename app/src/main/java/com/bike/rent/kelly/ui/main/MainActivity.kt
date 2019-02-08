@@ -14,6 +14,6 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
         val args = Bundle()
-        baseActivity.loadCitySelectFragment(args, false)
+        baseActivity.loadAuthFragment(args, false)
     }
 }
