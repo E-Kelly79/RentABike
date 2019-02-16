@@ -57,6 +57,7 @@ class FavouritesFragment: BaseFragment() {
                         layoutManager = LinearLayoutManager(context)
                         mFavRecyclerView.layoutManager = layoutManager
                         mFavRecyclerView.adapter = mFavRecyclerViewAdapter
+                        mFavRecyclerViewAdapter!!.notifyDataSetChanged()
                     }
                 }
             }

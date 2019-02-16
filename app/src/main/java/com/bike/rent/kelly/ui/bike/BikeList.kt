@@ -1,5 +1,6 @@
 package com.bike.rent.kelly.ui.bike
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -15,6 +16,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.bike.rent.kelly.R
+import com.bike.rent.kelly.SupportMapFragment
 import com.bike.rent.kelly.data.local.PreferencesHelper
 import com.bike.rent.kelly.model.bike.Bike
 import com.bike.rent.kelly.ui.base.BaseActivity
@@ -124,11 +126,13 @@ class BikeList: BaseFragment() {
                             val city = bikeList[row].contractName
                             val address = bikeList[row].address
                             setPreferences(latitude!!, longitude!!, title!!, city!!, address!!)
-                            baseActivity.loadGoogleMapsFragment(arguments!!, false)
+                            var intent: Intent = Intent(baseActivity, SupportMapFragment::class.java)
+                            startActivity(intent)
+                            //baseActivity.loadGoogleMapsFragment(arguments!!, false)
                         }
                         layoutManager = LinearLayoutManager(context)
-                        mBikeRecyclerView.layoutManager = layoutManager
-                        mBikeRecyclerView.adapter = mBikeRecyclerViewAdapter
+                        mBikeRecyclerView!!.layoutManager = layoutManager
+                        mBikeRecyclerView!!.adapter = mBikeRecyclerViewAdapter
                     }
                     mBikeRecyclerViewAdapter!!.notifyDataSetChanged()
 

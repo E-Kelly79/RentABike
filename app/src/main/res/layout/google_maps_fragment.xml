@@ -17,17 +17,26 @@
         mapbox:layout_constraintEnd_toEndOf="parent"
         mapbox:srcCompat="@android:drawable/btn_star_big_off" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/start_nav_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="32dp"
+        android:clickable="true"
+        mapbox:layout_constraintBottom_toBottomOf="parent"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:srcCompat="@drawable/ic_navigation" />
+
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mMapView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        mapbox:mapbox_cameraZoom="6.5"
         mapbox:layout_constraintBottom_toBottomOf="parent"
         mapbox:layout_constraintEnd_toEndOf="parent"
         mapbox:layout_constraintStart_toStartOf="parent"
-        mapbox:layout_constraintTop_toTopOf="parent"
-        mapbox:mapbox_cameraTilt="60"
-        mapbox:mapbox_cameraZoom="12" >
-
+        mapbox:layout_constraintTop_toTopOf="parent">
     </com.mapbox.mapboxsdk.maps.MapView>
 
 

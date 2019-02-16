@@ -245,7 +245,7 @@ open class BaseActivity : AppCompatActivity(), MvpView {
      * @param addToBackStack Boolean
      */
     fun loadGoogleMapsFragment(args: Bundle, addToBackStack: Boolean) {
-        getFragment(args, addToBackStack, SupportMapFragment(), GOOGLE_MAPS).commit()
+        //getFragment(args, addToBackStack, Mapbox(), GOOGLE_MAPS).commit()
     }
 
     /**
