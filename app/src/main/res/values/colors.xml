@@ -11,11 +11,12 @@
     <color name="color_toolbar_focus">#444344</color>
     <color name="color_btn_primary">#0272D9</color>
     <color name="color_btn_secondary">#512da8</color>
-    <color name="color_primary">#035BAC</color>
+    <color name="color_primary">#502059</color>
 
     <!--Focus colours are 20% darker-->
-    <color name="color_primary_dark">#00376A</color>
+    <color name="color_primary_dark">#833492</color>
     <color name="color_accent">#2C0971</color>
+    <color name="colorAccent">#2C0971</color>
     <color name="color_bg_gradient_start">@color/color_primary</color>
     <color name="color_bg_gradient_end">@color/color_primary_dark</color>
 

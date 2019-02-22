@@ -50,8 +50,8 @@
         app:layout_constraintRight_toRightOf="@id/guide_right"
         app:layout_constraintBottom_toBottomOf="@id/guide_centre_horizontal"
         android:scaleType="fitXY"
-        android:contentDescription="@string/image_landing_image"
-        android:src="@drawable/ic_cityscape"/>
+        android:src="@drawable/ic_gbscity"
+        android:contentDescription="@string/image_landing_image" />
 
     <TextView
         android:id="@+id/mLandingTitle"
@@ -104,7 +104,7 @@
         android:layout_marginStart="8dp"
         android:text="@string/action_find_bike"
         android:textColor="@color/color_white_accent"
-        android:background="@color/color_btn_primary"
+        android:background="@color/color_primary"
         android:drawableRight="@drawable/ic_search"
         android:drawableTint="@color/color_white_accent"
         android:paddingRight="16dp"

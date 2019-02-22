@@ -83,18 +83,6 @@
 
 
                 <TextView
-                    android:id="@+id/mNavWallet"
-                    android:layout_width="match_parent"
-                    android:layout_height="23dp"
-                    android:textSize="16sp"
-                    android:textColor="@color/color_white"
-                    android:drawableStart="@android:drawable/ic_input_add"
-                    android:drawableTint="@color/color_white"
-                    android:drawablePadding="10dp"
-                    android:paddingStart="16dp"
-                    android:text="@string/nav_link_my_wallet"/>
-
-                <TextView
                     android:id="@+id/mNavTickets"
                     android:layout_width="match_parent"
                     android:layout_height="23dp"
@@ -122,19 +110,6 @@
                     android:text="@string/nav_link_favorites"/>
 
                 <TextView
-                    android:id="@+id/mNavJourney"
-                    android:layout_width="match_parent"
-                    android:layout_height="23dp"
-                    android:layout_marginTop="24dp"
-                    android:textSize="16sp"
-                    android:drawablePadding="10dp"
-                    android:textColor="@color/color_white"
-                    android:drawableLeft="@android:drawable/ic_dialog_map"
-                    android:drawableTint="@color/color_white"
-                    android:paddingLeft="16dp"
-                    android:text="@string/nav_link_journey"/>
-
-                <TextView
                     android:id="@+id/mNavSearch"
                     android:layout_width="match_parent"
                     android:layout_height="23dp"
@@ -160,8 +135,8 @@
                 android:layout_height="225dp"
                 android:layout_alignParentBottom="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_cityscape"
-                android:layout_marginBottom="-10dp"/>
+                android:layout_marginBottom="-10dp"
+                android:src="@drawable/ic_gbscity"/>
         </RelativeLayout>
 
 
