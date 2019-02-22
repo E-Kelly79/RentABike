@@ -60,9 +60,7 @@ class BikeList: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         baseActivity.setStatusBarColor(
-            R.color.color_white, R.color.color_black,
-            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        )
+            R.color.color_primary_dark, R.color.color_black, View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
         var test = arguments
         var myString = test?.getString("contractName")
         Timber.i(myString, String)
@@ -131,8 +129,8 @@ class BikeList: BaseFragment() {
                             //baseActivity.loadGoogleMapsFragment(arguments!!, false)
                         }
                         layoutManager = LinearLayoutManager(context)
-                        mBikeRecyclerView!!.layoutManager = layoutManager
-                        mBikeRecyclerView!!.adapter = mBikeRecyclerViewAdapter
+                        mBikeRecyclerView.layoutManager = layoutManager
+                        mBikeRecyclerView.adapter = mBikeRecyclerViewAdapter
                     }
                     mBikeRecyclerViewAdapter!!.notifyDataSetChanged()
 

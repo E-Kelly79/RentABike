@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_black">#141414</color>
+    <color name="color_black">#1A1A1A</color>
     <color name="color_black_accent">#333333</color>
     <color name="color_grey">#727272</color>
-    <color name="color_white">#FFFFFF</color>
-    <color name="color_white_accent">#E1E1E1</color>
-    <color name="color_btn_border">#868BCC</color>
+    <color name="color_white">#E6E6E6</color>
 
-    <color name="color_toolbar">@color/color_white</color>
-    <color name="color_toolbar_focus">#444344</color>
+    <color name="color_toolbar">#502059</color>
+    <color name="color_toolbar_focus">#401b47</color>
     <color name="color_btn_primary">#0272D9</color>
     <color name="color_btn_secondary">#512da8</color>
-    <color name="color_primary">#035BAC</color>
+    <color name="color_primary">#502059</color>
 
     <!--Focus colours are 20% darker-->
-    <color name="color_primary_dark">#00376A</color>
-    <color name="color_accent">#2C0971</color>
-    <color name="color_bg_gradient_start">@color/color_primary</color>
-    <color name="color_bg_gradient_end">@color/color_primary_dark</color>
+    <color name="color_primary_dark">#833492</color>
+    <color name="color_success">#657B0F</color>
+    <color name="color_danger">#657B0F</color>
+    <color name="color_accent">#FDD100</color>
+    <color name="color_bg_gradient_start">@color/color_primary_dark</color>
+    <color name="color_bg_gradient_end">@color/color_primary</color>
 
-    <color name="color_text_main">#D9FFFFFF</color>
-    <color name="color_text_secondary">#D9EEECEC</color>
+    <color name="color_text_main">@color/color_white</color>
+    <color name="color_text_secondary">@color/color_white</color>
     <color name="color_text_dark">@color/color_black</color>
 </resources>

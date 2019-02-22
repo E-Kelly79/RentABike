@@ -59,7 +59,7 @@
                         android:layout_marginBottom="8dp"
                         android:text="GBS\n \tBikes"
                         android:textSize="32sp"
-                        android:textColor="@color/color_white_accent"
+                        android:textColor="@color/color_white"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"

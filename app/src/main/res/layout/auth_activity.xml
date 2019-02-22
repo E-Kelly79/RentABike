@@ -48,7 +48,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/ic_logo"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
         app:layout_constraintStart_toStartOf="@+id/guide_left"
         app:layout_constraintTop_toTopOf="@+id/guide_top" />
@@ -73,7 +73,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="0dp"
-            android:background="@color/color_primary"
+            android:background="@color/color_primary_dark"
             android:orientation="horizontal"
             app:tabTextColor="@color/color_white" />
 

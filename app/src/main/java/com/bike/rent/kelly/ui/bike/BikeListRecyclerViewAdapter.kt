@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.model.bike.Bike
+import com.bike.rent.kelly.model.bike.BikeImages
 
 /**
  * @author Eoin Kelly
@@ -20,7 +21,6 @@ import com.bike.rent.kelly.model.bike.Bike
  */
 class BikeListRecyclerViewAdapter(private var bikeList:ArrayList<Bike>, private val context: Context,
         val listener: (Int) -> Unit): RecyclerView.Adapter<BikeListRecyclerViewAdapter.ViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {
         val view = LayoutInflater.from(context)
@@ -40,7 +40,6 @@ class BikeListRecyclerViewAdapter(private var bikeList:ArrayList<Bike>, private 
         this.bikeList = filteredBikeList
         notifyDataSetChanged()
     }
-
 
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){

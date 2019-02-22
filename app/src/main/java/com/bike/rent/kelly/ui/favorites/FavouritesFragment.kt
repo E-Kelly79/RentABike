@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.favourites_fragment.mFavRecyclerView
+import kotlinx.android.synthetic.main.favourites_fragment.*
 import timber.log.Timber
 
 class FavouritesFragment: BaseFragment() {
@@ -39,8 +39,11 @@ class FavouritesFragment: BaseFragment() {
         baseActivity.showToolbar()
         baseActivity.setTitle("Favourites List")
         favList = ArrayList()
-        getFavouritesFromDatabase()
         return mView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        getFavouritesFromDatabase()
     }
 
     fun getFavouritesFromDatabase(){
@@ -51,6 +54,14 @@ class FavouritesFragment: BaseFragment() {
                     for (fav in dataSnapshot.children) {
                         val myFavs = fav.getValue(Favourites::class.java)!!
                         favList.add(myFavs)
+                        if (favList.size > 0){
+                            favoritesImg.visibility = View.GONE
+                            noFavsText.visibility = View.GONE
+                            favsSubText.visibility = View.GONE
+                            mFavRecyclerView.visibility = View.VISIBLE
+                        }
+
+
                         mFavRecyclerViewAdapter = FavouritesRecyclerViewAdapter(favList, context!!){
                             deleteFavourite(favList[it].favId!!)
                         }
@@ -68,8 +79,19 @@ class FavouritesFragment: BaseFragment() {
         })
     }
 
+
     fun deleteFavourite(favId: String) {
         val drFavourite = FirebaseDatabase.getInstance().getReference("Favourites").child(favId)
         drFavourite.removeValue()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (favList.size <= 0){
+            favoritesImg.visibility = View.VISIBLE
+            noFavsText.visibility = View.VISIBLE
+            favsSubText.visibility = View.VISIBLE
+            mFavRecyclerView.visibility = View.GONE
+        }
     }
 }

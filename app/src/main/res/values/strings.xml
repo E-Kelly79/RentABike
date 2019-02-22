@@ -37,6 +37,9 @@
     </string-array>
     <string name="title_activity_google_maps_fragment">Map</string>
     <string name="content_desc_unsplash">Background image for recycler view</string>
+    <string name="city_select_text">Please select the city that you are currently in</string>
+    <string name="no_favorutes">No Favorutes!</string>
+    <string name="no_favourites_text">You currently have no favourites, please add one to the list to view it here</string>
 
 
 </resources>

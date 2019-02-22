@@ -73,19 +73,33 @@
         app:layout_constraintStart_toStartOf="@+id/guide_left"
         app:layout_constraintTop_toBottomOf="@+id/mLoginEmail" />
 
+    <Spinner
+        android:id="@+id/mCitySpinner"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/guide_right"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guide_left"
+        app:layout_constraintTop_toBottomOf="@+id/mCreateAccountText" />
+
+
     <Button
         android:id="@+id/mLoginBtn"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/color_success"
         android:text="@string/action_login_btn"
         android:textColor="@color/color_white"
-        android:background="@color/color_primary"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guide_left"
-        app:layout_constraintTop_toBottomOf="@+id/mLoginPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/mCitySpinner" />
 
     <TextView
         android:id="@+id/mCreateAccountText"
@@ -93,11 +107,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="No Account? Create One"
+        android:layout_marginTop="8dp"
+        android:text="@string/city_select_text"
         android:textColor="@color/color_grey"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
         app:layout_constraintStart_toStartOf="@+id/guide_left"
-        app:layout_constraintTop_toBottomOf="@+id/mLoginBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/mLoginPassword" />
 
 </android.support.constraint.ConstraintLayout>

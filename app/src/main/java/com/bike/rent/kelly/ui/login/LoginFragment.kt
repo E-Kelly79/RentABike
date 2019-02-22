@@ -1,10 +1,13 @@
 package com.bike.rent.kelly.ui.login
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.ui.base.BaseFragment
 import com.bike.rent.kelly.utils.SnackBars
@@ -14,12 +17,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.mapbox.core.utils.TextUtils
 import kotlinx.android.synthetic.main.login_fragment.*
+import kotlinx.android.synthetic.main.map_fragment.mCitySpinner
+import kotlinx.android.synthetic.main.map_fragment.mLandingBtn
 
 class LoginFragment: BaseFragment(){
 
     lateinit var mView: View
     var mAuth: FirebaseAuth? = null
     var mDatabase: DatabaseReference? = null
+    lateinit var contractName: Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +38,10 @@ class LoginFragment: BaseFragment(){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        baseActivity.setStatusBarColor(R.color.color_bg_gradient_end, R.color.color_black,
+            View.SYSTEM_UI_LAYOUT_FLAGS
+        )
+
         mLoginBtn.setOnClickListener {
             var email = mLoginEmail.text.toString().trim()
             var password = mLoginPassword.text.toString().trim()
