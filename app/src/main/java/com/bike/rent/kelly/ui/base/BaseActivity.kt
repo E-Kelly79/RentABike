@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.base_layout.*
 import kotlinx.android.synthetic.main.toolbar.ToolbarTitle
 import kotlinx.android.synthetic.main.toolbar.mToolbarHome
 
-open class BaseActivity : AppCompatActivity(), MvpView {
+open class BaseActivity : AppCompatActivity() {
     lateinit var bundle: Bundle
 
     var mActivityId: Long = 0
@@ -45,11 +45,11 @@ open class BaseActivity : AppCompatActivity(), MvpView {
     var fragment: BaseFragment? = null
         private set
 
-    override
+
     val context: Context
         get() = applicationContext
 
-    override
+
     val baseActivity: BaseActivity
         get() = this
 

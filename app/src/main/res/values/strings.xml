@@ -41,5 +41,12 @@
     <string name="no_favorutes">No Favorutes!</string>
     <string name="no_favourites_text">You currently have no favourites, please add one to the list to view it here</string>
 
+    <!-- Dialogs Strings -->
+    <string name="dialog_loading">Loading...</string>
+    <string name="dialog_delete">You are about to delete an item Are you sure you want to delete this item"</string>
+    <string name="dialog_warning">WARNING</string>
+    <string name="dilaog_close">Close</string>
+    <string name="dialog_delete_btn">Delete</string>
+
 
 </resources>

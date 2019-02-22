@@ -5,6 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
+        <item name="dialogSheetAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppThemeWhite" parent="Theme.AppCompat.NoActionBar">
@@ -16,7 +17,7 @@
     <style name="ToolBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:background">@color/color_primary_dark</item>
+        <item name="android:background">@color/color_primary</item>
         <item name="contentInsetLeft">0dp</item>
         <item name="contentInsetStart">0dp</item>
         <item name="android:textColor">@color/color_black_accent</item>

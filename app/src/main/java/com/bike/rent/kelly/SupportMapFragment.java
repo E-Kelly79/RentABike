@@ -116,6 +116,7 @@ public class SupportMapFragment extends AppCompatActivity implements OnMapReadyC
         mapView.getMapAsync(this);
     }
 
+    //TODO ... DELETE this at when you know it is not needed
 //    @SuppressLint("MissingPermission")
 //    @Nullable
 //    @Override

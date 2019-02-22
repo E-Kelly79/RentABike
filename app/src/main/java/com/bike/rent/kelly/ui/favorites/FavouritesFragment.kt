@@ -1,5 +1,7 @@
 package com.bike.rent.kelly.ui.favorites
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -10,13 +12,18 @@ import android.widget.Toast
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.model.favs.Favourites
 import com.bike.rent.kelly.ui.base.BaseFragment
-
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+
 import kotlinx.android.synthetic.main.favourites_fragment.*
+
+import com.marcoscg.dialogsheet.DialogSheet
+import kotlinx.android.synthetic.main.favourites_fragment.mFavRecyclerView
+
+
 import timber.log.Timber
 
 class FavouritesFragment: BaseFragment() {
@@ -80,9 +87,26 @@ class FavouritesFragment: BaseFragment() {
     }
 
 
+
+    @SuppressLint("ResourceType")
+
     fun deleteFavourite(favId: String) {
         val drFavourite = FirebaseDatabase.getInstance().getReference("Favourites").child(favId)
-        drFavourite.removeValue()
+            val dialogSheet: DialogSheet = DialogSheet(context)
+            dialogSheet.setTitle(R.string.dialog_warning)
+                .setMessage(R.string.dialog_delete)
+                .setCancelable(true)
+                .setPositiveButton(R.string.dialog_delete_btn){
+                    drFavourite.removeValue()
+                }
+                .setNegativeButton("Cancel"){
+
+                }
+                .setRoundedCorners(false)
+                .setBackgroundColor(Color.WHITE)
+                .setButtonsColorRes(R.color.color_primary)
+                .show()
+
     }
 
     override fun onResume() {

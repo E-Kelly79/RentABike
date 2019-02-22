@@ -15,9 +15,10 @@
     <color name="color_primary_dark">#833492</color>
     <color name="color_success">#657B0F</color>
     <color name="color_danger">#657B0F</color>
-    <color name="color_accent">#FDD100</color>
-    <color name="color_bg_gradient_start">@color/color_primary_dark</color>
-    <color name="color_bg_gradient_end">@color/color_primary</color>
+    <color name="color_accent">#2C0971</color>
+    <color name="colorAccent">#2C0971</color>
+    <color name="color_gradent_start">@color/color_primary</color>
+    <color name="color_bg_gradient_end">@color/color_primary_dark</color>
 
     <color name="color_text_main">@color/color_white</color>
     <color name="color_text_secondary">@color/color_white</color>

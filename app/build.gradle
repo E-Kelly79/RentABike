@@ -58,9 +58,12 @@ dependencies {
     implementation "com.dubsmash.volley:library:$VOLLEY_VERSION"
     implementation "com.mapbox.mapboxsdk:mapbox-android-sdk:$MAPBOX"
     implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.28.0'
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    kapt 'com.github.bumptech.glide:compiler:4.4.0'
+    implementation 'com.github.marcoscgdev:DialogSheet:2.0.3'
 
 }
-//implementation 'com.google.android.gms:play-services-ads:17.1.1'
+
 
 apply plugin: 'com.google.gms.google-services'
 

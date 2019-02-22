@@ -38,7 +38,7 @@ class LoginFragment: BaseFragment(){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        baseActivity.setStatusBarColor(R.color.color_bg_gradient_end, R.color.color_black,
+        baseActivity.setStatusBarColor(R.color.color_gradent_start, R.color.color_black,
             View.SYSTEM_UI_LAYOUT_FLAGS
         )
 
