@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.base_layout.mivToolbarPrimary
 import kotlinx.android.synthetic.main.map_fragment.mCitySpinner
 import kotlinx.android.synthetic.main.map_fragment.mLandingBtn
 
@@ -29,6 +30,10 @@ class CitySelectFragment : BaseFragment() {
         baseActivity.setStatusBarColor(R.color.color_bg_gradient_end, R.color.color_bg_gradient_end,
             View.SYSTEM_UI_LAYOUT_FLAGS
         )
+
+        baseActivity.mivToolbarPrimary.setOnClickListener {
+            baseActivity.loadCitySelectFragment(arguments, false)
+        }
         //setup spinner
         var mSpinnerAdapter = ArrayAdapter.createFromResource(context, R.array.city_array,
             android.R.layout.simple_spinner_item)
