@@ -1,9 +1,14 @@
 # Assignment 1
+**Student Name: Eoin Kelly**
+**Student Number: 20074820**
+
 For this assignment i was giving the task to make an app from scratch.
 The app i choose to do was a bike rental locator app. The app as some feature like a list of city's 
-
 were they have bike rental schemes and from these city's you are giving a list of station placed across these city's.
 The app was built in Kotlin and only fragment were used for the first assignment.
+
+The app feature are to pick a city then you get a list of stations with in that city when you select one of these city's
+your are then presented with a map that give you the location of the station in the selected city
 
 ## Landing page
 When entering the landing page you have an image and a spinner with a list of city's and also a search location button
@@ -77,8 +82,15 @@ a code sample to retrieve items from Firebase database
 ````
 
 
-## Links to my viedo demo of the app
+## Video demo for assigment one
 [Assignment 1 demo](https://vimeo.com/320969998)
+
+## References
+Api that was used for information [JCDecaux Developer](https://developer.jcdecaux.com/#/opendata/vls?page=getstarted)
+Stack overflow for bug [Stack overflow](https://stackoverflow.com/)
+Android developer  [Android developer docs](https://developer.android.com/)
+Firebase for database, User Auth and Analytics [Firebase](https://firebase.google.com/)
+Mapbox for the map api [Mapbox](https://docs.mapbox.com/)
 
 
 
