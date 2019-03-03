@@ -1,5 +1,6 @@
 # Assignment 1
 **Student Name: Eoin Kelly**
+
 **Student Number: 20074820**
 
 For this assignment i was giving the task to make an app from scratch.
@@ -87,9 +88,13 @@ a code sample to retrieve items from Firebase database
 
 ## References
 Api that was used for information [JCDecaux Developer](https://developer.jcdecaux.com/#/opendata/vls?page=getstarted)
+
 Stack overflow for bug [Stack overflow](https://stackoverflow.com/)
+
 Android developer  [Android developer docs](https://developer.android.com/)
+
 Firebase for database, User Auth and Analytics [Firebase](https://firebase.google.com/)
+
 Mapbox for the map api [Mapbox](https://docs.mapbox.com/)
 
 
