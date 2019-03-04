@@ -45,7 +45,7 @@ class BikeList: BaseFragment() {
     lateinit var url: String
 
     /**
-     * Inflate a layout far the fragment to show
+     * Inflate a layoutfragment to show
      * @param inflater inflate the give view to show layout on screen
      * @param container the view in which the layout will sit in
      * @param savedInstanceState used to save any data and pass to another activity

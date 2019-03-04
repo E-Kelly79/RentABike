@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,8 +23,6 @@ import kotlinx.android.synthetic.main.favourites_fragment.*
 
 import com.marcoscg.dialogsheet.DialogSheet
 import kotlinx.android.synthetic.main.favourites_fragment.mFavRecyclerView
-
-
 import timber.log.Timber
 
 class FavouritesFragment: BaseFragment() {
@@ -39,7 +38,10 @@ class FavouritesFragment: BaseFragment() {
         super.onCreate(savedInstanceState)
         database = FirebaseDatabase.getInstance()
         favRef = database.reference
+        favList = ArrayList()
     }
+
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.favourites_fragment, container, false)
@@ -50,11 +52,12 @@ class FavouritesFragment: BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         getFavouritesFromDatabase()
     }
 
     fun getFavouritesFromDatabase(){
-       database.reference.child("Favourites").orderByChild("cityName").addValueEventListener(object : ValueEventListener {
+        database.reference.child("Favourites").orderByChild("cityName").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     favList.clear()
@@ -73,15 +76,17 @@ class FavouritesFragment: BaseFragment() {
                             deleteFavourite(favList[it].favId!!)
                         }
                         layoutManager = LinearLayoutManager(context)
-                        mFavRecyclerView.layoutManager = layoutManager
-                        mFavRecyclerView.adapter = mFavRecyclerViewAdapter
+                        mFavRecyclerView!!.layoutManager = layoutManager
+                        mFavRecyclerView!!.adapter = mFavRecyclerViewAdapter
                         mFavRecyclerViewAdapter!!.notifyDataSetChanged()
+
+                        Log.i("FAVS", favList.toString())
                     }
                 }
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 Timber.e(databaseError.toException())
-                Toast.makeText(context, "Failed to load Message.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Failed to retrive information from database.", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -106,7 +111,6 @@ class FavouritesFragment: BaseFragment() {
                 .setBackgroundColor(Color.WHITE)
                 .setButtonsColorRes(R.color.color_primary)
                 .show()
-
     }
 
     override fun onResume() {
