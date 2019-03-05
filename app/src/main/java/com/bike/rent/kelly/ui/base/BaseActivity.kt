@@ -2,6 +2,7 @@ package com.bike.rent.kelly.ui.base
 
 import android.content.Context
 import android.graphics.Color
+import android.location.LocationManager
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
@@ -19,8 +20,11 @@ import com.bike.rent.kelly.SupportMapFragment
 import com.bike.rent.kelly.ui.auth.AuthActivity
 import com.bike.rent.kelly.ui.bike.BikeList
 import com.bike.rent.kelly.ui.city_select.CitySelectFragment
+import com.bike.rent.kelly.ui.creditcards.CreditCardFragment
 import com.bike.rent.kelly.ui.favorites.FavouritesFragment
 import com.bike.rent.kelly.ui.menu.MenuFragment
+import com.bike.rent.kelly.ui.payment.PaymentFragment
+import com.bike.rent.kelly.ui.wallet.WalletFragment
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 import kotlinx.android.synthetic.main.base_layout.*
@@ -59,6 +63,7 @@ open class BaseActivity : AppCompatActivity() {
         setContentView(R.layout.base_layout)
         bundle = Bundle()
         initNavDrawer()
+
     }
 
     public override fun onResume() {
@@ -166,6 +171,8 @@ open class BaseActivity : AppCompatActivity() {
         return ft
     }
 
+
+
     /**
      * Load fragment based on Tag
      */
@@ -193,6 +200,18 @@ open class BaseActivity : AppCompatActivity() {
             }
             FAVOURITES_FRAGMENT -> {
                 currentFragmentKey = FAVOURITES_FRAGMENT
+                loadFavouriteFragment(args, addToBackStack)
+            }
+            PAYMENT_FRAGMENT -> {
+                currentFragmentKey = PAYMENT_FRAGMENT
+                loadFavouriteFragment(args, addToBackStack)
+            }
+            CREDIT_CARD_FRAGMENT -> {
+                currentFragmentKey = CREDIT_CARD_FRAGMENT
+                loadFavouriteFragment(args, addToBackStack)
+            }
+            WALLET_FRAGMENT -> {
+                currentFragmentKey = WALLET_FRAGMENT
                 loadFavouriteFragment(args, addToBackStack)
             }
         }
@@ -255,8 +274,7 @@ open class BaseActivity : AppCompatActivity() {
      * @param addToBackStack Boolean
      */
     fun loadMenuFragment(args: Bundle, addToBackStack: Boolean) {
-        getFragment(args, addToBackStack, MenuFragment(), MENU_FRAGMENT
-        ).commit()
+        getFragment(args, addToBackStack, MenuFragment(), MENU_FRAGMENT).commit()
     }
 
     /**
@@ -266,15 +284,44 @@ open class BaseActivity : AppCompatActivity() {
      * @param addToBackStack Boolean
      */
     open fun loadFavouriteFragment(args: Bundle, addToBackStack: Boolean) {
-        getFragment(args, addToBackStack, FavouritesFragment(), FAVOURITES_FRAGMENT
-        ).commit()
+        getFragment(args, addToBackStack, FavouritesFragment(), FAVOURITES_FRAGMENT).commit()
+    }
+
+    /**
+     * Load Payment Fragment
+     *
+     * @param args           Bundle
+     * @param addToBackStack Boolean
+     */
+    fun loadPaymentFragment(args: Bundle?, addToBackStack: Boolean) {
+        getFragment(args!!, addToBackStack, PaymentFragment(), PAYMENT_FRAGMENT).commit()
+    }
+
+    /**
+     * Load Wallet Fragment
+     *
+     * @param args           Bundle
+     * @param addToBackStack Boolean
+     */
+    fun loadWalletFragment(args: Bundle?, addToBackStack: Boolean) {
+        getFragment(args!!, addToBackStack, WalletFragment(), WALLET_FRAGMENT).commit()
+    }
+
+    /**
+     * Load Payment Fragment
+     *
+     * @param args           Bundle
+     * @param addToBackStack Boolean
+     */
+    fun loadCreditCardFragment(args: Bundle?, addToBackStack: Boolean) {
+        getFragment(args!!, addToBackStack, CreditCardFragment(), CREDIT_CARD_FRAGMENT).commit()
     }
 
     /**
      * Definition of fragments supported
      */
     @StringDef(CITY_SELECT_FRAGMENT, MENU_FRAGMENT, BIKE_LIST_FRAGMENT, LOGIN_FRAGMENT, GOOGLE_MAPS,
-        FAVOURITES_FRAGMENT, AUTH_FRAGMENT)
+        FAVOURITES_FRAGMENT, AUTH_FRAGMENT, PAYMENT_FRAGMENT)
     @Retention(RetentionPolicy.SOURCE)
     annotation class MainFragments
 
@@ -346,6 +393,10 @@ open class BaseActivity : AppCompatActivity() {
         const val GOOGLE_MAPS = "GOOGLE_MAPS"
         const val FAVOURITES_FRAGMENT = "FAVOURITES_FRAGMENT"
         const val AUTH_FRAGMENT = "AUTH_FRAGMENT"
+        const val PAYMENT_FRAGMENT = "AUTH_FRAGMENT"
+        const val WALLET_FRAGMENT = "WALLET_FRAGMENT"
+        const val CREDIT_CARD_FRAGMENT = "CREDIT_CARD_FRAGMENT"
+
 
         const val KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID"
         const val KEY_FRAGMENT_ARGS = "KEY_FRAGMENT_ARGS"
