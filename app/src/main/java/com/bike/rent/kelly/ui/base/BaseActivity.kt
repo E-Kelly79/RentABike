@@ -2,6 +2,9 @@ package com.bike.rent.kelly.ui.base
 
 import android.content.Context
 import android.graphics.Color
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
@@ -27,7 +30,9 @@ import kotlinx.android.synthetic.main.base_layout.*
 import kotlinx.android.synthetic.main.toolbar.ToolbarTitle
 import kotlinx.android.synthetic.main.toolbar.mToolbarHome
 
-open class BaseActivity : AppCompatActivity() {
+open class BaseActivity : AppCompatActivity(), LocationListener{
+
+
     lateinit var bundle: Bundle
 
     var mActivityId: Long = 0
@@ -338,6 +343,23 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    override fun onLocationChanged(p0: Location?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onProviderEnabled(p0: String?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onProviderDisabled(p0: String?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
     companion object {
         const val CITY_SELECT_FRAGMENT = "MAPS_FRAGMENT"
         const val MENU_FRAGMENT = "MENU_FRAGMENT"
@@ -363,3 +385,4 @@ open class BaseActivity : AppCompatActivity() {
         return bundle
     }
 }
+
