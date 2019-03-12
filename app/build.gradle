@@ -39,6 +39,11 @@ dependencies {
     final PICASSO_VERSION = '2.71828'
     final VOLLEY_VERSION = '2.0.1'
     final MAPBOX = '7.0.1'
+    final GOOGLE_SIGNIN = '16.0.1'
+    final FIREBASE = '16.0.3'
+    final FIREBASE_DATABASE = '16.0.1'
+
+    //Android Dependencies
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //noinspection GradleCompatible
@@ -46,14 +51,15 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
     implementation "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
     implementation "com.android.support.constraint:constraint-layout:$CONSTRAINT_LAYOUT"
-    implementation 'com.google.android.gms:play-services-maps:16.0.0'
-
-    implementation 'com.google.firebase:firebase-core:16.0.3'
-    implementation 'com.google.firebase:firebase-database:16.0.1'
-    implementation 'com.google.firebase:firebase-auth:16.0.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //3rd Party Dependencies
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation "com.google.firebase:firebase-core:$FIREBASE"
+    implementation "com.google.firebase:firebase-database:$FIREBASE_DATABASE"
+    implementation "com.google.firebase:firebase-auth:$FIREBASE"
     implementation "com.squareup.picasso:picasso:$PICASSO_VERSION"
     implementation "com.dubsmash.volley:library:$VOLLEY_VERSION"
     implementation "com.mapbox.mapboxsdk:mapbox-android-sdk:$MAPBOX"
@@ -61,10 +67,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.4.0'
     kapt 'com.github.bumptech.glide:compiler:4.4.0'
     implementation 'com.github.marcoscgdev:DialogSheet:2.0.3'
-
+    implementation "com.google.android.gms:play-services-auth:$GOOGLE_SIGNIN"
 }
-
-
 apply plugin: 'com.google.gms.google-services'
-
 com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

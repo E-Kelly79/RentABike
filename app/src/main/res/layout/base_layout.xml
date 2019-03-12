@@ -46,8 +46,37 @@
                 android:orientation="vertical">
 
                 <android.support.constraint.ConstraintLayout
+                    android:id="@+id/googleSigninLayout"
                     android:layout_width="match_parent"
                     android:layout_height="150dp">
+
+
+                    <ImageView
+                        android:id="@+id/googleSigninImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/googleSigninName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/carter_one"
+                        android:textColor="@color/color_white"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="@id/googleSigninImg"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/googleSigninEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/carter_one"
+                        android:textColor="@color/color_white"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="@id/googleSigninImg"
+                        app:layout_constraintTop_toTopOf="@id/googleSigninName"/>
 
                     <TextView
                         android:id="@+id/mivToolbarPrimary"
@@ -57,10 +86,10 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginBottom="8dp"
-                        android:text="GBS\n \tBikes"
                         android:textSize="32sp"
                         android:textColor="@color/color_white"
                         android:textStyle="bold"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
