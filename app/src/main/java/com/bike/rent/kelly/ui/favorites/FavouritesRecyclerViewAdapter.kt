@@ -47,8 +47,9 @@ class FavouritesRecyclerViewAdapter(private val favList:ArrayList<Favourites>, p
             lng.text = fav.longitude.toString()
             cardLayout.setOnClickListener { listener(pos) }
         }
-
-
     }
+
+
+
 
 }
