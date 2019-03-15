@@ -90,6 +90,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guide_left" />
 
+
     <com.google.android.gms.common.SignInButton
         android:id="@+id/googleSigninBtn"
         android:layout_width="0dp"

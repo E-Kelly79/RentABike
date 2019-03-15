@@ -1,10 +1,10 @@
 package com.bike.rent.kelly.ui.base
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.location.Location
 import android.location.LocationListener
-import android.location.LocationManager
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
@@ -13,28 +13,48 @@ import android.support.annotation.StringDef
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 
 import com.bike.rent.kelly.R
-import com.bike.rent.kelly.SupportMapFragment
+import com.bike.rent.kelly.data.local.PreferencesHelper
 import com.bike.rent.kelly.ui.auth.AuthActivity
 import com.bike.rent.kelly.ui.bike.BikeList
 import com.bike.rent.kelly.ui.city_select.CitySelectFragment
 import com.bike.rent.kelly.ui.favorites.FavouritesFragment
 import com.bike.rent.kelly.ui.menu.MenuFragment
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
+
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 import kotlinx.android.synthetic.main.base_layout.*
 import kotlinx.android.synthetic.main.toolbar.ToolbarTitle
 import kotlinx.android.synthetic.main.toolbar.mToolbarHome
+import timber.log.Timber
 
-open class BaseActivity : AppCompatActivity(), LocationListener{
+open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient.OnConnectionFailedListener{
 
 
+    private val RC_SIGN_IN: Int = 1234
+    private val WEB_CLIENT_ID = "1008646000926-2rhcrlub6fnq94i8mcbl6d7cqeloul6s.apps.googleusercontent.com"
+    private var mGoogleApiClient: GoogleApiClient? = null
+    private var mGoogleSignInClient: GoogleSignInClient? = null
+    var mAuth: FirebaseAuth? = null
     lateinit var bundle: Bundle
-
     var mActivityId: Long = 0
 
     /**
@@ -51,19 +71,38 @@ open class BaseActivity : AppCompatActivity(), LocationListener{
         private set
 
 
-    val context: Context
-        get() = applicationContext
+    val context: Context get() = applicationContext
 
 
-    val baseActivity: BaseActivity
-        get() = this
+    val baseActivity: BaseActivity get() = this
 
     @RequiresApi(VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.base_layout)
+        mAuth = FirebaseAuth.getInstance()
+        val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(WEB_CLIENT_ID)
+            .requestEmail()
+            .build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        mGoogleApiClient = GoogleApiClient.Builder(context!!)
+            .enableAutoManage(baseActivity, this)
+            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+            .build()
+
         bundle = Bundle()
         initNavDrawer()
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        //see if user is loggedin
+        val currentUser = mAuth!!.currentUser
+        updateUI(currentUser)
     }
 
     public override fun onResume() {
@@ -77,6 +116,82 @@ open class BaseActivity : AppCompatActivity(), LocationListener{
 
     override fun onDestroy() {
         super.onDestroy()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.e("BaseActivity", requestCode.toString())
+
+        if (requestCode == RC_SIGN_IN){
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            Log.e("BaseActivity", data.toString())
+            try {
+                var account = task.getResult(ApiException::class.java)
+                firebaseGoogleSignIn(account!!)
+            }catch (e: ApiException){
+                Log.w("BaseActivirty", "Google sign in failed $e")
+            }
+        }
+    }
+
+    private fun firebaseGoogleSignIn(acct: GoogleSignInAccount) {
+        Log.d("HELLO", "firebaseAuthWithGoogle:" + acct.id)
+
+        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+        mAuth!!.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("BaseActivity", "signInWithCredential:success")
+                    val user = mAuth!!.currentUser
+                    updateUI(user)
+                    var args: Bundle = Bundle()
+                    args.putString("Help", "HElp")
+                    loadCitySelectFragment(args, false)
+
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("BaseActivity", "signInWithCredential:failure", task.exception)
+                    updateUI(null)
+                }
+            }
+    }
+
+    override fun onConnectionFailed(connectionResult: ConnectionResult) {
+        Timber.d("onConnectionFailed: " + connectionResult)
+    }
+
+    fun signIn(){
+        var signInIntent = mGoogleSignInClient!!.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+
+    fun signOut() {
+        // sign out Firebase
+        mAuth!!.signOut()
+
+        // sign out Google
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback { updateUI(null) }
+    }
+
+    fun revokeAccess() {
+        // sign out Firebase
+        mAuth!!.signOut()
+
+        // revoke access Google
+        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback { updateUI(null) }
+    }
+
+    fun updateUI(user: FirebaseUser?) {
+        //Log.e(TAG, "USSER ${user!!.displayName}")
+        if (user != null) {
+            var prefs = PreferencesHelper(context!!)
+
+            prefs.setPrefString("Google_Email", user.email!!)
+            prefs.setPrefString("Google_Photo", user.photoUrl!!.toString())
+            prefs.setPrefString("Google_Name", user.displayName!!)
+        }
     }
 
     @RequiresApi(VERSION_CODES.LOLLIPOP)
@@ -303,26 +418,29 @@ open class BaseActivity : AppCompatActivity(), LocationListener{
         ToolbarTitle.text = title
     }
 
-    fun loadWallet(){
+    fun loadWallet(view: View){
         //loadWalletFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
         closeNavDrawer()
     }
 
-    fun loadTickets(){
+    fun loadBuyTickets(view: View){
         //loadTicketFragment( getArguments(), NOT_ADD_TO_BACKSTACK)
         closeNavDrawer()
     }
 
 
-    fun loadJourney(){
-        //loadJourneyFragment( getArguments(), NOT_ADD_TO_BACKSTACK)
+    fun loadSearchStation(view: View){
+        loadCitySelectFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
         closeNavDrawer()
     }
 
-
-    fun loadSearchStation(){
-       //loadSearchStationsFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
+    fun logout(view: View){
+        signOut()
+        revokeAccess()
+        Toast.makeText(this, "Loggedout", Toast.LENGTH_LONG).show()
+        loadAuthFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
         closeNavDrawer()
+
     }
 
 

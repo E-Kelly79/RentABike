@@ -2,14 +2,20 @@ package com.bike.rent.kelly.ui.city_select
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.bike.rent.kelly.R
+import com.bike.rent.kelly.data.local.PreferencesHelper
 import com.bike.rent.kelly.ui.base.BaseFragment
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.base_layout.mivToolbarPrimary
+import kotlinx.android.synthetic.main.base_layout.signinEmail
+import kotlinx.android.synthetic.main.base_layout.signinImg
+import kotlinx.android.synthetic.main.base_layout.signinName
 import kotlinx.android.synthetic.main.map_fragment.mCitySpinner
 import kotlinx.android.synthetic.main.map_fragment.mLandingBtn
 
@@ -23,6 +29,14 @@ class CitySelectFragment : BaseFragment() {
         mView = inflater.inflate(R.layout.map_fragment, container, false)
         baseActivity.hideToolbar()
         baseActivity.lockNavDrawer()
+        var prefs:PreferencesHelper = PreferencesHelper(context!!)
+        Log.i("PREFS", "prefs "+ prefs.getPrefString("Google_Email"))
+        Log.i("PREFS", "prefs "+ prefs.getPrefString("Google_Photo"))
+        Log.i("PREFS", "prefs "+ prefs.getPrefString("Google_Name"))
+        baseActivity.signinName.text = prefs.getPrefString("Google_Name")
+        baseActivity.signinEmail.text = prefs.getPrefString("Google_Email")
+        Glide.with(context).load(prefs.getPrefString("Google_Photo")).into(baseActivity.signinImg)
+
         return mView
     }
 
