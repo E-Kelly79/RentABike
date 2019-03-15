@@ -64,7 +64,7 @@ class SignupFragment: BaseFragment() {
                 userObject["username"] = username
                 userObject["name"] = "Hello there"
                 userObject["image"] = "default"
-                mDatabase!!.setValue(userObject).addOnCompleteListener { task: Task<Void> ->
+                mDatabase!!.setValue(userObject).addOnCompleteListener {task: Task<Void> ->
                     if (task.isSuccessful){
                         mDialog.dismiss()
                         SnackBars.centerSnackbar(view!!, "User created")

@@ -436,11 +436,17 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
 
     fun logout(view: View){
         signOut()
-        revokeAccess()
         Toast.makeText(this, "Loggedout", Toast.LENGTH_LONG).show()
         loadAuthFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
         closeNavDrawer()
+    }
 
+    fun disconnectAccount(view: View){
+        signOut()
+        revokeAccess()
+        Toast.makeText(this, "Google account is disconnect", Toast.LENGTH_LONG).show()
+        loadAuthFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
+        closeNavDrawer()
     }
 
 
@@ -497,6 +503,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
         const val CITY ="CITY"
         const val ADDRESS ="ADDRESS"
     }
+
     fun getArguments(): Bundle{
         bundle = Bundle()
         bundle.putString("KEY", "")

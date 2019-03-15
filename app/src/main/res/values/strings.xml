@@ -47,6 +47,7 @@
     <string name="dialog_warning">WARNING</string>
     <string name="dilaog_close">Close</string>
     <string name="dialog_delete_btn">Delete</string>
+    <string name="nav_string_logout">Logout</string>
 
 
 </resources>

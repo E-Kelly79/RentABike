@@ -27,7 +27,7 @@ class FavouritesRecyclerViewAdapter(private val favList:ArrayList<Favourites>, p
     }
 
     override fun onBindViewHolder(holder: FavouritesRecyclerViewAdapter.ViewHolder, position: Int) {
-        holder?.bindView(favList[position], position, listener)
+        holder.bindView(favList[position], position, listener)
     }
 
 

@@ -176,7 +176,21 @@
                     android:drawableLeft="@android:drawable/ic_lock_lock"
                     android:drawableTint="@color/color_white"
                     android:paddingLeft="16dp"
-                    android:text="@string/nav_link_search"/>
+                    android:text="@string/nav_string_logout"/>
+
+                <TextView
+                    android:id="@+id/mNavDisconnectAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="24dp"
+                    android:textSize="16sp"
+                    android:drawablePadding="10dp"
+                    android:onClick="disconnectAccount"
+                    android:textColor="@color/color_white"
+                    android:drawableLeft="@android:drawable/ic_dialog_info"
+                    android:drawableTint="@color/color_white"
+                    android:paddingLeft="16dp"
+                    android:text="Disconnect Google Account"/>
 
                 <View
                     android:layout_width="match_parent"
