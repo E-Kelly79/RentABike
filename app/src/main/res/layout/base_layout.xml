@@ -131,6 +131,7 @@
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
                     android:drawablePadding="10dp"
+                    android:onClick="loadBuyTickets"
                     android:textColor="@color/color_white"
                     android:drawableLeft="@android:drawable/ic_input_add"
                     android:drawableTint="@color/color_white"

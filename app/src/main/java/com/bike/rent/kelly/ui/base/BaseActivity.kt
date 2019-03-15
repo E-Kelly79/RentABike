@@ -26,6 +26,7 @@ import com.bike.rent.kelly.ui.bike.BikeList
 import com.bike.rent.kelly.ui.city_select.CitySelectFragment
 import com.bike.rent.kelly.ui.favorites.FavouritesFragment
 import com.bike.rent.kelly.ui.menu.MenuFragment
+import com.bike.rent.kelly.ui.tickets.TicketFragment
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -315,6 +316,10 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
                 currentFragmentKey = FAVOURITES_FRAGMENT
                 loadFavouriteFragment(args, addToBackStack)
             }
+            TICKET_FRAGMENT -> {
+                currentFragmentKey = TICKET_FRAGMENT
+                loadFavouriteFragment(args, addToBackStack)
+            }
         }
     }
 
@@ -380,6 +385,17 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
     }
 
     /**
+     * Load Ticket Fragment
+     *
+     * @param args           Bundle
+     * @param addToBackStack Boolean
+     */
+    fun loadTicketFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, TicketFragment(), MENU_FRAGMENT
+        ).commit()
+    }
+
+    /**
      * Load Favourite Fragment
      *
      * @param args           Bundle
@@ -394,7 +410,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
      * Definition of fragments supported
      */
     @StringDef(CITY_SELECT_FRAGMENT, MENU_FRAGMENT, BIKE_LIST_FRAGMENT, LOGIN_FRAGMENT, GOOGLE_MAPS,
-        FAVOURITES_FRAGMENT, AUTH_FRAGMENT)
+        FAVOURITES_FRAGMENT, AUTH_FRAGMENT, TICKET_FRAGMENT)
     @Retention(RetentionPolicy.SOURCE)
     annotation class MainFragments
 
@@ -424,7 +440,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
     }
 
     fun loadBuyTickets(view: View){
-        //loadTicketFragment( getArguments(), NOT_ADD_TO_BACKSTACK)
+        loadTicketFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
         closeNavDrawer()
     }
 
@@ -492,6 +508,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
         const val GOOGLE_MAPS = "GOOGLE_MAPS"
         const val FAVOURITES_FRAGMENT = "FAVOURITES_FRAGMENT"
         const val AUTH_FRAGMENT = "AUTH_FRAGMENT"
+        const val TICKET_FRAGMENT = "TICKET_FRAGMENT"
 
         const val KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID"
         const val KEY_FRAGMENT_ARGS = "KEY_FRAGMENT_ARGS"
