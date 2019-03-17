@@ -59,6 +59,7 @@ class LoginFragment: BaseFragment(){
 
         googleSigninBtn.setOnClickListener {
             baseActivity.signIn()
+            updateUI(baseActivity.currentUser)
         }
 
         mLoginBtn.setOnClickListener {
@@ -84,6 +85,15 @@ class LoginFragment: BaseFragment(){
                     SnackBars.centerSnackbar(mView, "Email or Password are incorrect")
                 }
             }
+    }
+
+    fun updateUI(user: FirebaseUser?) {
+        if (user != null) {
+            var prefs = PreferencesHelper(context!!)
+            prefs.setPrefString("Google_Email", user.email!!)
+            prefs.setPrefString("Google_Photo", user.photoUrl!!.toString())
+            prefs.setPrefString("Google_Name", user.displayName!!)
+        }
     }
 
 

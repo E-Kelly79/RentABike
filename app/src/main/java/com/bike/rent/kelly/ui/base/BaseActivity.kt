@@ -48,7 +48,7 @@ import kotlinx.android.synthetic.main.toolbar.ToolbarTitle
 import kotlinx.android.synthetic.main.toolbar.mToolbarHome
 import timber.log.Timber
 
-open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient.OnConnectionFailedListener{
+open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener{
 
 
     private val RC_SIGN_IN: Int = 1234
@@ -58,6 +58,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
     var mAuth: FirebaseAuth? = null
     lateinit var bundle: Bundle
     var mActivityId: Long = 0
+    var currentUser: FirebaseUser? = null
 
     /**
      * Set current fragment
@@ -103,8 +104,9 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
     override fun onStart() {
         super.onStart()
         //see if user is loggedin
-        val currentUser = mAuth!!.currentUser
-        updateUI(currentUser)
+        currentUser = mAuth!!.currentUser
+
+
     }
 
     public override fun onResume() {
@@ -141,8 +143,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("BaseActivity", "signInWithCredential:success")
-                    val user = mAuth!!.currentUser
-                    updateUI(user)
+                    currentUser = mAuth!!.currentUser
 //                    var args: Bundle = Bundle()
 //                    args.putString("Help", "HElp")
                     loadCitySelectFragment(getArguments(), false)
@@ -150,7 +151,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("BaseActivity", "signInWithCredential:failure", task.exception)
-                    updateUI(null)
+                    currentUser = null
                 }
             }
     }
@@ -170,17 +171,10 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
         mAuth!!.signOut()
 
         // sign out Google
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback { updateUI(null) }
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback { currentUser = null }
     }
 
-    fun updateUI(user: FirebaseUser?) {
-        if (user != null) {
-            var prefs = PreferencesHelper(context!!)
-            prefs.setPrefString("Google_Email", user.email!!)
-            prefs.setPrefString("Google_Photo", user.photoUrl!!.toString())
-            prefs.setPrefString("Google_Name", user.displayName!!)
-        }
-    }
+
 
     @RequiresApi(VERSION_CODES.LOLLIPOP)
     private fun initNavDrawer() {
@@ -459,13 +453,6 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
         closeNavDrawer()
     }
 
-    fun disconnectAccount(view: View){
-        signOut()
-        Toast.makeText(this, "Google account is disconnect", Toast.LENGTH_LONG).show()
-        loadAuthFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
-        closeNavDrawer()
-    }
-
 
     fun loadFavourites(view: View){
         loadFavouriteFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
@@ -483,23 +470,6 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
             window.navigationBarColor = resources.getColor(navColor)
         }
     }
-
-    override fun onLocationChanged(p0: Location?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onProviderEnabled(p0: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onProviderDisabled(p0: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
 
     companion object {
 
