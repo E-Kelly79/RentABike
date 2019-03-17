@@ -48,6 +48,13 @@
     <string name="dilaog_close">Close</string>
     <string name="dialog_delete_btn">Delete</string>
     <string name="nav_string_logout">Logout</string>
+    <string name="card_name">Card Name</string>
+    <string name="card_number">Card Number</string>
+    <string name="expiry_date">Expiry Date</string>
+    <string name="ccv">CCV</string>
+    <string name="save_card_details">Save Card Details</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="pay_now">Pay Now</string>
 
 
 </resources>

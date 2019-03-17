@@ -105,7 +105,7 @@
         android:layout_marginStart="8dp"
         android:text="@string/action_find_bike"
         android:textColor="@color/color_white"
-        android:background="@color/color_primary"
+        android:background="@color/color_primary_dark"
         android:drawableRight="@drawable/ic_search"
         android:drawableTint="@color/color_white"
         android:paddingRight="16dp"

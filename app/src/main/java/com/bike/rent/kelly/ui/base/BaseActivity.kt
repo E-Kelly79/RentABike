@@ -23,6 +23,7 @@ import com.bike.rent.kelly.R
 import com.bike.rent.kelly.data.local.PreferencesHelper
 import com.bike.rent.kelly.ui.auth.AuthActivity
 import com.bike.rent.kelly.ui.bike.BikeList
+import com.bike.rent.kelly.ui.card_payment.CardPaymentFragment
 import com.bike.rent.kelly.ui.city_select.CitySelectFragment
 import com.bike.rent.kelly.ui.favorites.FavouritesFragment
 import com.bike.rent.kelly.ui.menu.MenuFragment
@@ -121,11 +122,9 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.e("BaseActivity", requestCode.toString())
 
         if (requestCode == RC_SIGN_IN){
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-            Log.e("BaseActivity", data.toString())
             try {
                 var account = task.getResult(ApiException::class.java)
                 firebaseGoogleSignIn(account!!)
@@ -136,8 +135,6 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
     }
 
     private fun firebaseGoogleSignIn(acct: GoogleSignInAccount) {
-        Log.d("HELLO", "firebaseAuthWithGoogle:" + acct.id)
-
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         mAuth!!.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
@@ -146,9 +143,9 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
                     Log.d("BaseActivity", "signInWithCredential:success")
                     val user = mAuth!!.currentUser
                     updateUI(user)
-                    var args: Bundle = Bundle()
-                    args.putString("Help", "HElp")
-                    loadCitySelectFragment(args, false)
+//                    var args: Bundle = Bundle()
+//                    args.putString("Help", "HElp")
+                    loadCitySelectFragment(getArguments(), false)
 
                 } else {
                     // If sign in fails, display a message to the user.
@@ -176,19 +173,9 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback { updateUI(null) }
     }
 
-    fun revokeAccess() {
-        // sign out Firebase
-        mAuth!!.signOut()
-
-        // revoke access Google
-        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback { updateUI(null) }
-    }
-
     fun updateUI(user: FirebaseUser?) {
-        //Log.e(TAG, "USSER ${user!!.displayName}")
         if (user != null) {
             var prefs = PreferencesHelper(context!!)
-
             prefs.setPrefString("Google_Email", user.email!!)
             prefs.setPrefString("Google_Photo", user.photoUrl!!.toString())
             prefs.setPrefString("Google_Name", user.displayName!!)
@@ -320,6 +307,10 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
                 currentFragmentKey = TICKET_FRAGMENT
                 loadFavouriteFragment(args, addToBackStack)
             }
+            CARD_PAYMENT_FRAGMENT -> {
+                currentFragmentKey = CARD_PAYMENT_FRAGMENT
+                loadCardPaymentFragment(args, addToBackStack)
+            }
         }
     }
 
@@ -396,6 +387,17 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
     }
 
     /**
+     * Load Card Payment Fragment Fragment
+     *
+     * @param args           Bundle
+     * @param addToBackStack Boolean
+     */
+    fun loadCardPaymentFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, CardPaymentFragment(), MENU_FRAGMENT
+        ).commit()
+    }
+
+    /**
      * Load Favourite Fragment
      *
      * @param args           Bundle
@@ -410,7 +412,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
      * Definition of fragments supported
      */
     @StringDef(CITY_SELECT_FRAGMENT, MENU_FRAGMENT, BIKE_LIST_FRAGMENT, LOGIN_FRAGMENT, GOOGLE_MAPS,
-        FAVOURITES_FRAGMENT, AUTH_FRAGMENT, TICKET_FRAGMENT)
+        FAVOURITES_FRAGMENT, AUTH_FRAGMENT, TICKET_FRAGMENT, CARD_PAYMENT_FRAGMENT)
     @Retention(RetentionPolicy.SOURCE)
     annotation class MainFragments
 
@@ -459,7 +461,6 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
 
     fun disconnectAccount(view: View){
         signOut()
-        revokeAccess()
         Toast.makeText(this, "Google account is disconnect", Toast.LENGTH_LONG).show()
         loadAuthFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
         closeNavDrawer()
@@ -501,6 +502,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
 
 
     companion object {
+
         const val CITY_SELECT_FRAGMENT = "MAPS_FRAGMENT"
         const val MENU_FRAGMENT = "MENU_FRAGMENT"
         const val BIKE_LIST_FRAGMENT = "BIKE_LIST"
@@ -509,6 +511,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
         const val FAVOURITES_FRAGMENT = "FAVOURITES_FRAGMENT"
         const val AUTH_FRAGMENT = "AUTH_FRAGMENT"
         const val TICKET_FRAGMENT = "TICKET_FRAGMENT"
+        const val CARD_PAYMENT_FRAGMENT = "CARD_PAYMENT_FRAGMENT"
 
         const val KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID"
         const val KEY_FRAGMENT_ARGS = "KEY_FRAGMENT_ARGS"
@@ -519,6 +522,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener, GoogleApiClient
         const val TITLE ="TITLE"
         const val CITY ="CITY"
         const val ADDRESS ="ADDRESS"
+        var CREDIT_AMOUNT = 5000.00f
     }
 
     fun getArguments(): Bundle{

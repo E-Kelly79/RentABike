@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.data.local.PreferencesHelper
+import com.bike.rent.kelly.ui.base.BaseActivity
 import com.bike.rent.kelly.ui.base.BaseFragment
 import com.bike.rent.kelly.utils.SnackBars
 import com.google.android.gms.auth.api.Auth
@@ -34,13 +35,15 @@ import timber.log.Timber
 
 class LoginFragment: BaseFragment(){
 
-    private val TAG = "LOGINFRAGMENT"
-
     var mDatabase: DatabaseReference? = null
     lateinit var mView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (baseActivity.mAuth!!.currentUser != null){
+            baseActivity.loadCitySelectFragment(baseActivity.getArguments(), false)
+
+        }
 
     }
 
