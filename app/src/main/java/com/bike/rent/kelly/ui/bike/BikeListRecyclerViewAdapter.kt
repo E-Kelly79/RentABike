@@ -1,15 +1,20 @@
 package com.bike.rent.kelly.ui.bike
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.model.bike.Bike
 import com.bike.rent.kelly.model.bike.BikeImages
+import com.bike.rent.kelly.utils.BikeArray
+import com.bumptech.glide.Glide
 
 /**
  * @author Eoin Kelly
@@ -34,6 +39,12 @@ class BikeListRecyclerViewAdapter(private var bikeList:ArrayList<Bike>, private 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.bindView(bikeList[position], position, listener)
+        if (position > BikeArray.bikeimages.size){
+            BikeArray.bikeimages[position] = 0
+        }
+            Glide.with(context)
+                .load(BikeArray.bikeimages[position])
+                .into(holder.image)
     }
 
     fun filterList(filteredBikeList: ArrayList<Bike>){
@@ -52,6 +63,7 @@ class BikeListRecyclerViewAdapter(private var bikeList:ArrayList<Bike>, private 
         var parentLayout = itemView.findViewById<ConstraintLayout>(R.id.constraintLayout)
         var lat = itemView.findViewById<TextView>(R.id.text_lat)
         var lng = itemView.findViewById<TextView>(R.id.text_lng)
+        var image= itemView.findViewById<ImageView>(R.id.unsplash)
 
         /**
          *
