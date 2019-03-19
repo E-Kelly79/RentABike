@@ -133,10 +133,24 @@
                     android:drawablePadding="10dp"
                     android:onClick="loadBuyTickets"
                     android:textColor="@color/color_white"
-                    android:drawableLeft="@android:drawable/ic_input_add"
+                    android:drawableLeft="@drawable/ic_add_shopping_cart"
                     android:drawableTint="@color/color_white"
                     android:paddingLeft="16dp"
                     android:text="@string/nav_link_buy_tickets"/>
+
+                <TextView
+                    android:id="@+id/mNavWallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="24dp"
+                    android:textSize="16sp"
+                    android:drawablePadding="10dp"
+                    android:onClick="loadWallet"
+                    android:textColor="@color/color_white"
+                    android:drawableLeft="@drawable/ic_account_balance_wallet"
+                    android:drawableTint="@color/color_white"
+                    android:paddingLeft="16dp"
+                    android:text="@string/nav_link_wallet"/>
 
                 <TextView
                     android:id="@+id/mNavFavs"

@@ -1,10 +1,8 @@
 package com.bike.rent.kelly.ui.bike
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.model.bike.Bike
-import com.bike.rent.kelly.model.bike.BikeImages
+import com.bike.rent.kelly.ui.base.BaseActivity
 import com.bike.rent.kelly.utils.BikeArray
 import com.bumptech.glide.Glide
 
@@ -26,6 +24,7 @@ import com.bumptech.glide.Glide
  */
 class BikeListRecyclerViewAdapter(private var bikeList:ArrayList<Bike>, private val context: Context,
         val listener: (Int) -> Unit): RecyclerView.Adapter<BikeListRecyclerViewAdapter.ViewHolder>() {
+    var base = BaseActivity
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {
         val view = LayoutInflater.from(context)
@@ -42,9 +41,29 @@ class BikeListRecyclerViewAdapter(private var bikeList:ArrayList<Bike>, private 
         if (position > BikeArray.bikeimages.size){
             BikeArray.bikeimages[position] = 0
         }
+
+        //Loop trough the drawables for name that contains  and add it to array list
+        var imageListId = ArrayList<Int>()
+        var drawables = R.drawable::class.java!!.fields
+        for (drawable in drawables) {
+            //if the drawable name contains "bicycle" the get resource id and add to list
+            if (drawable.name.contains("bicycle_")){
+                imageListId.add(context.resources.getIdentifier(drawable.name, "drawable", context.packageName))
+            }
+        }
+
+        //check to see if the position is less the the size of the array
+        //if it is then add images to the placeholder other wise add the 4th image to placeholder
+        if (position < imageListId.size) {
             Glide.with(context)
-                .load(BikeArray.bikeimages[position])
+                .load(imageListId[position])
                 .into(holder.image)
+        }else{
+            Glide.with(context)
+                .load(imageListId[3])
+                .into(holder.image)
+        }
+
     }
 
     fun filterList(filteredBikeList: ArrayList<Bike>){
@@ -66,7 +85,10 @@ class BikeListRecyclerViewAdapter(private var bikeList:ArrayList<Bike>, private 
         var image= itemView.findViewById<ImageView>(R.id.unsplash)
 
         /**
-         *
+         * function to bind bike object information to the given variables
+         * @param bike Bike object
+         * @param pos for the postition of the recycler view
+         * @param listener for the click event of the recycler view
          */
         fun bindView(bike: Bike, pos:Int, listener:(Int)-> Unit) = with(itemView){
             streetName.text = "Name: ${bike.name}"

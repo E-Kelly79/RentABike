@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.data.local.PreferencesHelper
+import com.bike.rent.kelly.model.tickets.Ticket
+import com.bike.rent.kelly.ui.base.BaseActivity
 import com.bike.rent.kelly.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.ticket_fragment.*
 
@@ -19,6 +21,7 @@ class TicketFragment : BaseFragment(){
     val yearPrice: Float = 120.00f
     lateinit var priceArguments: PreferencesHelper
     lateinit var mView: View
+    var tickets: Ticket? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,22 +38,29 @@ class TicketFragment : BaseFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         dayTicketContainer.setOnClickListener {
-
             priceArguments.setPrefFloat(PRICE, dayPrice)
             Log.i("TICKET DAY", priceArguments.getPrefFloat(PRICE).toString())
             baseActivity.loadCardPaymentFragment(arguments!!, false)
+            tickets = Ticket(ticketDay.text.toString(), ticketSubText.text.toString(), 5.00f)
+            BaseActivity.WALLET_LIST.add(tickets!!)
+
         }
 
         monthTicketContainer.setOnClickListener {
             priceArguments.setPrefFloat(PRICE, monthPrice)
             Log.i("TICKET MONTH",priceArguments.getPrefFloat(PRICE).toString())
             baseActivity.loadCardPaymentFragment(arguments!!, false)
+            tickets = Ticket(ticketMonth.text.toString(), monthTicketSubText.text.toString(), 17.00f)
+            BaseActivity.WALLET_LIST.add(tickets!!)
         }
 
         yearTicketContainer.setOnClickListener {
             priceArguments.setPrefFloat(PRICE, yearPrice)
             Log.i("TICKET YEAR", priceArguments.getPrefFloat(PRICE).toString())
             baseActivity.loadCardPaymentFragment(arguments!!, false)
+            tickets = Ticket(ticketYear.text.toString(), yearTicketSubText.text.toString(), 120.00f)
+            BaseActivity.WALLET_LIST.add(tickets!!)
+
         }
 
 

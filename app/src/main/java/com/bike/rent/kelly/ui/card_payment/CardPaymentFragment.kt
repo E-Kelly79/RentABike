@@ -12,6 +12,7 @@ import android.widget.Toast
 
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.data.local.PreferencesHelper
+import com.bike.rent.kelly.model.tickets.Ticket
 import com.bike.rent.kelly.ui.base.BaseActivity
 import com.bike.rent.kelly.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.card_payment_fragment.*
@@ -24,6 +25,7 @@ class CardPaymentFragment: BaseFragment() {
     val MASTER_CCV = "555"
     lateinit var mView: View
     lateinit var prices: PreferencesHelper
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,10 +91,11 @@ class CardPaymentFragment: BaseFragment() {
         payNowBtn.setOnClickListener {
             if(cardNumber.text.toString() == VISA_CARD || cardNumber.text.toString() == MASTERCARD) {
                 BaseActivity.CREDIT_AMOUNT -= prices.getPrefFloat("PRICE").toString().toFloat()
+
                 Log.i("TAG", "AMOUNT = ${BaseActivity.CREDIT_AMOUNT}")
             }else{
                 Toast.makeText(context!!, "Please make sure your card number is correct", Toast.LENGTH_LONG).show()
-                cardNumber.isFocusable
+
             }
         }
 

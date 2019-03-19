@@ -1,4 +1,5 @@
 <resources>
+    <!-- Global Strings -->
     <string name="app_name">GBS Bikes</string>
     <string name="text_title">GBS Bikes</string>
     <string name="image_landing_image">Landing image</string>
@@ -7,11 +8,12 @@
     <string name="text_sign_up_btn">Sign Up</string>
 
     <!-- Nav Links -->
-    <string name="nav_link_my_wallet">My Wallet</string>
+    <string name="nav_link_wallet">Wallet</string>
     <string name="nav_link_favorites">Favorites</string>
     <string name="nav_link_buy_tickets">Buy Tickets</string>
     <string name="nav_link_journey">Plan A Journey</string>
     <string name="nav_link_search">Search Station</string>
+    <string name="nav_string_logout">Logout</string>
 
     <!-- Hint Strings -->
     <string name="hint_full_name">Micheal Smith</string>
@@ -23,18 +25,7 @@
     <string name="action_find_bike">Search Location</string>
     <string name="action_login_btn">Login</string>
 
-    <!-- City Array -->
-    <string-array name="city_array">
-        <item>Please Select</item>
-        <item>Dublin</item>
-        <item>Marseille</item>
-        <item>Toulouse</item>
-        <item>Luxembourg</item>
-        <item>Santander</item>
-        <item>Bruxelles-Capitale</item>
-        <item>Lyon</item>
-        <item>Brisbane</item>
-    </string-array>
+
     <string name="title_activity_google_maps_fragment">Map</string>
     <string name="content_desc_unsplash">Background image for recycler view</string>
     <string name="city_select_text">Please select the city that you are currently in</string>
@@ -47,7 +38,8 @@
     <string name="dialog_warning">WARNING</string>
     <string name="dilaog_close">Close</string>
     <string name="dialog_delete_btn">Delete</string>
-    <string name="nav_string_logout">Logout</string>
+
+
     <string name="card_name">Card Name</string>
     <string name="card_number">Card Number</string>
     <string name="expiry_date">Expiry Date</string>
@@ -55,6 +47,32 @@
     <string name="save_card_details">Save Card Details</string>
     <string name="total_amount">Total Amount</string>
     <string name="pay_now">Pay Now</string>
+
+
+    <!-- Ticket Strings-->
+    <string name="ticket_sub_day">All 30 minutes rides free for 24 hours</string>
+    <string name="monthly_pass_title_ticket">Monthly Pass Ticket</string>
+    <string name="ticket_sub_monthly">All 30 minutes rides free for 1 month</string>
+    <string name="yearly_pass_title_ticket">Yearly Pass Ticket</string>
+    <string name="ticket_sub_year">All 30 minutes rides free for 1 Year</string>
+    <string name="day_pass_title_ticket">Day Pass Ticket</string>
+    <string name="price_year">Price £120 Euro</string>
+    <string name="price_month">Price £17 Euro</string>
+    <string name="price_day">Price £5 Euro</string>
+    <string name="available_tickets">Your aviable tickets. Please click on a ticket to activite it</string>
+
+
+    <!-- City Array -->
+    <string-array name="city_array">
+        <item>Please Select</item>
+        <item>Dublin</item>
+        <item>Marseille</item>
+        <item>Toulouse</item>
+        <item>Luxembourg</item>
+        <item>Bruxelles-Capitale</item>
+        <item>Lyon</item>
+        <item>Brisbane</item>
+    </string-array>
 
 
 </resources>

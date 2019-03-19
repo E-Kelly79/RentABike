@@ -1,18 +1,30 @@
 package com.bike.rent.kelly.model.bike
 
-class Bike(){
-    var number: Int? = null
-    var contractName: String? = null
-    var name: String? = null
-    var address: String? = null
-    var banking: Boolean? = null
-    var bonus: Boolean? = null
-    var bikeStands: Int? = null
-    var availableBikes: Int? = null
-    var status: String? = null
-    var lastUpdated: Long? = null
-    var lat: Double? = null
-    var lng: Double? = null
+class Bike(var number: Int? = null,
+    var contractName: String? = null,
+    var name: String? = null,
+    var address: String? = null,
+    var banking: Boolean? = null,
+    var bonus: Boolean? = null,
+    var bikeStands: Int? = null,
+    var availableBikes: Int? = null,
+    var status: String? = null,
+    var lastUpdated: Long? = null,
+    var lat: Double? = null,
+    var lng: Double? = null){
+
+//    var number: Int? = null
+//    var contractName: String? = null
+//    var name: String? = null
+//    var address: String? = null
+//    var banking: Boolean? = null
+//    var bonus: Boolean? = null
+//    var bikeStands: Int? = null
+//    var availableBikes: Int? = null
+//    var status: String? = null
+//    var lastUpdated: Long? = null
+//    var lat: Double? = null
+//    var lng: Double? = null
 
     constructor(number: Int, contractName: String, name: String, address: String,
                 banking: Boolean, bonus: Boolean, bikeStands: Int, availableBikes: Int,

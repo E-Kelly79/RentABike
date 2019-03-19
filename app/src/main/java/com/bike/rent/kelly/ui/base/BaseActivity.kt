@@ -21,6 +21,7 @@ import android.widget.Toast
 
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.data.local.PreferencesHelper
+import com.bike.rent.kelly.model.tickets.Ticket
 import com.bike.rent.kelly.ui.auth.AuthActivity
 import com.bike.rent.kelly.ui.bike.BikeList
 import com.bike.rent.kelly.ui.card_payment.CardPaymentFragment
@@ -493,6 +494,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         const val CITY ="CITY"
         const val ADDRESS ="ADDRESS"
         var CREDIT_AMOUNT = 5000.00f
+        val WALLET_LIST: ArrayList<Ticket> = ArrayList()
     }
 
     fun getArguments(): Bundle{
