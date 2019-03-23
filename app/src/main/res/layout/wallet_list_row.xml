@@ -1,59 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/mWalletContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:cardElevation="10dp"
-        app:cardCornerRadius="10dp"
+        android:layout_height="180dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ticket_back"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
-            android:id="@+id/mWalletContainer"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@drawable/ticket_alt">
-
-            <TextView
-                android:id="@+id/mWalletTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:hint="Title"
-                android:textAlignment="center" />
+        <TextView
+            android:id="@+id/mWalletTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:hint="Title"
+            android:textAlignment="center"
+            android:textColor="@color/color_black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/mWalletSub"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/mWalletTitle"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="24dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:hint="Sub" />
+            android:layout_marginTop="8dp"
+            android:hint="Sub"
+            android:textAlignment="center"
+            android:textColor="@color/color_black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/mWalletTitle"
+            app:layout_constraintStart_toStartOf="@+id/mWalletTitle"
+            app:layout_constraintTop_toBottomOf="@+id/mWalletTitle" />
 
         <TextView
             android:id="@+id/mWalletPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/mWalletSub"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="24dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:hint="Price" />
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="Price"
+            android:textColor="@color/color_black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mWalletSub" />
+        <TextView
+            android:id="@+id/mTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="time"
+            android:textColor="@color/color_black"
+            app:layout_constraintEnd_toEndOf="@+id/mWalletPrice"
+            app:layout_constraintHorizontal_bias="0.428"
+            app:layout_constraintStart_toStartOf="@+id/mWalletPrice"
+            app:layout_constraintTop_toBottomOf="@+id/mWalletPrice" />
 
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+    </android.support.constraint.ConstraintLayout>
+
 
 </android.support.constraint.ConstraintLayout>

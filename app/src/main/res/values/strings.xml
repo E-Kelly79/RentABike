@@ -36,8 +36,11 @@
     <string name="dialog_loading">Loading...</string>
     <string name="dialog_delete">You are about to delete an item Are you sure you want to delete this item"</string>
     <string name="dialog_warning">WARNING</string>
-    <string name="dilaog_close">Close</string>
+    <string name="dialog_close">Close</string>
     <string name="dialog_delete_btn">Delete</string>
+    <string name="dialog_activate_title">WARNING!!</string>
+    <string name="dialog_activate">Your are about to activate this ticket once activated this ticket will be deleted once the expiry date ends</string>
+    <string name="dialog_ok_btn">OK</string>
 
 
     <string name="card_name">Card Name</string>

@@ -22,6 +22,7 @@ import android.widget.Toast
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.data.local.PreferencesHelper
 import com.bike.rent.kelly.model.tickets.Ticket
+import com.bike.rent.kelly.ui.WalletFragment
 import com.bike.rent.kelly.ui.auth.AuthActivity
 import com.bike.rent.kelly.ui.bike.BikeList
 import com.bike.rent.kelly.ui.card_payment.CardPaymentFragment
@@ -47,6 +48,7 @@ import java.lang.annotation.RetentionPolicy
 import kotlinx.android.synthetic.main.base_layout.*
 import kotlinx.android.synthetic.main.toolbar.ToolbarTitle
 import kotlinx.android.synthetic.main.toolbar.mToolbarHome
+import net.danlew.android.joda.JodaTimeAndroid
 import timber.log.Timber
 
 open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener{
@@ -84,6 +86,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.base_layout)
+        JodaTimeAndroid.init(this)
         mAuth = FirebaseAuth.getInstance()
         val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(WEB_CLIENT_ID)
@@ -300,7 +303,11 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
             }
             TICKET_FRAGMENT -> {
                 currentFragmentKey = TICKET_FRAGMENT
-                loadFavouriteFragment(args, addToBackStack)
+                loadTicketFragment(args, addToBackStack)
+            }
+            WALLET_FRAGMENT -> {
+                currentFragmentKey = WALLET_FRAGMENT
+                loadWalletFragment(args, addToBackStack)
             }
             CARD_PAYMENT_FRAGMENT -> {
                 currentFragmentKey = CARD_PAYMENT_FRAGMENT
@@ -382,6 +389,17 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     }
 
     /**
+     * Load Wallet Fragment
+     *
+     * @param args           Bundle
+     * @param addToBackStack Boolean
+     */
+    fun loadWalletFragment(args: Bundle, addToBackStack: Boolean) {
+        getFragment(args, addToBackStack, WalletFragment(), MENU_FRAGMENT
+        ).commit()
+    }
+
+    /**
      * Load Card Payment Fragment Fragment
      *
      * @param args           Bundle
@@ -407,7 +425,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
      * Definition of fragments supported
      */
     @StringDef(CITY_SELECT_FRAGMENT, MENU_FRAGMENT, BIKE_LIST_FRAGMENT, LOGIN_FRAGMENT, GOOGLE_MAPS,
-        FAVOURITES_FRAGMENT, AUTH_FRAGMENT, TICKET_FRAGMENT, CARD_PAYMENT_FRAGMENT)
+        FAVOURITES_FRAGMENT, AUTH_FRAGMENT, TICKET_FRAGMENT, CARD_PAYMENT_FRAGMENT, WALLET_FRAGMENT)
     @Retention(RetentionPolicy.SOURCE)
     annotation class MainFragments
 
@@ -432,7 +450,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
     }
 
     fun loadWallet(view: View){
-        //loadWalletFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
+        loadWalletFragment(getArguments(), NOT_ADD_TO_BACKSTACK)
         closeNavDrawer()
     }
 
@@ -483,6 +501,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         const val AUTH_FRAGMENT = "AUTH_FRAGMENT"
         const val TICKET_FRAGMENT = "TICKET_FRAGMENT"
         const val CARD_PAYMENT_FRAGMENT = "CARD_PAYMENT_FRAGMENT"
+        const val WALLET_FRAGMENT = "WALLET_FRAGMENT"
 
         const val KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID"
         const val KEY_FRAGMENT_ARGS = "KEY_FRAGMENT_ARGS"

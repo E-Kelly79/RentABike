@@ -1,6 +1,8 @@
 package com.bike.rent.kelly.ui.card_payment
 
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -64,6 +66,7 @@ class CardPaymentFragment: BaseFragment() {
                 BaseActivity.CREDIT_AMOUNT -= prices.getPrefFloat("PRICE").toString().toFloat()
                 Log.i("CREDIT", BaseActivity.CREDIT_AMOUNT.toString())
 
+
             }
         }
 
@@ -91,8 +94,12 @@ class CardPaymentFragment: BaseFragment() {
         payNowBtn.setOnClickListener {
             if(cardNumber.text.toString() == VISA_CARD || cardNumber.text.toString() == MASTERCARD) {
                 BaseActivity.CREDIT_AMOUNT -= prices.getPrefFloat("PRICE").toString().toFloat()
-
                 Log.i("TAG", "AMOUNT = ${BaseActivity.CREDIT_AMOUNT}")
+                Toast.makeText(context!!, "Payment was successful", Toast.LENGTH_LONG).show()
+
+                Handler().postDelayed({
+                    baseActivity.loadWalletFragment(baseActivity.getArguments(), false)
+                }, 2500)
             }else{
                 Toast.makeText(context!!, "Please make sure your card number is correct", Toast.LENGTH_LONG).show()
 

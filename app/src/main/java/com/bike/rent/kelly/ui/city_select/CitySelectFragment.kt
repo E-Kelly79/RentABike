@@ -49,7 +49,7 @@ class CitySelectFragment : BaseFragment() {
             baseActivity.loadCitySelectFragment(arguments, false)
         }
         //setup spinner
-        var mSpinnerAdapter = ArrayAdapter.createFromResource(context, R.array.city_array,
+        var mSpinnerAdapter = ArrayAdapter.createFromResource(context!!, R.array.city_array,
             android.R.layout.simple_spinner_item)
         mSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         mCitySpinner.adapter = mSpinnerAdapter

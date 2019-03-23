@@ -13,8 +13,8 @@
 
     <!--Focus colours are 20% darker-->
     <color name="color_primary_dark">#833492</color>
-    <color name="color_success">#657B0F</color>
-    <color name="color_danger">#657B0F</color>
+    <color name="color_success">#22BB33</color>
+    <color name="color_danger">#BB2124</color>
     <color name="color_accent">#2C0971</color>
     <color name="colorAccent">#2C0971</color>
     <color name="color_gradent_start">@color/color_primary</color>
