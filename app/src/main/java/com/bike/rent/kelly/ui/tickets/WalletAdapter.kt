@@ -42,11 +42,11 @@ class WalletAdapter(private var walletList:ArrayList<Ticket>, private val contex
 
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        var title = itemView.findViewById<TextView>(R.id.mWalletTitle)
-        var sub = itemView.findViewById<TextView>(R.id.mWalletSub)
-        var price = itemView.findViewById<TextView>(R.id.mWalletPrice)
-        var expiresAt = itemView.findViewById<TextView>(R.id.mTime)
-        var parentLayout = itemView.findViewById<ConstraintLayout>(R.id.mWalletContainer)
+        var title = itemView.findViewById<TextView>(R.id.mWalletTitle)!!
+        var sub = itemView.findViewById<TextView>(R.id.mWalletSub)!!
+        var price = itemView.findViewById<TextView>(R.id.mWalletPrice)!!
+        var expiresAt = itemView.findViewById<TextView>(R.id.mTime)!!
+        var parentLayout = itemView.findViewById<ConstraintLayout>(R.id.mWalletContainer)!!
 
         @RequiresApi(VERSION_CODES.N)
         fun bindView(ticket: Ticket, pos: Int, listener: (Int) -> Unit) = with(itemView) {
@@ -54,14 +54,19 @@ class WalletAdapter(private var walletList:ArrayList<Ticket>, private val contex
             sub.text = "${ticket.info}"
             price.text = "Price £${ticket.price}"
             expiresAt.text = "Expires ${ticket.expires}"
-            if (ticket.expires != null){
+
+            if (ticket.activated){
                 expiresAt.visibility = View.VISIBLE
                 expiresAt.setTextColor(resources.getColor(R.color.color_danger))
+                title.text = "Activated ${ticket.title}"
+                parentLayout.isClickable = false
             }
 
             parentLayout.setOnClickListener { listener(pos)
-
+                ticket.activated = true
                 expiresAt.setTextColor(resources.getColor(R.color.color_danger))
+                expiresAt.visibility = View.VISIBLE
+                title.text = "Activated ${ticket.title}"
 
             }
         }
