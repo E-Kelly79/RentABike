@@ -53,19 +53,16 @@ class WalletAdapter(private var walletList:ArrayList<Ticket>, private val contex
             title.text = "${ticket.title}"
             sub.text = "${ticket.info}"
             price.text = "Price £${ticket.price}"
-            expiresAt
+            expiresAt.text = "Expires ${ticket.expires}"
+            if (ticket.expires != null){
+                expiresAt.visibility = View.VISIBLE
+                expiresAt.setTextColor(resources.getColor(R.color.color_danger))
+            }
 
             parentLayout.setOnClickListener { listener(pos)
-                if(title.text.contains("Day")){
-                    expiresAt.text = "Expires ${DateTime.now().plusDays(1).toString("E dd/MM/yyyy HH:mm:ss")}"
-                    expiresAt.setTextColor(resources.getColor(R.color.color_danger))
-                }else if(title.text.contains("Month")){
-                    expiresAt.text = "Expires ${DateTime.now().plusMonths(1).toString("E dd/MM/yyyy HH:mm:ss")}"
-                    expiresAt.setTextColor(resources.getColor(R.color.color_danger))
-                }else{
-                    expiresAt.text = "Expires ${DateTime.now().plusYears(1).toString("E dd/MM/yyyy HH:mm:ss")}"
-                    expiresAt.setTextColor(resources.getColor(R.color.color_danger))
-                }
+
+                expiresAt.setTextColor(resources.getColor(R.color.color_danger))
+
             }
         }
     }

@@ -12,6 +12,7 @@ import com.bike.rent.kelly.model.tickets.Ticket
 import com.bike.rent.kelly.ui.base.BaseActivity
 import com.bike.rent.kelly.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.ticket_fragment.*
+import org.joda.time.DateTime
 
 class TicketFragment : BaseFragment(){
 
@@ -22,6 +23,7 @@ class TicketFragment : BaseFragment(){
     lateinit var priceArguments: PreferencesHelper
     lateinit var mView: View
     var tickets: Ticket? = null
+    var date: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,18 +41,18 @@ class TicketFragment : BaseFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         dayTicketContainer.setOnClickListener {
             priceArguments.setPrefFloat(PRICE, dayPrice)
-            Log.i("TICKET DAY", priceArguments.getPrefFloat(PRICE).toString())
             baseActivity.loadCardPaymentFragment(arguments!!, false)
-            tickets = Ticket(ticketDay.text.toString(), ticketSubText.text.toString(), 5.00f)
+            date = DateTime.now().plusDays(1).toString("E dd/MM/yyyy HH:mm:ss")
+            tickets = Ticket(ticketDay.text.toString(), ticketSubText.text.toString(), 5.00f, date)
             BaseActivity.WALLET_LIST.add(tickets!!)
 
         }
 
         monthTicketContainer.setOnClickListener {
             priceArguments.setPrefFloat(PRICE, monthPrice)
-            Log.i("TICKET MONTH",priceArguments.getPrefFloat(PRICE).toString())
             baseActivity.loadCardPaymentFragment(arguments!!, false)
-            tickets = Ticket(ticketMonth.text.toString(), monthTicketSubText.text.toString(), 17.00f)
+            date =  DateTime.now().plusMonths(1).toString("E dd/MM/yyyy HH:mm:ss")
+            tickets = Ticket(ticketMonth.text.toString(), monthTicketSubText.text.toString(), 17.00f, date)
             BaseActivity.WALLET_LIST.add(tickets!!)
         }
 
@@ -58,7 +60,8 @@ class TicketFragment : BaseFragment(){
             priceArguments.setPrefFloat(PRICE, yearPrice)
             Log.i("TICKET YEAR", priceArguments.getPrefFloat(PRICE).toString())
             baseActivity.loadCardPaymentFragment(arguments!!, false)
-            tickets = Ticket(ticketYear.text.toString(), yearTicketSubText.text.toString(), 120.00f)
+            date =  DateTime.now().plusYears(1).toString("E dd/MM/yyyy HH:mm:ss")
+            tickets = Ticket(ticketYear.text.toString(), yearTicketSubText.text.toString(), 120.00f, date)
             BaseActivity.WALLET_LIST.add(tickets!!)
 
         }

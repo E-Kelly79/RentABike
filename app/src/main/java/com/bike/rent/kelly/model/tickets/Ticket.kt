@@ -1,8 +1,8 @@
 package com.bike.rent.kelly.model.tickets
 
-import java.util.Date
+import org.joda.time.DateTime
 
 class Ticket (var title: String? = null,
               var info: String? = null,
               var price: Float = 0.0f,
-              var time: Date? = null)
+              var expires: String? = null)

@@ -38,9 +38,6 @@ class WalletFragment : BaseFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         walletAdapter = WalletAdapter(BaseActivity.WALLET_LIST, context!!){row ->
-//            val title = BaseActivity.WALLET_LIST[row].title
-//            val sub= BaseActivity.WALLET_LIST[row].info
-//            val price = BaseActivity.WALLET_LIST[row].price
                 activateTicketCheck()
         }
 

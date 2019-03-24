@@ -68,6 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="time"
+            android:visibility="gone"
             android:textColor="@color/color_black"
             app:layout_constraintEnd_toEndOf="@+id/mWalletPrice"
             app:layout_constraintHorizontal_bias="0.428"
