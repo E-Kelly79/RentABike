@@ -1,24 +1,17 @@
-package com.bike.rent.kelly.ui
+package com.bike.rent.kelly.ui.wallet
 
-import android.graphics.Color
-import android.icu.util.Calendar
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
+
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.support.annotation.RequiresApi
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bike.rent.kelly.R
 
 import com.bike.rent.kelly.ui.base.BaseActivity
 import com.bike.rent.kelly.ui.base.BaseFragment
-import com.bike.rent.kelly.ui.tickets.WalletAdapter
-import com.marcoscg.dialogsheet.DialogSheet
 import kotlinx.android.synthetic.main.wallet_fragment.mWalletRecyclerView
 
 class WalletFragment : BaseFragment(){
@@ -37,9 +30,8 @@ class WalletFragment : BaseFragment(){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        walletAdapter = WalletAdapter(BaseActivity.WALLET_LIST, context!!){row ->
-
-                activateTicketCheck()
+        walletAdapter = WalletAdapter(BaseActivity.WALLET_LIST, context!!) { row ->
+            activateTicketCheck()
         }
 
         layoutManager = LinearLayoutManager(context)
@@ -49,15 +41,10 @@ class WalletFragment : BaseFragment(){
     }
 
     fun activateTicketCheck() {
-        val dialogSheet: DialogSheet = DialogSheet(context)
-        dialogSheet.setTitle(R.string.dialog_activate_title)
-            .setMessage(R.string.dialog_activate)
-            .setCancelable(true)
-            .setPositiveButton(R.string.dialog_ok_btn) {
-            }
-            .setRoundedCorners(false)
-            .setBackgroundColor(Color.WHITE)
-            .setButtonsColorRes(R.color.color_primary)
+        SweetAlertDialog(baseActivity, SweetAlertDialog.WARNING_TYPE)
+            .setTitleText("WARNING!!")
+            .setContentText(getString(R.string.dialog_activate))
             .show()
     }
+
 }

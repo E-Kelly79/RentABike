@@ -3,8 +3,6 @@ package com.bike.rent.kelly.ui.base
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.location.Location
-import android.location.LocationListener
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
@@ -22,7 +20,7 @@ import android.widget.Toast
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.data.local.PreferencesHelper
 import com.bike.rent.kelly.model.tickets.Ticket
-import com.bike.rent.kelly.ui.WalletFragment
+import com.bike.rent.kelly.ui.wallet.WalletFragment
 import com.bike.rent.kelly.ui.auth.AuthActivity
 import com.bike.rent.kelly.ui.bike.BikeList
 import com.bike.rent.kelly.ui.card_payment.CardPaymentFragment
@@ -55,7 +53,6 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
 
 
     private val RC_SIGN_IN: Int = 1234
-    private val WEB_CLIENT_ID = "1008646000926-2rhcrlub6fnq94i8mcbl6d7cqeloul6s.apps.googleusercontent.com"
     private var mGoogleApiClient: GoogleApiClient? = null
     private var mGoogleSignInClient: GoogleSignInClient? = null
     var mAuth: FirebaseAuth? = null
@@ -89,7 +86,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         JodaTimeAndroid.init(this)
         mAuth = FirebaseAuth.getInstance()
         val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(WEB_CLIENT_ID)
+            .requestIdToken(getString(R.string.web_token_google_signin))
             .requestEmail()
             .build()
 
@@ -107,10 +104,19 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
 
     override fun onStart() {
         super.onStart()
-        //see if user is loggedin
+        //see if user is logged in
         currentUser = mAuth!!.currentUser
+    }
 
+    override fun onPause() {
+        super.onPause()
+        if (currentUser != null) {
+            var prefs = PreferencesHelper(context!!)
 
+            prefs.setPrefString("Google_Email", currentUser!!.email!!)
+            prefs.setPrefString("Google_Photo", currentUser!!.photoUrl!!.toString())
+            prefs.setPrefString("Google_Name", currentUser!!.displayName!!)
+        }
     }
 
     public override fun onResume() {
@@ -148,8 +154,6 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("BaseActivity", "signInWithCredential:success")
                     currentUser = mAuth!!.currentUser
-//                    var args: Bundle = Bundle()
-//                    args.putString("Help", "HElp")
                     loadCitySelectFragment(getArguments(), false)
 
                 } else {
@@ -178,8 +182,6 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback { currentUser = null }
     }
 
-
-
     @RequiresApi(VERSION_CODES.LOLLIPOP)
     private fun initNavDrawer() {
         mLayoutDrawer.setScrimColor(Color.TRANSPARENT)
@@ -207,7 +209,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         mLayoutDrawer.openDrawer(Gravity.LEFT)
     }
 
-    protected fun closeNavDrawer() {
+    fun closeNavDrawer() {
         mLayoutDrawer.closeDrawer(Gravity.LEFT)
     }
 
@@ -512,7 +514,7 @@ open class BaseActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFaile
         const val TITLE ="TITLE"
         const val CITY ="CITY"
         const val ADDRESS ="ADDRESS"
-        var CREDIT_AMOUNT = 5000.00f
+        var CREDIT_AMOUNT = 500.00f
         val WALLET_LIST: ArrayList<Ticket> = ArrayList()
     }
 

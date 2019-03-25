@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="google_ad_key">ca-app-pub-3776969437464358~8500104069</string>
+    <string name="web_token_google_signin">1008646000926-2rhcrlub6fnq94i8mcbl6d7cqeloul6s.apps.googleusercontent.com</string>
 </resources>

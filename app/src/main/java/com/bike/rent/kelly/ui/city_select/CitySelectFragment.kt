@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.map_fragment.mLandingBtn
 class CitySelectFragment : BaseFragment() {
     lateinit var mView: View
     lateinit var contractName: Bundle
+    lateinit var prefs: PreferencesHelper
 
 
     override fun onCreateView(
@@ -29,10 +30,7 @@ class CitySelectFragment : BaseFragment() {
         mView = inflater.inflate(R.layout.map_fragment, container, false)
         baseActivity.hideToolbar()
         baseActivity.lockNavDrawer()
-        var prefs:PreferencesHelper = PreferencesHelper(context!!)
-        Log.i("PREFS", "prefs "+ prefs.getPrefString("Google_Email"))
-        Log.i("PREFS", "prefs "+ prefs.getPrefString("Google_Photo"))
-        Log.i("PREFS", "prefs "+ prefs.getPrefString("Google_Name"))
+        prefs = PreferencesHelper(context!!)
         baseActivity.signinName.text = prefs.getPrefString("Google_Name")
         baseActivity.signinEmail.text = prefs.getPrefString("Google_Email")
         Glide.with(context).load(prefs.getPrefString("Google_Photo")).into(baseActivity.signinImg)

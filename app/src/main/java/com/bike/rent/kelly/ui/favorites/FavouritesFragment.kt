@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bike.rent.kelly.R
 import com.bike.rent.kelly.model.favs.Favourites
 import com.bike.rent.kelly.ui.base.BaseFragment
@@ -21,7 +22,6 @@ import com.google.firebase.database.ValueEventListener
 
 import kotlinx.android.synthetic.main.favourites_fragment.*
 
-import com.marcoscg.dialogsheet.DialogSheet
 import kotlinx.android.synthetic.main.favourites_fragment.mFavRecyclerView
 import timber.log.Timber
 
@@ -69,6 +69,11 @@ class FavouritesFragment: BaseFragment() {
                             noFavsText.visibility = View.GONE
                             favsSubText.visibility = View.GONE
                             mFavRecyclerView.visibility = View.VISIBLE
+                        }else{
+                            favoritesImg.visibility = View.VISIBLE
+                            noFavsText.visibility = View.VISIBLE
+                            favsSubText.visibility = View.VISIBLE
+                            mFavRecyclerView.visibility = View.GONE
                         }
 
 
@@ -86,7 +91,7 @@ class FavouritesFragment: BaseFragment() {
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 Timber.e(databaseError.toException())
-                Toast.makeText(context, "Failed to retrive information from database.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Failed to retrieve information from database.", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -97,29 +102,24 @@ class FavouritesFragment: BaseFragment() {
 
     fun deleteFavourite(favId: String) {
         val drFavourite = FirebaseDatabase.getInstance().getReference("Favourites").child(favId)
-            val dialogSheet: DialogSheet = DialogSheet(context)
-            dialogSheet.setTitle(R.string.dialog_warning)
-                .setMessage(R.string.dialog_delete)
-                .setCancelable(true)
-                .setPositiveButton(R.string.dialog_delete_btn){
-                    drFavourite.removeValue()
-                }
-                .setNegativeButton("Cancel"){
-
-                }
-                .setRoundedCorners(false)
-                .setBackgroundColor(Color.WHITE)
-                .setButtonsColorRes(R.color.color_primary)
-                .show()
+        SweetAlertDialog(baseActivity, SweetAlertDialog.WARNING_TYPE)
+            .setTitleText(getString(R.string.dialog_warning))
+            .setContentText(getString(R.string.dialog_delete))
+            .setConfirmText("Delete")
+            .setConfirmClickListener {
+                drFavourite.removeValue()
+                it
+                    .setTitleText("Deleted")
+                    .setContentText("Favourite was deleted")
+                    .setConfirmText("OK")
+                    .setConfirmClickListener(null)
+                    .changeAlertType(SweetAlertDialog.SUCCESS_TYPE)
+            }
+            .show()
     }
 
     override fun onResume() {
         super.onResume()
-        if (favList.size <= 0){
-            favoritesImg.visibility = View.VISIBLE
-            noFavsText.visibility = View.VISIBLE
-            favsSubText.visibility = View.VISIBLE
-            mFavRecyclerView.visibility = View.GONE
-        }
+
     }
 }

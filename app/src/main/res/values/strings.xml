@@ -39,8 +39,12 @@
     <string name="dialog_close">Close</string>
     <string name="dialog_delete_btn">Delete</string>
     <string name="dialog_activate_title">WARNING!!</string>
-    <string name="dialog_activate">Your are about to activate this ticket once activated this ticket will be deleted once the expiry date ends</string>
+    <string name="dialog_activate">Your activated this ticket. This ticket will be deleted once the expiry date has passed</string>
     <string name="dialog_ok_btn">OK</string>
+    <string name="dialog_extra_info">All rides that are 30 minutes or less are free.\nAll rides that are over 30 minutes will be charged at £1.50 per 5 minutes</string>
+    <string name="dialog_day_info">DAY INFORMATION</string>
+    <string name="dialog_month_info">MONTH INFORMATION</string>
+    <string name="dialog_year_info">YEAR INFORMATION</string>
 
 
     <string name="card_name">Card Name</string>
@@ -63,6 +67,8 @@
     <string name="price_month">Price £17 Euro</string>
     <string name="price_day">Price £5 Euro</string>
     <string name="available_tickets">Your available tickets. Please click on a ticket to activate it</string>
+
+
 
 
     <!-- City Array -->
