@@ -41,6 +41,7 @@ class TicketFragment : BaseFragment(){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         dayTicketContainer.setOnClickListener {
             priceArguments.setPrefFloat(PRICE, dayPrice)
             baseActivity.loadCardPaymentFragment(arguments!!, false)

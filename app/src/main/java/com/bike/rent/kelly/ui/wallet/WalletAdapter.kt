@@ -5,7 +5,6 @@ import android.os.Build.VERSION_CODES
 import android.support.annotation.RequiresApi
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import com.bike.rent.kelly.R
 import com.bike.rent.kelly.model.tickets.Ticket
 import com.bike.rent.kelly.ui.wallet.WalletAdapter.ViewHolder
 import org.joda.time.DateTime
-import java.lang.Exception
 
 
 class WalletAdapter(private var walletList:ArrayList<Ticket>, private val context: Context,
@@ -31,10 +29,6 @@ class WalletAdapter(private var walletList:ArrayList<Ticket>, private val contex
         return ViewHolder(view)
     }
 
-
-
-
-
     override fun getItemCount(): Int {
         return walletList.size
     }
@@ -42,6 +36,8 @@ class WalletAdapter(private var walletList:ArrayList<Ticket>, private val contex
     @RequiresApi(VERSION_CODES.N)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.bindView(walletList[position], position, listener)
+
+        //Check to see if the date of today is after the expire date if so then delete ticket
         if (DateTime.now().isAfter(walletList[position].expires!!)) {
             walletList.removeAt(position)
             mRecyclerView.post(object : Runnable {

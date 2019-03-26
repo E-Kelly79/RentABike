@@ -6,6 +6,11 @@
     <string name="text_title_sub">Welcome to GBS Bikes please find your city from the list below and press search location to find a bike</string>
     <string name="password_info">* Password must be 8 - 20 characters with at least1 uppercase and 1 special character (!@#$ etc.).</string>
     <string name="text_sign_up_btn">Sign Up</string>
+    <string name="title_activity_google_maps_fragment">Map</string>
+    <string name="content_desc_unsplash">Background image for recycler view</string>
+    <string name="city_select_text">Please select the city that you are currently in</string>
+    <string name="no_favorutes">No Favorutes!</string>
+    <string name="no_favourites_text">You currently have no favourites, please add one to the list to view it here</string>
 
     <!-- Nav Links -->
     <string name="nav_link_wallet">Wallet</string>
@@ -24,13 +29,8 @@
     <!-- Action Button Strings -->
     <string name="action_find_bike">Search Location</string>
     <string name="action_login_btn">Login</string>
+    <string name="pay_now">Pay Now</string>
 
-
-    <string name="title_activity_google_maps_fragment">Map</string>
-    <string name="content_desc_unsplash">Background image for recycler view</string>
-    <string name="city_select_text">Please select the city that you are currently in</string>
-    <string name="no_favorutes">No Favorutes!</string>
-    <string name="no_favourites_text">You currently have no favourites, please add one to the list to view it here</string>
 
     <!-- Dialogs Strings -->
     <string name="dialog_loading">Loading...</string>
@@ -39,7 +39,7 @@
     <string name="dialog_close">Close</string>
     <string name="dialog_delete_btn">Delete</string>
     <string name="dialog_activate_title">WARNING!!</string>
-    <string name="dialog_activate">Your activated this ticket. This ticket will be deleted once the expiry date has passed</string>
+    <string name="dialog_activate">Your activated this ticket. This ticket will be deleted once the expiry date ends</string>
     <string name="dialog_ok_btn">OK</string>
     <string name="dialog_extra_info">All rides that are 30 minutes or less are free.\nAll rides that are over 30 minutes will be charged at £1.50 per 5 minutes</string>
     <string name="dialog_day_info">DAY INFORMATION</string>
@@ -47,13 +47,14 @@
     <string name="dialog_year_info">YEAR INFORMATION</string>
 
 
+    <!-- Card Strings -->
     <string name="card_name">Card Name</string>
     <string name="card_number">Card Number</string>
     <string name="expiry_date">Expiry Date</string>
     <string name="ccv">CCV</string>
     <string name="save_card_details">Save Card Details</string>
     <string name="total_amount">Total Amount</string>
-    <string name="pay_now">Pay Now</string>
+
 
 
     <!-- Ticket Strings-->
@@ -67,8 +68,6 @@
     <string name="price_month">Price £17 Euro</string>
     <string name="price_day">Price £5 Euro</string>
     <string name="available_tickets">Your available tickets. Please click on a ticket to activate it</string>
-
-
 
 
     <!-- City Array -->
