@@ -1,6 +1,10 @@
 package com.bike.rent.kelly.ui.card_payment
 
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.graphics.Color
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -10,6 +14,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -21,6 +26,7 @@ import com.bike.rent.kelly.ui.base.BaseActivity
 import com.bike.rent.kelly.ui.base.BaseFragment
 import com.bike.rent.kelly.utils.ProgressDialog
 import kotlinx.android.synthetic.main.card_payment_fragment.*
+import java.util.Calendar
 
 class CardPaymentFragment: BaseFragment() {
 
@@ -30,6 +36,8 @@ class CardPaymentFragment: BaseFragment() {
     val MASTER_CCV = "555"
     lateinit var mView: View
     lateinit var prices: PreferencesHelper
+    lateinit var calendar: Calendar
+    lateinit var datePicker:DatePickerDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +68,30 @@ class CardPaymentFragment: BaseFragment() {
             }
             else -> Log.i("NONE", "No price has been set")
         }
+
+        if (cardExpiry.isFocused){
+            baseActivity.closeSoftKeyboard()
+        }
+        cardExpiry.setOnClickListener {
+            calendar = Calendar.getInstance()
+            var day = calendar.get(Calendar.DAY_OF_MONTH)
+            var month = calendar.get(Calendar.MONTH)
+            var year = calendar.get(Calendar.YEAR)
+
+            if (VERSION.SDK_INT >= VERSION_CODES.N) {
+                datePicker = DatePickerDialog(context, OnDateSetListener { _, mYear, mMonth, _ ->
+                    if (mMonth >= 0){
+                        var expiryMonth = mMonth + 1
+                        var format = String.format("%02d", expiryMonth)
+                        cardExpiry.setText("$format/$mYear")
+                    }
+
+                },year, month, day)
+                datePicker.show()
+            }
+        }
+
+
 
         payNowBtn.setOnClickListener {
             checkCardDetails()
@@ -115,6 +147,8 @@ class CardPaymentFragment: BaseFragment() {
                     .show()
             }
         }
+
+    private fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
     private fun EditText.onChange(char: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {

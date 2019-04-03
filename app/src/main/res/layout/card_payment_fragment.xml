@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/expiryDate"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white">
@@ -55,9 +57,9 @@
         android:layout_marginStart="24dp"
         android:ems="10"
         android:hint="@string/card_name"
+        android:inputType="textPersonName"
         android:textColor="@color/color_black"
         android:textColorHint="@color/color_black"
-        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/cardNumber"
         app:layout_constraintEnd_toEndOf="@id/guideRight"
         app:layout_constraintStart_toStartOf="@id/guideLeft"
@@ -69,9 +71,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/card_number"
+        android:inputType="number"
         android:textColor="@color/color_black"
         android:textColorHint="@color/color_black"
-        android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/cardExpiry"
         app:layout_constraintEnd_toEndOf="@+id/cardName"
         app:layout_constraintHorizontal_bias="0.5"
@@ -84,9 +86,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/expiry_date"
+        android:inputType="date"
         android:textColor="@color/color_black"
         android:textColorHint="@color/color_black"
-        android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/cardCCV"
         app:layout_constraintEnd_toEndOf="@+id/cardNumber"
         app:layout_constraintHorizontal_bias="0.5"
@@ -100,14 +102,16 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/ccv"
+        android:inputType="number"
         android:textColor="@color/color_black"
         android:textColorHint="@color/color_black"
-        android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/saveCardSwitch"
         app:layout_constraintEnd_toEndOf="@+id/cardExpiry"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/cardExpiry"
         app:layout_constraintTop_toBottomOf="@+id/cardExpiry" />
+
+
 
 
     <Switch
@@ -150,24 +154,25 @@
             android:id="@+id/totalAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
             android:textColor="@color/color_black"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/payNowBtn"
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="@string/pay_now"
+            android:layout_below="@id/total"
+            android:layout_marginTop="8dp"
             android:background="@color/color_primary"
-            android:layout_below="@id/total"/>
+            android:text="@string/pay_now" />
 
 
     </RelativeLayout>
+
 
 
 
