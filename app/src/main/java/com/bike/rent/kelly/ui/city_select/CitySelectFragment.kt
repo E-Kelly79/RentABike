@@ -39,7 +39,7 @@ class CitySelectFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        baseActivity.setStatusBarColor(R.color.color_bg_gradient_end, android.R.color.transparent,
+        baseActivity.setStatusBarColor(R.color.color_primary, android.R.color.transparent,
             View.SYSTEM_UI_LAYOUT_FLAGS
         )
 

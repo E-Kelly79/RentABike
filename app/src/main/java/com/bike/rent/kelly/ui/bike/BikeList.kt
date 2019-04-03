@@ -55,12 +55,13 @@ class BikeList: BaseFragment() {
         mView = inflater.inflate(R.layout.bike_list_fragment, container, false)
         baseActivity.showToolbar()
         baseActivity.setTitle("Bike List")
+        baseActivity.unlockNavDrawer()
         return mView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         baseActivity.setStatusBarColor(
-            R.color.color_primary_dark, R.color.color_black, View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+            R.color.color_primary, R.color.color_black, View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
         var test = arguments
         var myString = test?.getString("contractName")
         Timber.i(myString, String)

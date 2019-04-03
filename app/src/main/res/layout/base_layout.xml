@@ -50,8 +50,7 @@
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/googleSigninLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:background="@drawable/patter">
+                    android:layout_height="150dp">
 
 
                     <ImageView
@@ -70,7 +69,6 @@
                         android:id="@+id/signinName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:layout_marginStart="8dp"
                         android:fontFamily="@font/carter_one"
                         android:textColor="@color/color_white"
@@ -87,7 +85,7 @@
                         android:fontFamily="@font/carter_one"
                         android:textColor="@color/color_white"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/signinImg"
+                        app:layout_constraintStart_toStartOf="@+id/signinName"
                         app:layout_constraintTop_toBottomOf="@+id/signinName"
                         tools:text="Email" />
 
