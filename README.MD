@@ -83,38 +83,36 @@ a code sample to retrieve items from Firebase database
 ````
 
 ## Wallet
-This screen is just a list were bought tickets are placed and uses can then active them once bought
-below code shows a dialog when user clicks ticket showing them there are about to activate a ticket
+This screen is were a user can buy 3 different type of ticket a day pass, month pass or a yearly pass each having there own expiry date
+and brings them to a payment screen
+Sample code below show a day pass
 
-`````kotlin
- fun activateTicketCheck() {
+````kotlin
+fun activateTicketCheck() {
         SweetAlertDialog(baseActivity, SweetAlertDialog.WARNING_TYPE)
             .setTitleText("WARNING!!")
             .setContentText(getString(R.string.dialog_activate))
             .show()
     }
+ 
 ````
-
+    
 ## Tickets
-This screen is were a user can buy 3 different type of ticket a day pass, month pass or a yearly pass each having there own expiry date
-and brings them to a payment screen
-Sample code below show a day pass
+This screen is just a list were bought tickets are placed and uses can then active them once bought
+below code shows a dialog when user clicks ticket showing them there are about to activate a ticket
 
-`````kotlin
-   dayTicketContainer.setOnClickListener {
+````kotlin
+ dayTicketContainer.setOnClickListener {
              priceArguments.setPrefFloat(PRICE, dayPrice)
              baseActivity.loadCardPaymentFragment(arguments!!, false)
              date = DateTime.now().plusDays(1)
              tickets = Ticket(ticketDay.text.toString(), ticketSubText.text.toString(), 5.00f, date)
              BaseActivity.WALLET_LIST.add(tickets!!)
- 
-         }
+    }
 ````
-
 
 ## Loop trough drawable for bike images
 ````kotlin
- //Loop trough the drawables for name thatcontains  and add it to array list
         var imageListId = ArrayList<Int>()
         var drawables = R.drawable::class.java!!.fields
         for (drawable in drawables) {
@@ -125,15 +123,10 @@ Sample code below show a day pass
         }
 ````
 
-
-
-
-
-
 ## Video demo for assigment two
-[Assignment 2 app demo](https://vimeo.com/320969998)
+[Assignment 2 app demo](https://www.youtube.com/watch?v=pr8bWUMiCek&feature=youtu.be)
 
-[Assignment 2 firebase demo](https://vimeo.com/320969998)
+[Assignment 2 firebase demo](https://www.youtube.com/watch?v=msMgNKZoAzI)
 
 
 ## References
@@ -156,18 +149,3 @@ Date And Time for expiry dates [Dates](https://github.com/dlew/joda-time-android
 Order by child with Firebase [Order By](https://firebase.google.com/docs/database/android/lists-of-data)
 
 Sweet Dialogs libary [SweetAlert](https://github.com/pedant/sweet-alert-dialog)
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
