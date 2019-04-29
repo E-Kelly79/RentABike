@@ -82,20 +82,87 @@ a code sample to retrieve items from Firebase database
                         }
 ````
 
+## Wallet
+This screen is just a list were bought tickets are placed and uses can then active them once bought
+below code shows a dialog when user clicks ticket showing them there are about to activate a ticket
 
-## Video demo for assigment one
-[Assignment 1 demo](https://vimeo.com/320969998)
+`````kotlin
+ fun activateTicketCheck() {
+        SweetAlertDialog(baseActivity, SweetAlertDialog.WARNING_TYPE)
+            .setTitleText("WARNING!!")
+            .setContentText(getString(R.string.dialog_activate))
+            .show()
+    }
+````
+
+## Tickets
+This screen is were a user can buy 3 different type of ticket a day pass, month pass or a yearly pass each having there own expiry date
+and brings them to a payment screen
+Sample code below show a day pass
+
+`````kotlin
+   dayTicketContainer.setOnClickListener {
+             priceArguments.setPrefFloat(PRICE, dayPrice)
+             baseActivity.loadCardPaymentFragment(arguments!!, false)
+             date = DateTime.now().plusDays(1)
+             tickets = Ticket(ticketDay.text.toString(), ticketSubText.text.toString(), 5.00f, date)
+             BaseActivity.WALLET_LIST.add(tickets!!)
+ 
+         }
+````
+
+
+## Loop trough drawable for bike images
+````kotlin
+ //Loop trough the drawables for name thatcontains  and add it to array list
+        var imageListId = ArrayList<Int>()
+        var drawables = R.drawable::class.java!!.fields
+        for (drawable in drawables) {
+            //if the drawable name contains "bicycle" the get resource id and add to list
+            if (drawable.name.contains("bicycle_")){
+                imageListId.add(context.resources.getIdentifier(drawable.name, "drawable", context.packageName))
+            }
+        }
+````
+
+
+
+
+
+
+## Video demo for assigment two
+[Assignment 2 app demo](https://vimeo.com/320969998)
+
+[Assignment 2 firebase demo](https://vimeo.com/320969998)
+
 
 ## References
 Api that was used for information [JCDecaux Developer](https://developer.jcdecaux.com/#/opendata/vls?page=getstarted)
 
-Stack overflow for bug [Stack overflow](https://stackoverflow.com/)
+Null pointer execption [Kotlin Nulls][https://stackoverflow.com/questions/5226853/nullpointerexception-on-list-add)
 
 Android developer  [Android developer docs](https://developer.android.com/)
 
 Firebase for database, User Auth and Analytics [Firebase](https://firebase.google.com/)
 
 Mapbox for the map api [Mapbox](https://docs.mapbox.com/)
+
+Google Sign In [Google Signin](https://medium.com/@myric.september/authenticate-using-google-sign-in-kotlin-firebase-4490f71d9e44)
+
+Bike Image Drawables [Loop Trough Drawables](https://stackoverflow.com/questions/3221603/retrieving-all-drawable-resources-from-resources-object/3221787)
+
+Date And Time for expiry dates [Dates](https://github.com/dlew/joda-time-android)
+
+Order by child with Firebase [Order By](https://firebase.google.com/docs/database/android/lists-of-data)
+
+Sweet Dialogs libary [SweetAlert](https://github.com/pedant/sweet-alert-dialog)
+
+
+
+
+
+
+
 
 
 
