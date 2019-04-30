@@ -123,6 +123,20 @@ below code shows a dialog when user clicks ticket showing them there are about t
         }
 ````
 
+## Testing
+Some unit testiung was done for my models and a sample of this testing can bee seen below
+````kotlin
+ @Test
+    fun textCreate(){
+        Assert.assertEquals("1", favourite.favId)
+        Assert.assertEquals("stationName", favourite.stationName)
+        Assert.assertEquals("City name", favourite.cityName)
+        Assert.assertEquals("address", favourite.address)
+        Assert.assertEquals(1.2092F, favourite.longitude)
+        Assert.assertEquals(-6.2343F, favourite.latitude)
+    
+````
+
 ## Video demo for assigment two
 [Assignment 2 app demo](https://www.youtube.com/watch?v=pr8bWUMiCek&feature=youtu.be)
 
